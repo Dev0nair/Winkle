@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "536646087179",
+    "firebase_url": "https://winkle-d362a.firebaseio.com",
+    "project_id": "winkle-d362a",
+    "storage_bucket": "winkle-d362a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:536646087179:android:e582d1db2d36ad1dab8d0e",
+        "android_client_info": {
+          "package_name": "com.ismaelgr.winkle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "536646087179-ulneo6al817ecdjii6i33tmqgqs4d1cp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMLS9dJ6TPDZ86BYO_q5E48vdAYMYs7x4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "536646087179-ulneo6al817ecdjii6i33tmqgqs4d1cp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
