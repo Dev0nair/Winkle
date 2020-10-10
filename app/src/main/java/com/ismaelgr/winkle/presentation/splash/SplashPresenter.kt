@@ -1,25 +1,34 @@
 package com.ismaelgr.winkle.presentation.splash
 
-import android.util.Log
+import com.ismaelgr.winkle.domain.usecase.LegalConfirmationUseCase
+import com.ismaelgr.winkle.domain.usecase.IsUserLoggedUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 import com.ismaelgr.winkle.util.Consts
 
-class SplashPresenter(private val splash: SplashContract.View) :
+class SplashPresenter(
+    private val splash: SplashContract.View,
+    private val legalConfirmationUseCase: LegalConfirmationUseCase,
+    private val isUserLoggedUseCase: IsUserLoggedUseCase
+) :
     BasePresenter<SplashContract.View>(splash), SplashContract.Presenter {
 
     override fun onInitElements() {
         splash.loadAnimation(
             onTimeCompleted = {
-                /**
-                 * Aqui tenemos que comprobar si hemos aceptado las condiciones legales o no.
-                 *      Si no lo habíamos aceptado, cargamos Legal.
-                 *      Si sí lo habíamos aceptado, comprobamos si estamos logeados
-                 *          Si no estabamos logeados, cargamos Login
-                 *          Si sí estabamos logeados, cargamos Main (donde está el jugo de la app, que empieza por el home)
-                 */
+                legalConfirmationUseCase.execute { isLegalConfirmed ->
+                    if (isLegalConfirmed) {
+                        isUserLoggedUseCase.execute { isLogged ->
+                            if (isLogged) {
+                                splash.loadMainApplication()
+                            } else {
+                                splash.loadLogin()
+                            }
+                        }
+                    } else {
+                        splash.loadLegal()
+                    }
 
-                splash.loadMainApplication()
-                Log.i("Splash Fragment", "Se va a cargar main fragment")
+                }
             },
             timeToProceed = Consts.SPLASH_DURATION
         )
