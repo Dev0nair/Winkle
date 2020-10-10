@@ -9,7 +9,14 @@
         android:id="@+id/legalScreenFragment"
         android:name="com.ismaelgr.winkle.presentation.legalscreen.LegalScreenFragment"
         android:label="fragment_legalscreen"
-        tools:layout="@layout/fragment_legalscreen" />
+        tools:layout="@layout/fragment_legalscreen" >
+        <action
+            android:id="@+id/action_legalScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_legalScreenFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.ismaelgr.winkle.presentation.login.LoginFragment"
