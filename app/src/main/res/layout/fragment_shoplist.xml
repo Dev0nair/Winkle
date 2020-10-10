@@ -5,4 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".presentation.shoplist.ShopListFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="Shopping list"
+        />
+
 </FrameLayout>
