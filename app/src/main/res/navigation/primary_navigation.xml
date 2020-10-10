@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_legalScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_legalScreenFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
