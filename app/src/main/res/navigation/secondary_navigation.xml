@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ismaelgr.winkle.presentation.profile.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="@string/secondary_menu_perfil"
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_purchasesFragment"
@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.ismaelgr.winkle.presentation.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="@string/secondary_menu_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/salesSummaryFragment"
@@ -56,7 +56,7 @@
     <fragment
         android:id="@+id/myProductsFragment"
         android:name="com.ismaelgr.winkle.presentation.myproducts.MyProductsFragment"
-        android:label="fragment_myproducts"
+        android:label="@string/secondary_menu_mi_tienda"
         tools:layout="@layout/fragment_myproducts">
         <action
             android:id="@+id/action_myProductsFragment_to_newProductFragment"
@@ -73,7 +73,7 @@
     <fragment
         android:id="@+id/shopListFragment"
         android:name="com.ismaelgr.winkle.presentation.shoplist.ShopListFragment"
-        android:label="fragment_shoplist"
+        android:label="@string/secondary_menu_cesta"
         tools:layout="@layout/fragment_shoplist">
         <action
             android:id="@+id/action_shopListFragment_to_productDetailsFragment"
