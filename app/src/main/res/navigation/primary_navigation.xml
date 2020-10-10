@@ -9,7 +9,7 @@
         android:id="@+id/legalScreenFragment"
         android:name="com.ismaelgr.winkle.presentation.legalscreen.LegalScreenFragment"
         android:label="fragment_legalscreen"
-        tools:layout="@layout/fragment_legalscreen" >
+        tools:layout="@layout/fragment_legalscreen">
         <action
             android:id="@+id/action_legalScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -21,7 +21,7 @@
         android:id="@+id/loginFragment"
         android:name="com.ismaelgr.winkle.presentation.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
@@ -30,7 +30,7 @@
         android:id="@+id/signInFragment"
         android:name="com.ismaelgr.winkle.presentation.signin.SignInFragment"
         android:label="fragment_signin"
-        tools:layout="@layout/fragment_signin" >
+        tools:layout="@layout/fragment_signin">
         <action
             android:id="@+id/action_signInFragment_to_signIn2Fragment"
             app:destination="@id/signIn2Fragment" />
@@ -39,7 +39,7 @@
         android:id="@+id/signIn2Fragment"
         android:name="com.ismaelgr.winkle.presentation.signin2.SignIn2Fragment"
         android:label="fragment_signin2"
-        tools:layout="@layout/fragment_signin2" >
+        tools:layout="@layout/fragment_signin2">
         <action
             android:id="@+id/action_signIn2Fragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -48,19 +48,25 @@
         android:id="@+id/splashFragment"
         android:name="com.ismaelgr.winkle.presentation.splash.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
             app:popUpTo="@id/splashFragment"
-            app:launchSingleTop="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_splashFragment_to_legalScreenFragment"
-            app:destination="@id/legalScreenFragment" />
+            app:destination="@id/legalScreenFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
