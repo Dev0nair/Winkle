@@ -7,10 +7,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import com.google.firebase.FirebaseApp
+import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var appBarConfiguration2: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,15 @@ class MainActivity : AppCompatActivity() {
                 R.layout.fragment_main
             )
         )
+
+        appBarConfiguration2 = AppBarConfiguration(
+            topLevelDestinationIds = setOf(
+                R.layout.fragment_home,
+                R.layout.fragment_myproducts,
+                R.layout.fragment_shoplist,
+                R.layout.fragment_profile
+            )
+        )
     }
 
     private fun initializeFirebase() {
@@ -38,6 +49,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
+        secondary_nav_host?.let { secondaryHost ->
+            return secondaryHost.findNavController()
+                .navigateUp(appBarConfiguration2) || super.onSupportNavigateUp()
+        }
+
         val navController = findNavController(R.id.principal_nav_host)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
