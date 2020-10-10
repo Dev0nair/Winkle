@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Winkle</string>
+    <string name="secondary_menu_home">Home</string>
+    <string name="secondary_menu_mi_tienda">My shop</string>
+    <string name="secondary_menu_cesta">Shopping list</string>
+    <string name="secondary_menu_perfil">Profile</string>
+</resources>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Winkle</string>
+    <string name="secondary_menu_home">Inicio</string>
+    <string name="secondary_menu_mi_tienda">Mi tienda</string>
+    <string name="secondary_menu_cesta">Cesta</string>
+    <string name="secondary_menu_perfil">Perfil</string>
 </resources>
