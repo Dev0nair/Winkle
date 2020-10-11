@@ -5,4 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".presentation.signin2.SignIn2Fragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="Sign In 2"
+        />
+
 </FrameLayout>
