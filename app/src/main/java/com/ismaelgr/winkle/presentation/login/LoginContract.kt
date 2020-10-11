@@ -6,9 +6,11 @@ interface LoginContract {
 
     interface View : BaseContract.View {
         fun loadMainApplication()
+        fun loadSignIn()
     }
 
     interface Presenter : BaseContract.Presenter {
-        fun onLoginBtnClick(email: String, pass: String)
+        fun onLogInBtnClick(email: String, pass: String)
+        fun onSignInBtnClick()
     }
 }

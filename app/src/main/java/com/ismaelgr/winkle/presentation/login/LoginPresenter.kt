@@ -10,7 +10,7 @@ class LoginPresenter(
 ) :
     BasePresenter<LoginContract.View>(login), LoginContract.Presenter {
 
-    override fun onLoginBtnClick(email: String, pass: String) {
+    override fun onLogInBtnClick(email: String, pass: String) {
         if (email.isNotEmpty()) {
             if (pass.isNotEmpty()) {
                 loginUseCase.execute(
@@ -25,6 +25,10 @@ class LoginPresenter(
         } else {
             login.showError(login.getMyString(R.string.err_email_empty))
         }
+    }
+
+    override fun onSignInBtnClick() {
+        login.loadSignIn()
     }
 
 }

@@ -22,15 +22,21 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginContract.View 
         edit_pass.setOnFocusChangeListener(::onFocusListener)
 
         btn_login.setOnClickListener {
-            loginPresenter.onLoginBtnClick(
+            loginPresenter.onLogInBtnClick(
                 edit_email.text.toString(),
                 edit_pass.text.toString()
             )
         }
+
+        btn_signin.setOnClickListener { loginPresenter.onSignInBtnClick() }
     }
 
     override fun loadMainApplication() {
         findNavController().navigate(R.id.action_loginFragment_to_flujo_principal)
+    }
+
+    override fun loadSignIn() {
+        findNavController().navigate(R.id.action_loginFragment_to_signInFragment)
     }
 
     private fun onFocusListener(view: View, hasFocus: Boolean) {
