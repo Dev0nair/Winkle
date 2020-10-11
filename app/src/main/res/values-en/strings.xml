@@ -11,4 +11,10 @@
     <string name="err_pass_empty">You cannot leave password field empty</string>
     <string name="text_login">Log In</string>
     <string name="text_signin">Sign in</string>
+    <string name="text_continue">Continue</string>
+    <string name="text_username">Username</string>
+    <string name="text_description">Description</string>
+    <string name="text_contact_phone">Contact phone</string>
+    <string name="text_contact_email">Contact email</string>
+    <string name="text_create_profile">Create\nNew\nProfile</string>
 </resources>

@@ -10,4 +10,10 @@
     <string name="err_pass_empty">No puedes dejar la contraseña vacía</string>
     <string name="text_login">Iniciar sesión</string>
     <string name="text_signin">Registrarse</string>
+    <string name="text_continue">Continuar</string>
+    <string name="text_username">Nombre de usuario</string>
+    <string name="text_description">Descripcion</string>
+    <string name="text_contact_phone">Teléfono de contacto</string>
+    <string name="text_contact_email">Correo de contacto</string>
+    <string name="text_create_profile">Crear\nNuevo\nPerfil</string>
 </resources>

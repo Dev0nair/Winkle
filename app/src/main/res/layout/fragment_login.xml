@@ -16,7 +16,7 @@
         android:src="@drawable/img_login_wallpaper" />
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -35,15 +35,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="@string/text_signin"
-
         android:textAlignment="center"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_default="percent"
-
+        android:textSize="15sp"
         app:layout_constraintWidth_percent="0.75" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -52,17 +50,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:background="@drawable/rounded_background"
-
         android:text="@string/text_login"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@id/btn_signin"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.75" />
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/MyEditText.Full"
         android:id="@+id/edit_pass_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -80,15 +77,15 @@
             android:id="@+id/edit_pass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_edit_text"
             android:hint="@string/text_pass"
             android:inputType="textPassword"
-            android:padding="15dp"
+            android:padding="20dp"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/MyEditText.Full"
         android:id="@+id/edit_email_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -105,14 +102,10 @@
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_edit_text"
             android:hint="@string/text_email"
             android:inputType="textEmailAddress"
-            android:padding="15dp"
-
+            android:padding="20dp"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
