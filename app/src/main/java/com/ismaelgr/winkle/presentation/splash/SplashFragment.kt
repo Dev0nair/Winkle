@@ -36,7 +36,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash), SplashContract.Vi
     }
 
     override fun loadMainApplication() {
-        findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+        findNavController().navigate(R.id.action_splashFragment_to_flujo_rincipal)
     }
 
     override fun loadAnimation(onTimeCompleted: () -> Unit, timeToProceed: Long) {
