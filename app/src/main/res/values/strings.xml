@@ -4,4 +4,10 @@
     <string name="secondary_menu_mi_tienda">Mi tienda</string>
     <string name="secondary_menu_cesta">Cesta</string>
     <string name="secondary_menu_perfil">Perfil</string>
+    <string name="text_email">Email</string>
+    <string name="text_pass">Contraseña</string>
+    <string name="err_email_empty">No puedes dejar el email vacío</string>
+    <string name="err_pass_empty">No puedes dejar la contraseña vacía</string>
+    <string name="text_login">Iniciar sesión</string>
+    <string name="text_signin">Registrarse</string>
 </resources>

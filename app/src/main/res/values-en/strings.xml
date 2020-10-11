@@ -5,4 +5,10 @@
     <string name="secondary_menu_mi_tienda">My shop</string>
     <string name="secondary_menu_cesta">Shopping list</string>
     <string name="secondary_menu_perfil">Profile</string>
+    <string name="text_email">Email</string>
+    <string name="text_pass">Password</string>
+    <string name="err_email_empty">You cannot leave email field empty</string>
+    <string name="err_pass_empty">You cannot leave password field empty</string>
+    <string name="text_login">Log In</string>
+    <string name="text_signin">Sign in</string>
 </resources>
