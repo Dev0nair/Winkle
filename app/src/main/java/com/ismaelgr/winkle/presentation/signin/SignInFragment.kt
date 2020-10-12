@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.domain.usecase.CreateAccountUseCase
 import kotlinx.android.synthetic.main.fragment_signin.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -23,7 +24,7 @@ class SignInFragment : BaseFragment(R.layout.fragment_signin), SignInContract.Vi
     }
 
     override fun initElements() {
-        signinPresenter = SignInPresenter(this as SignInContract.View)
+        signinPresenter = SignInPresenter(this as SignInContract.View, CreateAccountUseCase())
 
         btn_continue1.setOnClickListener {
             signinPresenter.onContinuePressed(

@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.domain.usecase.CreateProfileUseCase
 import kotlinx.android.synthetic.main.fragment_signin2.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -23,7 +24,7 @@ class SignIn2Fragment : BaseFragment(R.layout.fragment_signin2), SignIn2Contract
     }
 
     override fun initElements() {
-        signin2Presenter = SignIn2Presenter(this as SignIn2Contract.View)
+        signin2Presenter = SignIn2Presenter(this as SignIn2Contract.View, CreateProfileUseCase())
 
         btn_continue.setOnClickListener {
             signin2Presenter.onSignInClick(
@@ -33,7 +34,5 @@ class SignIn2Fragment : BaseFragment(R.layout.fragment_signin2), SignIn2Contract
                 contactPhone = edit_contact_phone.text.toString()
             )
         }
-
-        toolbar_back.setOnClickListener { signin2Presenter.onBackClick() }
     }
 }

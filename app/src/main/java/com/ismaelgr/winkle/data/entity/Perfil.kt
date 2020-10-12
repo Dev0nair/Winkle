@@ -1,11 +1,11 @@
 package com.ismaelgr.winkle.data.entity
 
 data class Perfil (
-    val id: String,
-    val nombre: String,
-    val descripcion: String,
-    val email: String,
-    val emailContacto: String,
-    val telefono: String,
-    val image: String
+    var id: String,
+    var username: String,
+    var descripcion: String,
+    var email: String,
+    var emailContacto: String,
+    var telefono: String,
+    var image: String
 )

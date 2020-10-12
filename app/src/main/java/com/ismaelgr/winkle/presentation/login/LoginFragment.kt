@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.domain.usecase.HasProfileUseCase
 import com.ismaelgr.winkle.domain.usecase.LoginUseCase
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -16,7 +17,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginContract.View 
     private lateinit var loginPresenter: LoginContract.Presenter
 
     override fun initElements() {
-        loginPresenter = LoginPresenter(this as LoginContract.View, LoginUseCase())
+        loginPresenter =
+            LoginPresenter(this as LoginContract.View, LoginUseCase(), HasProfileUseCase())
 
         edit_email.setOnFocusChangeListener(::onFocusListener)
         edit_pass.setOnFocusChangeListener(::onFocusListener)
@@ -37,6 +39,10 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginContract.View 
 
     override fun loadSignIn() {
         findNavController().navigate(R.id.action_loginFragment_to_signInFragment)
+    }
+
+    override fun loadSignInProfile() {
+        findNavController().navigate(R.id.action_loginFragment_to_signIn2Fragment)
     }
 
     private fun onFocusListener(view: View, hasFocus: Boolean) {

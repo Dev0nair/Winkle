@@ -8,6 +8,7 @@ interface SplashContract {
         fun loadLegal()
         fun loadLogin()
         fun loadMainApplication()
+        fun loadSignInProfile()
         fun loadAnimation(onTimeCompleted: () -> Unit, timeToProceed: Long)
     }
 

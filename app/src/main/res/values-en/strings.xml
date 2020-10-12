@@ -16,5 +16,11 @@
     <string name="text_description">Description</string>
     <string name="text_contact_phone">Contact phone</string>
     <string name="text_contact_email">Contact email</string>
-    <string name="text_create_profile">Create\nNew\nProfile</string>
+    <string name="text_create_new_profile">Create\nNew\nProfile</string>
+    <string name="text_create_new_account">Create\nNew\nAccount</string>
+    <string name="text_new_email">New email</string>
+    <string name="text_new_pass">New password</string>
+    <string name="text_create_account">Create account</string>
+    <string name="text_create_profile">Create profile</string>
+    <string name="err_username_empty">You cannot leave username field empty</string>
 </resources>

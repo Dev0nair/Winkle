@@ -7,6 +7,7 @@ interface LoginContract {
     interface View : BaseContract.View {
         fun loadMainApplication()
         fun loadSignIn()
+        fun loadSignInProfile()
     }
 
     interface Presenter : BaseContract.Presenter {

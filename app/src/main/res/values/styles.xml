@@ -35,4 +35,10 @@
         <item name="cornerSizeBottomRight">25dp</item>
     </style>
 
+    <style name="Screen_title">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">41sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -15,27 +15,19 @@
         android:scaleType="centerCrop"
         android:src="@drawable/img_login_wallpaper" />
 
-    <include
-        layout="@layout/toolbar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
+        style="@style/Screen_title"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
         android:clickable="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:src="@drawable/img_winkle_logo"
-        android:text="@string/text_create_profile"
-        android:textColor="@android:color/white"
-        android:textSize="45sp"
-        android:textStyle="bold"
+        android:text="@string/text_create_new_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/edit_username_layout"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.13" />
@@ -46,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:background="@drawable/rounded_background"
-        android:text="@string/text_signin"
+        android:text="@string/text_create_profile"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -76,7 +68,7 @@
             android:hint="@string/text_description"
             android:inputType="textMultiLine"
             android:lines="5"
-            android:padding="20dp"
+            android:padding="@dimen/edit_text_padding"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -101,7 +93,7 @@
             android:layout_height="match_parent"
             android:hint="@string/text_contact_phone"
             android:inputType="phone"
-            android:padding="20dp"
+            android:padding="@dimen/edit_text_padding"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -126,7 +118,7 @@
             android:layout_height="match_parent"
             android:hint="@string/text_contact_email"
             android:inputType="textEmailAddress"
-            android:padding="20dp"
+            android:padding="@dimen/edit_text_padding"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -151,7 +143,7 @@
             android:layout_height="match_parent"
             android:hint="@string/text_username"
             android:inputType="textPersonName"
-            android:padding="20dp"
+            android:padding="@dimen/edit_text_padding"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>

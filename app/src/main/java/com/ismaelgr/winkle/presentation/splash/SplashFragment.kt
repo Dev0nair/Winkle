@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.domain.usecase.HasProfileUseCase
 import com.ismaelgr.winkle.domain.usecase.IsUserLoggedUseCase
 import com.ismaelgr.winkle.domain.usecase.LegalConfirmationUseCase
 import com.ismaelgr.winkle.presentation.base.BaseFragment
@@ -20,7 +21,8 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash), SplashContract.Vi
         splashPresenter = SplashPresenter(
             this as SplashContract.View,
             LegalConfirmationUseCase(),
-            IsUserLoggedUseCase()
+            IsUserLoggedUseCase(),
+            HasProfileUseCase()
         )
 
         splashPresenter.onInitElements()
@@ -37,6 +39,10 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash), SplashContract.Vi
 
     override fun loadMainApplication() {
         findNavController().navigate(R.id.action_splashFragment_to_flujo_rincipal)
+    }
+
+    override fun loadSignInProfile() {
+        findNavController().navigate(R.id.action_splashFragment_to_signIn2Fragment)
     }
 
     override fun loadAnimation(onTimeCompleted: () -> Unit, timeToProceed: Long) {
