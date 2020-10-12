@@ -8,6 +8,8 @@ interface LoginContract {
         fun loadMainApplication()
         fun loadSignIn()
         fun loadSignInProfile()
+        fun disableButtons()
+        fun enableButtons()
     }
 
     interface Presenter : BaseContract.Presenter {

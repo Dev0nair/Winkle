@@ -17,11 +17,21 @@ class SignInPresenter(
     override fun onContinuePressed(email: String, pass: String) {
         if (email.isNotEmpty()) {
             if (pass.isNotEmpty()) {
+                showLoading(true)
+                signin.disableButtons()
                 createAccountUseCase.execute(email, pass,
                     onSuccess = {
-                        signin.navigateNextSignIn()
+                        showLoading(false)
+                        signin.run {
+                            enableButtons()
+                            navigateNextSignIn()
+                        }
                     }, onError = {
-                        signin.showError(it)
+                        showLoading(false)
+                        signin.run {
+                            showError(it)
+                            enableButtons()
+                        }
                     })
             } else {
                 signin.showError(signin.getMyString(R.string.err_pass_empty))

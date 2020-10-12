@@ -7,6 +7,8 @@ interface SignInContract {
     interface View : BaseContract.View{
         fun navigateNextSignIn()
         fun navigateBack()
+        fun enableButtons()
+        fun disableButtons()
     }
     interface Presenter : BaseContract.Presenter {
         fun onBackPressed()

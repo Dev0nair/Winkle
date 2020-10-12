@@ -1,5 +1,6 @@
 package com.ismaelgr.winkle.presentation.signin2
 
+import com.google.firebase.auth.FirebaseAuth
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.domain.usecase.CreateProfileUseCase
@@ -28,10 +29,22 @@ class SignIn2Presenter(
                 telefono = contactPhone
             )
 
+            showLoading(true)
+            signin2.disableButtons()
+
             createProfileUseCase.execute(
                 perfil,
-                onSuccess = { signin2.navigateMainApp() },
-                onError = { signin2.showError(it) }
+                onSuccess = {
+                    showLoading(false)
+                    signin2.navigateMainApp()
+                },
+                onError = {
+                    signin2.run {
+                        showLoading(false)
+                        showError(it)
+                        enableButtons()
+                    }
+                }
             )
         } else {
             signin2.showError(signin2.getMyString(R.string.err_username_empty))
@@ -40,5 +53,10 @@ class SignIn2Presenter(
 
     override fun onBackClick() {
         signin2.navigateBack()
+    }
+
+    override fun onExitToLoginBtnClick() {
+        FirebaseAuth.getInstance().signOut()
+        signin2.backToLogin()
     }
 }

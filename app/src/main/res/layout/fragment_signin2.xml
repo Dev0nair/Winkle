@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.signin2.SignIn2Fragment">
 
     <ImageView
@@ -16,8 +16,8 @@
         android:src="@drawable/img_login_wallpaper" />
 
     <TextView
-        style="@style/Screen_title"
         android:id="@+id/title"
+        style="@style/Screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -33,14 +33,14 @@
         app:layout_constraintVertical_bias="0.13" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_continue"
+        android:id="@+id/btn_create_profile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/rounded_background"
         android:text="@string/text_create_profile"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_exit_to_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_default="percent"
@@ -54,7 +54,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="start|top"
         android:textColorHint="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@id/btn_continue"
+        app:layout_constraintBottom_toTopOf="@id/btn_create_profile"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintWidth_default="percent"
@@ -147,4 +147,21 @@
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/btn_exit_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@android:color/transparent"
+        android:drawableStart="@drawable/ic_exit"
+        android:drawablePadding="15dp"
+        android:drawableTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/text_exit_to_login"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

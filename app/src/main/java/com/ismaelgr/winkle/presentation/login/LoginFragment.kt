@@ -45,6 +45,16 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginContract.View 
         findNavController().navigate(R.id.action_loginFragment_to_signIn2Fragment)
     }
 
+    override fun disableButtons() {
+        btn_login.isEnabled = false
+        btn_signin.isEnabled = false
+    }
+
+    override fun enableButtons() {
+        btn_login.isEnabled = true
+        btn_signin.isEnabled = true
+    }
+
     private fun onFocusListener(view: View, hasFocus: Boolean) {
         if (!hasFocus) hideKeyboard()
     }

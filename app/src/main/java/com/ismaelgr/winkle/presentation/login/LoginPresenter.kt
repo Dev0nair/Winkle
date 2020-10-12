@@ -25,20 +25,34 @@ class LoginPresenter(
     }
 
     private fun doLogin(email: String, pass: String) {
+        login.disableButtons()
+        showLoading(true)
         loginUseCase.execute(
             email,
             pass,
-            onSuccess = { checkProfileWhenLogin() },
-            onError = { login.showError(it) }
+            onSuccess = {
+                checkProfileWhenLogin()
+            },
+            onError = {
+                showLoading(false)
+                login.run {
+                    showError(it)
+                    enableButtons()
+                }
+            }
         )
     }
 
     private fun checkProfileWhenLogin() {
         hasProfileUseCase.execute { hasProfile ->
+            showLoading(false)
             if (hasProfile) {
                 login.loadMainApplication()
             } else {
-                login.loadSignInProfile()
+                login.run {
+                    enableButtons()
+                    loadSignInProfile()
+                }
             }
         }
     }

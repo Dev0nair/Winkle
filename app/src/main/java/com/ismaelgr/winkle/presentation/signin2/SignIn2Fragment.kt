@@ -6,7 +6,6 @@ import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.domain.usecase.CreateProfileUseCase
 import kotlinx.android.synthetic.main.fragment_signin2.*
-import kotlinx.android.synthetic.main.toolbar.*
 
 /**
  * A simple [Fragment] subclass.
@@ -23,10 +22,24 @@ class SignIn2Fragment : BaseFragment(R.layout.fragment_signin2), SignIn2Contract
         findNavController().navigate(R.id.action_signIn2Fragment_to_flujo_principal)
     }
 
+    override fun backToLogin() {
+        findNavController().navigate(R.id.action_signIn2Fragment_to_loginFragment)
+    }
+
+    override fun enableButtons() {
+        btn_create_profile.isEnabled = true
+        btn_exit_to_login.isEnabled = true
+    }
+
+    override fun disableButtons() {
+        btn_create_profile.isEnabled = false
+        btn_exit_to_login.isEnabled = false
+    }
+
     override fun initElements() {
         signin2Presenter = SignIn2Presenter(this as SignIn2Contract.View, CreateProfileUseCase())
 
-        btn_continue.setOnClickListener {
+        btn_create_profile.setOnClickListener {
             signin2Presenter.onSignInClick(
                 username = edit_username.text.toString(),
                 contactEmail = edit_contact_email.text.toString(),
@@ -34,5 +47,7 @@ class SignIn2Fragment : BaseFragment(R.layout.fragment_signin2), SignIn2Contract
                 contactPhone = edit_contact_phone.text.toString()
             )
         }
+
+        btn_exit_to_login.setOnClickListener { signin2Presenter.onExitToLoginBtnClick() }
     }
 }

@@ -23,10 +23,20 @@ class SignInFragment : BaseFragment(R.layout.fragment_signin), SignInContract.Vi
         findNavController().popBackStack()
     }
 
+    override fun enableButtons() {
+        btn_create_account.isEnabled = true
+        toolbar_back.isEnabled = true
+    }
+
+    override fun disableButtons() {
+        btn_create_account.isEnabled = false
+        toolbar_back.isEnabled = false
+    }
+
     override fun initElements() {
         signinPresenter = SignInPresenter(this as SignInContract.View, CreateAccountUseCase())
 
-        btn_continue1.setOnClickListener {
+        btn_create_account.setOnClickListener {
             signinPresenter.onContinuePressed(
                 edit_email.text.toString(),
                 edit_pass.text.toString()
