@@ -60,5 +60,4 @@ class LoginPresenter(
     override fun onSignInBtnClick() {
         login.loadSignIn()
     }
-
 }

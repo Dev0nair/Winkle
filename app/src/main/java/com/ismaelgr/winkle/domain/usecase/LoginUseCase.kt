@@ -1,13 +1,10 @@
 package com.ismaelgr.winkle.domain.usecase
 
-import com.google.firebase.auth.FirebaseAuth
+import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 
-class LoginUseCase {
+class LoginUseCase(private val accountRepository: AccountRepositoryNeed) {
 
     fun execute(email: String, pass: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.signInWithEmailAndPassword(email, pass)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { onError(it.message.orEmpty()) }
+        accountRepository.login(email, pass, onSuccess, onError)
     }
 }
