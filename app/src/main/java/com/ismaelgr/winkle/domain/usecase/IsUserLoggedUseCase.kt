@@ -1,11 +1,10 @@
 package com.ismaelgr.winkle.domain.usecase
 
-import com.google.firebase.auth.FirebaseAuth
+import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 
-class IsUserLoggedUseCase {
+class IsUserLoggedUseCase(private val accountRepositoryNeed: AccountRepositoryNeed) {
 
     fun execute(onLoad: (Boolean) -> Unit) {
-        val value = FirebaseAuth.getInstance().currentUser != null
-        onLoad(value)
+        accountRepositoryNeed.isLogged().run(onLoad)
     }
 }

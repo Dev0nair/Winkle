@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
+import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.HasProfileUseCase
 import com.ismaelgr.winkle.domain.usecase.IsUserLoggedUseCase
 import com.ismaelgr.winkle.domain.usecase.LegalConfirmationUseCase
@@ -21,8 +23,11 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash), SplashContract.Vi
         splashPresenter = SplashPresenter(
             this as SplashContract.View,
             LegalConfirmationUseCase(),
-            IsUserLoggedUseCase(),
-            HasProfileUseCase()
+            IsUserLoggedUseCase(AccountRepositoryFactory().getRepository()),
+            HasProfileUseCase(
+                AccountRepositoryFactory().getRepository(),
+                ProfileRepositoryFactory().getRepository()
+            )
         )
 
         splashPresenter.onInitElements()

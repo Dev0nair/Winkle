@@ -1,22 +1,18 @@
 package com.ismaelgr.winkle.domain.usecase
 
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.ismaelgr.winkle.data.entity.Perfil
-import com.ismaelgr.winkle.util.Routes
+import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
+import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
 
-class CreateProfileUseCase {
+class CreateProfileUseCase(
+    private val profileRepositoryNeed: ProfileRepositoryNeed,
+    private val accountRepositoryNeed: AccountRepositoryNeed
+) {
 
     fun execute(perfil: Perfil, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        FirebaseAuth.getInstance().currentUser?.let { user ->
-            perfil.id = user.uid
-            perfil.email = user.email.toString()
-
-            FirebaseFirestore.getInstance().collection(Routes.PERFILES)
-                .document()
-                .set(perfil)
-                .addOnSuccessListener { onSuccess() }
-                .addOnFailureListener { onError(it.message.toString()) }
-        }
+        val account = accountRepositoryNeed.getAccount()
+        perfil.id = account.id
+        perfil.email = account.email
+        profileRepositoryNeed.createProfile(perfil, onSuccess, onError)
     }
 }

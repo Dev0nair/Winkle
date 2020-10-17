@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
+import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.CreateProfileUseCase
 import kotlinx.android.synthetic.main.fragment_signin2.*
 
@@ -37,7 +39,13 @@ class SignIn2Fragment : BaseFragment(R.layout.fragment_signin2), SignIn2Contract
     }
 
     override fun initElements() {
-        signin2Presenter = SignIn2Presenter(this as SignIn2Contract.View, CreateProfileUseCase())
+        signin2Presenter = SignIn2Presenter(
+            this as SignIn2Contract.View,
+            CreateProfileUseCase(
+                ProfileRepositoryFactory().getRepository(),
+                AccountRepositoryFactory().getRepository()
+            )
+        )
 
         btn_create_profile.setOnClickListener {
             signin2Presenter.onSignInClick(
