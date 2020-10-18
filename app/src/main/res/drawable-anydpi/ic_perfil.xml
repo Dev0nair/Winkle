@@ -4,7 +4,7 @@
     android:viewportWidth="16"
     android:viewportHeight="16"
     android:tint="#333333"
-    android:alpha="1">
+    android:alpha="0.6">
   <group android:translateX="-4"
       android:translateY="-4">
       <path
