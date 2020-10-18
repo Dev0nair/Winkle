@@ -12,7 +12,7 @@ import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.home_product_view.view.*
 import kotlin.math.absoluteValue
 
-class HomeRecyclerAdapter(private val onProductClick: (idProducto: String) -> Unit) :
+class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Unit) :
     RecyclerView.Adapter<HomeRecyclerAdapter.HomeAdapter>() {
 
     private var listProducts = ArrayList<Producto>()
@@ -47,7 +47,7 @@ class HomeRecyclerAdapter(private val onProductClick: (idProducto: String) -> Un
             setImage(item.image)
             setName(item.nombre)
             setPrice(item.precio)
-            this.itemView.setOnClickListener { onProductClick(item.id) }
+            this.itemView.setOnClickListener { onProductClick(item) }
         }
     }
 

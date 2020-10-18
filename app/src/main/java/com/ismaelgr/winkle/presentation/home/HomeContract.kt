@@ -11,11 +11,12 @@ interface HomeContract {
         fun filterTags(list: List<String>)
         fun filterCategories(list: List<Categorias>)
         fun filterNameDesc(string: String)
+        fun navigateToProductDetail(producto: Producto)
     }
 
     interface Presenter : BaseContract.Presenter {
         fun onInit()
-        fun onProductClick(idProducto: String)
+        fun onProductClick(producto: Producto)
         fun onCategorySelected(categoria: Categorias)
         fun onSearch(search: String)
     }

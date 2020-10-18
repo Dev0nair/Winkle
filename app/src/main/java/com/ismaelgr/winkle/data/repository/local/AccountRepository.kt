@@ -5,7 +5,14 @@ import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 
 class AccountRepository : AccountRepositoryNeed {
 
-    private var logged = false
+    private val logged = true
+    private val cuenta = Cuenta(
+        id = "123456789",
+        username = "Ismael González",
+        email = "correo_prueba@gmail.com",
+        phone = "654725348",
+        image = ""
+    )
 
     override fun createAccount(
         email: String,
@@ -16,19 +23,7 @@ class AccountRepository : AccountRepositoryNeed {
         onSuccess()
     }
 
-    override fun getAccount(): Cuenta {
-        if (isLogged()) {
-            return Cuenta(
-                id = "123456789",
-                username = "Ismael González",
-                email = "correo_prueba@gmail.com",
-                phone = "654725348",
-                image = ""
-            )
-        } else {
-            throw Error("You are not logged!")
-        }
-    }
+    override fun getAccount(): Cuenta = cuenta
 
     override fun isLogged(): Boolean = logged
 
@@ -38,11 +33,9 @@ class AccountRepository : AccountRepositoryNeed {
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
-        logged = true
         onSuccess()
     }
 
     override fun logout() {
-        logged = false
     }
 }

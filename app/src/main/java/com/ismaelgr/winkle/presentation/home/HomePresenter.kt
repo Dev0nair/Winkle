@@ -1,14 +1,15 @@
 package com.ismaelgr.winkle.presentation.home
 
 import com.ismaelgr.winkle.data.entity.Categorias
+import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.domain.usecase.GetAllProductsUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class HomePresenter(
-    private val view: HomeContract.View,
+    private val home: HomeContract.View,
     private val getAllProductsUseCase: GetAllProductsUseCase
 ) :
-    BasePresenter<HomeContract.View>(view), HomeContract.Presenter {
+    BasePresenter<HomeContract.View>(home), HomeContract.Presenter {
 
     private var categorias = ArrayList<Categorias>()
 
@@ -16,7 +17,7 @@ class HomePresenter(
         showLoading(true)
         getAllProductsUseCase.execute(
             onSuccess = { list ->
-                list.run(view::loadProducts)
+                list.run(home::loadProducts)
                 showLoading(false)
             },
             onError = {
@@ -26,8 +27,8 @@ class HomePresenter(
         )
     }
 
-    override fun onProductClick(idProducto: String) {
-        // TODO("Not yet implemented")
+    override fun onProductClick(producto: Producto) {
+        home.navigateToProductDetail(producto)
     }
 
     override fun onCategorySelected(categoria: Categorias) {
@@ -37,7 +38,7 @@ class HomePresenter(
             categorias.add(categoria)
         }
 
-        view.filterCategories(categorias.toList())
+        home.filterCategories(categorias.toList())
     }
 
     override fun onSearch(search: String) {
@@ -52,7 +53,7 @@ class HomePresenter(
             nameDesc += search
         }
 
-        view.run {
+        home.run {
             filterTags(realTags) // si hay un 'Texto ejemplo "hola" nosek', será [Texto ejemplo, hola, nosek]. de esta forma, solo cogemos hola
             filterNameDesc(nameDesc)
         }

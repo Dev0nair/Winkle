@@ -1,7 +1,9 @@
 package com.ismaelgr.winkle.presentation.home
 
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.chip.Chip
 import com.ismaelgr.winkle.presentation.base.BaseFragment
@@ -85,5 +87,9 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
             setNameDesc(string)
             setFilters()
         }
+    }
+
+    override fun navigateToProductDetail(producto: Producto) {
+        findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, bundleOf("producto" to producto))
     }
 }

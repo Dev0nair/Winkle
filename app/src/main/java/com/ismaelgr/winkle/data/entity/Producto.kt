@@ -1,5 +1,9 @@
 package com.ismaelgr.winkle.data.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Producto (
     val id: String,
     val nombre: String,
@@ -10,4 +14,4 @@ data class Producto (
     val activo: Boolean,
     val etiquetas: List<String>,
     val categorias: Int
-)
+): Parcelable
