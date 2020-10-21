@@ -28,7 +28,15 @@ class ProfileRepository : ProfileRepositoryNeed {
         onSuccess: (Perfil) -> Unit,
         onError: (String) -> Unit
     ) {
+        TODO("Not yet implemented")
+    }
 
+    override fun getProfileFromAcc(
+        idAccount: String,
+        onSuccess: (Perfil) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        TODO("Not yet implemented")
     }
 
     override fun createProfile(perfil: Perfil, onSuccess: () -> Unit, onError: (String) -> Unit) {

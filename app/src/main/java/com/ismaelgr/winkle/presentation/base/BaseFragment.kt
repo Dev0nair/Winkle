@@ -22,11 +22,17 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
     }
 
     override fun hideLoading() {
-        activity?.findViewById<ContentLoadingProgressBar>(R.id.main_loading_progressbar)?.hide()
+        activity?.run {
+            findViewById<View>(R.id.main_overlay)?.visibility = View.GONE
+            findViewById<ContentLoadingProgressBar>(R.id.main_loading_progressbar)?.hide()
+        }
     }
 
     override fun showLoading() {
-        activity?.findViewById<ContentLoadingProgressBar>(R.id.main_loading_progressbar)?.show()
+        activity?.run {
+            findViewById<View>(R.id.main_overlay)?.visibility = View.VISIBLE
+            findViewById<ContentLoadingProgressBar>(R.id.main_loading_progressbar)?.show()
+        }
     }
 
     open fun hideKeyboard() {

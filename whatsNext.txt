@@ -1,0 +1,8 @@
+Realmente las necesidades son:
+[] Realizar Home
+[] Realizar Mi Tienda
+[] Realizar Cesta
+[] Realizar Mi perfil
+
+Lo ultimo realizado fue:
+Se ha añadido 

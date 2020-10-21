@@ -6,5 +6,6 @@ interface ProfileRepositoryNeed {
 
     fun hasProfile(idAccount: String, onSuccess: (Boolean) -> Unit, onError: (String) -> Unit)
     fun getProfile(idProfile: String, onSuccess: (Perfil) -> Unit, onError: (String) -> Unit)
+    fun getProfileFromAcc(idAccount: String, onSuccess: (Perfil) -> Unit, onError: (String) -> Unit)
     fun createProfile(perfil: Perfil, onSuccess: () -> Unit, onError: (String) -> Unit)
 }

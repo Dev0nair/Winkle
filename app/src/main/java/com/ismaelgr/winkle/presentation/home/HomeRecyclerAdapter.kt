@@ -100,7 +100,7 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
                         0
                     }
                 }
-            }).sortedBy { it.nombre }
+            })
 
             listProducts.run {
                 clear()

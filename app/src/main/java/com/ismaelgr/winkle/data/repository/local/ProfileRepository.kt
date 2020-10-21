@@ -15,7 +15,7 @@ class ProfileRepository: ProfileRepositoryNeed {
         emailContacto = "correo2_prueba@gmail.com"
     )
 
-    private val withProfile = true
+    private var withProfile = false
 
     override fun hasProfile(idAccount: String, onSuccess: (Boolean) -> Unit, onError: (String) -> Unit) {
         onSuccess(withProfile)
@@ -29,7 +29,16 @@ class ProfileRepository: ProfileRepositoryNeed {
         onSuccess(perfil)
     }
 
+    override fun getProfileFromAcc(
+        idAccount: String,
+        onSuccess: (Perfil) -> Unit,
+        onError: (String) -> Unit
+    ) {
+        onSuccess(perfil)
+    }
+
     override fun createProfile(perfil: Perfil, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        withProfile = true
         onSuccess()
     }
 }

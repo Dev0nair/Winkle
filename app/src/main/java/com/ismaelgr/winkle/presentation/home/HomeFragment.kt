@@ -1,5 +1,6 @@
 package com.ismaelgr.winkle.presentation.home
 
+import android.content.res.ColorStateList
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -44,6 +45,7 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
             viewChip.text = Mapper.map(requireContext(), category)
             viewChip.isClickable = true
             viewChip.isCheckable = true
+            viewChip.setChipBackgroundColorResource(R.color.chip_background)
             viewChip.setOnClickListener { homePresenter.onCategorySelected(category) }
 
             home_categories_cg.addView(viewChip)

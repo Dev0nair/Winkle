@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#af5350</color>
     <color name="colorAccent">#ff867c</color>
     <color name="primaryTextColor">#000000</color>
+    <color name="unselectedChip">#ccc</color>
 </resources>
