@@ -5,4 +5,6 @@ Realmente las necesidades son:
 [] Realizar Mi perfil
 
 Lo ultimo realizado fue:
-Se ha añadido 
+ - Se ha añadido el usecase de Mi Tienda para recibir mis productos
+ - Se ha pulido el filtro en la parte de ordenar por coincidencia del nombre o descripcion
+ - Se ha metido el floating button de altas de nuevos productos (aunque habria que poner bien el estilo)

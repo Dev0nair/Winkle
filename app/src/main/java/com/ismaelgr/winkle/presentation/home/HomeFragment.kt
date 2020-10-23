@@ -66,6 +66,10 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
         homePresenter.onInit()
     }
 
+    override fun reloadData() {
+        homePresenter.onInit()
+    }
+
     override fun loadProducts(list: List<Producto>) {
         homeRecyclerAdapter.setList(list)
     }

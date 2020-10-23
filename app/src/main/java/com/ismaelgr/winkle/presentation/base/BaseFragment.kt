@@ -16,6 +16,8 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
 
     abstract override fun initElements()
 
+    open fun reloadData() {}
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initElements()

@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.FirebaseApp
+import com.ismaelgr.winkle.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -86,9 +87,16 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         bottom_navigation_bar.setupWithNavController(navController)
+
+        bottom_navigation_bar.setOnNavigationItemReselectedListener {
+            navHostFragment.childFragmentManager.fragments[0]?.let { actualFragment ->
+                (actualFragment as BaseFragment).reloadData()
+            }
+        }
     }
 
     private fun initializeFirebase() {
@@ -98,7 +106,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
         return navController.navigateUp(appBarConfiguration)

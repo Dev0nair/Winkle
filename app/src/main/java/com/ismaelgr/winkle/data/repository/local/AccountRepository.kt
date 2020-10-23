@@ -5,7 +5,7 @@ import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 
 class AccountRepository : AccountRepositoryNeed {
 
-    private var logged = false
+    private var logged = true
     private val cuenta = Cuenta(
         id = "123456789",
         username = "Ismael González",
