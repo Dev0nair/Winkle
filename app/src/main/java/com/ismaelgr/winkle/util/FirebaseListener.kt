@@ -20,11 +20,25 @@ object FirebaseListener {
 
     fun makeOneTimeCollectionListener(
         collectionReference: CollectionReference,
-        onSuccess: (Any) -> Unit,
+        onSuccess: (QuerySnapshot) -> Unit,
         onCancel: () -> Unit = {},
         onError: (Exception) -> Unit
     ) {
         val firebaseListener = collectionReference.get()
+
+        firebaseListener
+            .addOnSuccessListener(onSuccess)
+            .addOnFailureListener(onError)
+            .addOnCanceledListener(onCancel)
+    }
+
+    fun makeOneTimeDocumentListener(
+        documentReference: DocumentReference,
+        onSuccess: (DocumentSnapshot) -> Unit,
+        onCancel: () -> Unit = {},
+        onError: (Exception) -> Unit
+    ) {
+        val firebaseListener = documentReference.get()
 
         firebaseListener
             .addOnSuccessListener(onSuccess)
