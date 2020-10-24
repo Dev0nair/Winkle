@@ -3,6 +3,7 @@ package com.ismaelgr.winkle.data.repository.local
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
+import io.reactivex.rxjava3.core.Maybe
 
 class ProductRepository : ProductRepositoryNeed {
 
@@ -87,28 +88,23 @@ class ProductRepository : ProductRepositoryNeed {
     )
 
     override fun getProductsOf(
-        idProfile: String,
-        onSuccess: (List<Producto>) -> Unit,
-        onError: (String) -> Unit
-    ) {
+        idProfile: String
+    ): Maybe<List<Producto>> {
         val productsOfProfile = products.filter { producto -> producto.vendedorId == idProfile }
-        onSuccess(productsOfProfile)
+        return Maybe.just(productsOfProfile)
     }
 
-    override fun getAllProducts(onSuccess: (List<Producto>) -> Unit, onError: (String) -> Unit) {
-        onSuccess(products)
-    }
+    override fun getAllProducts(): Maybe<List<Producto>> = Maybe.just(products)
 
     override fun getProductInfo(
-        idProducto: String,
-        onSuccess: (Producto) -> Unit,
-        onError: (String) -> Unit
-    ) {
+        idProducto: String
+    ): Maybe<Producto> = Maybe.create { emitter ->
         val producto: Producto? = products.find { product -> product.id == idProducto }
+
         if (producto != null) {
-            onSuccess(producto)
+            emitter.onSuccess(producto)
         } else {
-            onError("There is no product with id $idProducto")
+            emitter.onError(Error("There is no product with id $idProducto"))
         }
     }
 }

@@ -5,38 +5,38 @@ import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
 import com.ismaelgr.winkle.util.FirebaseListener
 import com.ismaelgr.winkle.util.Routes
+import io.reactivex.rxjava3.core.Maybe
 
-class ProductRepository: ProductRepositoryNeed {
+class ProductRepository : ProductRepositoryNeed {
 
     override fun getProductsOf(
-        idProfile: String,
-        onSuccess: (List<Producto>) -> Unit,
-        onError: (String) -> Unit
-    ) {
+        idProfile: String
+    ) =
         FirebaseListener.makeOneTimeQueryListener(
-            query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS).whereEqualTo("vendedorId", idProfile),
-            onSuccess = { data -> data.toObjects(Producto::class.java).run(onSuccess) },
-            onError = { error -> error.message.toString().run(onError) }
+            query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
+                .whereEqualTo("vendedorId", idProfile),
+            classCast = Producto::class.java
         )
-    }
 
-    override fun getAllProducts(onSuccess: (List<Producto>) -> Unit, onError: (String) -> Unit) {
+
+    override fun getAllProducts() =
         FirebaseListener.makeOneTimeQueryListener(
             query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS),
-            onSuccess = { data -> data.toObjects(Producto::class.java).run(onSuccess) },
-            onError = { error -> error.message.toString().run(onError) }
+            classCast = Producto::class.java
         )
-    }
+
 
     override fun getProductInfo(
-        idProducto: String,
-        onSuccess: (Producto) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        FirebaseListener.makeOneTimeQueryListener(
-            query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS).whereEqualTo("id", idProducto),
-            onSuccess = { data -> data.toObjects(Producto::class.java)[0].run(onSuccess) },
-            onError = { error -> error.message.toString().run(onError) }
-        )
-    }
+        idProducto: String
+    ) =
+        Maybe.create<Producto> { emitter ->
+            FirebaseListener.makeOneTimeQueryListener(
+                query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
+                    .whereEqualTo("id", idProducto),
+                classCast = Producto::class.java
+            )
+                .doOnSuccess { emitter.onSuccess(it[0]) }
+                .doOnComplete(emitter::onComplete)
+                .doOnError(emitter::onError)
+        }
 }

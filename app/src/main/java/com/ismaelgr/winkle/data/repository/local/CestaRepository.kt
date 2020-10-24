@@ -2,6 +2,7 @@ package com.ismaelgr.winkle.data.repository.local
 
 import com.ismaelgr.winkle.data.entity.Cesta
 import com.ismaelgr.winkle.data.repository.needs.CestaRepositoryNeed
+import io.reactivex.rxjava3.core.Maybe
 
 class CestaRepository: CestaRepositoryNeed {
 
@@ -10,31 +11,28 @@ class CestaRepository: CestaRepositoryNeed {
         products = arrayListOf("1", "2", "3")
     )
 
-    override fun getCesta(idProfile: String, onLoad: (Cesta) -> Unit, onError: (String) -> Unit) {
-        cesta.run(onLoad)
-    }
+    override fun getCesta(idProfile: String): Maybe<Cesta> =
+        Maybe.just(cesta)
 
-    override fun addToCesta(idProfile: String, idProduct: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+    override fun addToCesta(idProfile: String, idProduct: String): Maybe<Any> {
         cesta.products.add(idProduct)
-        onSuccess()
+        return Maybe.just(Any())
     }
 
-    override fun clearCesta(idProfile: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+    override fun clearCesta(idProfile: String): Maybe<Any> {
         cesta.products.clear()
-        onSuccess()
+        return Maybe.just(Any())
     }
 
     override fun deleteFromCesta(
         idProfile: String,
-        idProduct: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
+        idProduct: String
+    ): Maybe<Any> = Maybe.create { emitter ->
         if(cesta.products.contains(idProduct)) {
             cesta.products.remove(idProduct)
-            onSuccess()
+            emitter.onSuccess(Any())
         } else {
-            onError("No se pudo borrar un producto que no existe")
+            emitter.onError(Error("No se pudo borrar un producto que no existe"))
         }
     }
 }

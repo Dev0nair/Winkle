@@ -1,21 +1,17 @@
 package com.ismaelgr.winkle.util
 
 import com.google.firebase.firestore.*
+import io.reactivex.rxjava3.core.Maybe
 
 object FirebaseListener {
 
-    fun makeOneTimeQueryListener(
+    fun <T> makeOneTimeQueryListener(
         query: Query,
-        onSuccess: (QuerySnapshot) -> Unit,
-        onCancel: () -> Unit = {},
-        onError: (Exception) -> Unit
-    ) {
-        val firebaseListener = query.get()
-
-        firebaseListener
-            .addOnSuccessListener(onSuccess)
-            .addOnFailureListener(onError)
-            .addOnCanceledListener(onCancel)
+        classCast: Class<T>
+    ) = Maybe.create<List<T>> { emiter ->
+        query.get()
+            .addOnSuccessListener { it.toObjects(classCast).run(emiter::onSuccess) }
+            .addOnFailureListener(emiter::onError)
     }
 
     fun makeOneTimeCollectionListener(
@@ -32,19 +28,15 @@ object FirebaseListener {
             .addOnCanceledListener(onCancel)
     }
 
-    fun makeOneTimeDocumentListener(
+    fun <T> makeOneTimeDocumentListener(
         documentReference: DocumentReference,
-        onSuccess: (DocumentSnapshot) -> Unit,
-        onCancel: () -> Unit = {},
-        onError: (Exception) -> Unit
-    ) {
-        val firebaseListener = documentReference.get()
-
-        firebaseListener
-            .addOnSuccessListener(onSuccess)
-            .addOnFailureListener(onError)
-            .addOnCanceledListener(onCancel)
+        classCast: Class<T>
+    ) = Maybe.create<T> { emiter ->
+        documentReference.get()
+            .addOnSuccessListener { it.toObject(classCast).run(emiter::onSuccess) }
+            .addOnFailureListener(emiter::onError)
     }
+
 
     fun makeFullTimeListener(
         collectionPath: String,

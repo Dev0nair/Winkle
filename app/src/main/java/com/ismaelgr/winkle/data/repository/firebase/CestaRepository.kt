@@ -5,75 +5,80 @@ import com.ismaelgr.winkle.data.entity.Cesta
 import com.ismaelgr.winkle.data.repository.needs.CestaRepositoryNeed
 import com.ismaelgr.winkle.util.FirebaseListener
 import com.ismaelgr.winkle.util.Routes
+import io.reactivex.rxjava3.core.Maybe
 
 class CestaRepository : CestaRepositoryNeed {
 
-    override fun getCesta(idProfile: String, onLoad: (Cesta) -> Unit, onError: (String) -> Unit) {
-
+    override fun getCesta(idProfile: String): Maybe<Cesta> =
         FirebaseListener.makeOneTimeDocumentListener(
-            documentReference = FirebaseFirestore.getInstance().collection(Routes.CESTAS)
-                .document(idProfile),
-            onSuccess = { data -> data.toObject(Cesta::class.java)?.run(onLoad) },
-            onError = { error -> error.message.toString().run(onError) }
+            FirebaseFirestore.getInstance().collection(Routes.CESTAS).document(idProfile),
+            Cesta::class.java
         )
-    }
 
     override fun addToCesta(
         idProfile: String,
-        idProduct: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
+        idProduct: String
+    ) = Maybe.create<Any> { emiter ->
         FirebaseListener.makeOneTimeDocumentListener(
             documentReference = FirebaseFirestore.getInstance().collection(Routes.CESTAS)
                 .document(idProfile),
-            onSuccess = { data ->
-                var cesta = data.toObject(Cesta::class.java)
-                if (cesta == null) {
-                    cesta = Cesta(idProfile, arrayListOf())
-                }
-                cesta.products.add(idProduct)
-
-                FirebaseFirestore.getInstance().collection(Routes.CESTAS).document(idProfile)
-                    .set(cesta)
-                    .addOnSuccessListener { onSuccess() }
-                    .addOnFailureListener { onError(it.message.toString()) }
-            },
-            onError = { error -> error.message.toString().run(onError) }
+            Cesta::class.java
         )
+            .doOnSuccess { cesta ->
+                cesta.products.add(idProduct)
+                applyCesta(idProfile, cesta, emiter::onSuccess, emiter::onError)
+            }
+            .doOnComplete {
+                val cesta = Cesta(idProfile, arrayListOf())
+                cesta.products.add(idProduct)
+                applyCesta(idProfile, cesta, emiter::onSuccess, emiter::onError)
+            }
     }
 
-    override fun clearCesta(idProfile: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+    private fun applyCesta(
+        idProfile: String,
+        cesta: Cesta,
+        onSuccess: (Any) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
         FirebaseFirestore.getInstance().collection(Routes.CESTAS).document(idProfile)
-            .delete()
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { onError(it.message.toString()) }
+            .set(cesta)
+            .addOnSuccessListener { onSuccess(Any()) }
+            .addOnFailureListener { onError(it) }
     }
+
+    override fun clearCesta(idProfile: String) =
+        Maybe.create<Any> { emitter ->
+            FirebaseFirestore.getInstance().collection(Routes.CESTAS).document(idProfile)
+                .delete()
+                .addOnSuccessListener { emitter.onSuccess(Any()) }
+                .addOnFailureListener { it.run(emitter::onError) }
+        }
 
     override fun deleteFromCesta(
         idProfile: String,
-        idProduct: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
-        FirebaseListener.makeOneTimeDocumentListener(
-            documentReference = FirebaseFirestore.getInstance().collection(Routes.CESTAS)
-                .document(idProfile),
-            onSuccess = { data ->
-                val cesta = data.toObject(Cesta::class.java)
-                if (cesta != null) {
+        idProduct: String
+    ) = Maybe.create<Any> { emitter ->
+            FirebaseListener.makeOneTimeDocumentListener(
+                documentReference = FirebaseFirestore.getInstance().collection(Routes.CESTAS)
+                    .document(idProfile),
+                Cesta::class.java
+            )
+                .doOnSuccess { cesta ->
                     if (cesta.products.contains(idProduct)) {
                         cesta.products.remove(idProduct)
-
-                        FirebaseFirestore.getInstance().collection(Routes.CESTAS)
-                            .document(idProfile)
-                            .set(cesta)
-                            .addOnSuccessListener { onSuccess() }
-                            .addOnFailureListener { onError(it.message.toString()) }
+                        applyCesta(idProfile, cesta, emitter::onSuccess, emitter::onError)
+                    } else {
+                        emitter.onComplete()
                     }
                 }
-            },
-            onError = { error -> error.message.toString().run(onError) }
-        )
-    }
+                .doOnComplete {
+                    applyCesta(
+                        idProfile,
+                        Cesta(idProfile, arrayListOf()),
+                        { emitter.onComplete() },
+                        emitter::onError
+                    )
+                }
+        }
 }
