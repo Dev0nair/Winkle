@@ -58,4 +58,8 @@ class HomePresenter(
             filterNameDesc(nameDesc)
         }
     }
+
+    override fun onDestroy() {
+        getAllProductsUseCase.dispose()
+    }
 }

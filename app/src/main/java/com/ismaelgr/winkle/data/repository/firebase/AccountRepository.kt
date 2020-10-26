@@ -4,18 +4,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ismaelgr.winkle.data.entity.Cuenta
 import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 import com.ismaelgr.winkle.util.Mapper
+import io.reactivex.rxjava3.core.Completable
 
 class AccountRepository : AccountRepositoryNeed {
+
     override fun createAccount(
         email: String,
-        pass: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.createUserWithEmailAndPassword(email, pass)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { onError(it.message.toString()) }
+        pass: String
+    ): Completable = Completable.create { emitter ->
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, pass)
+            .addOnSuccessListener { emitter.onComplete() }
+            .addOnFailureListener { it.run(emitter::onError) }
     }
 
     override fun getAccount(): Cuenta {
@@ -31,14 +30,11 @@ class AccountRepository : AccountRepositoryNeed {
 
     override fun login(
         email: String,
-        pass: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.signInWithEmailAndPassword(email, pass)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { onError(it.message.orEmpty()) }
+        pass: String
+    ): Completable = Completable.create { emitter ->
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, pass)
+            .addOnSuccessListener { emitter.onComplete() }
+            .addOnFailureListener { it.run(emitter::onError) }
     }
 
     override fun logout() {

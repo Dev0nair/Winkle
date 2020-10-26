@@ -1,6 +1,5 @@
 package com.ismaelgr.winkle.presentation.home
 
-import android.content.res.ColorStateList
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment

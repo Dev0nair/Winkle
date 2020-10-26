@@ -2,6 +2,7 @@ package com.ismaelgr.winkle.util
 
 import com.google.firebase.firestore.*
 import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Observable
 
 object FirebaseListener {
 
@@ -38,16 +39,35 @@ object FirebaseListener {
     }
 
 
-    fun makeFullTimeListener(
-        collectionPath: String,
-        onSuccess: (Any) -> Unit,
-        onError: (Exception) -> Unit
-    ) {
-        val firebaseListener = FirebaseFirestore.getInstance().collection(collectionPath)
+    fun <T> makeFullTimeCollectionListener(
+        collectionReference: CollectionReference,
+        classCast: Class<T>
+    ): Observable<Pair<T, DocumentChange.Type>> {
+        return Observable.create { emitter ->
+            collectionReference
+                .addSnapshotListener { value, error ->
+                    value?.documentChanges?.forEach {
+                        val data = it.document.toObject(classCast)
+                        val change = it.type
+                        emitter.onNext(Pair(data, change))
+                    }
+                    error?.run(emitter::onError)
+                }
 
-        firebaseListener.addSnapshotListener { value, error ->
-            error?.run(onError)
-            value?.run(onSuccess)
+        }
+    }
+
+    fun <T> makeFullTimeDocumentListener(
+        documentReference: DocumentReference,
+        classCast: Class<T>
+    ): Observable<T> {
+        return Observable.create { emitter ->
+            documentReference
+                .addSnapshotListener { value, error ->
+                    value?.toObject(classCast).run(emitter::onNext)
+                    error?.run(emitter::onError)
+                }
+
         }
     }
 }

@@ -59,4 +59,8 @@ class MyProductsPresenter(
         }
     }
 
+    override fun onDestroy() {
+        getMyProductsUseCase.dispose()
+    }
+
 }

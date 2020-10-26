@@ -2,6 +2,7 @@ package com.ismaelgr.winkle.data.repository.local
 
 import com.ismaelgr.winkle.data.entity.Cuenta
 import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
+import io.reactivex.rxjava3.core.Completable
 
 class AccountRepository : AccountRepositoryNeed {
 
@@ -16,12 +17,8 @@ class AccountRepository : AccountRepositoryNeed {
 
     override fun createAccount(
         email: String,
-        pass: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
-        onSuccess()
-    }
+        pass: String
+    ): Completable = Completable.complete()
 
     override fun getAccount(): Cuenta = cuenta
 
@@ -29,14 +26,8 @@ class AccountRepository : AccountRepositoryNeed {
 
     override fun login(
         email: String,
-        pass: String,
-        onSuccess: () -> Unit,
-        onError: (String) -> Unit
-    ) {
-        logged = true
-        onSuccess()
-    }
+        pass: String
+    ) : Completable = Completable.complete()
 
-    override fun logout() {
-    }
+    override fun logout() {}
 }

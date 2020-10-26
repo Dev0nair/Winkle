@@ -17,6 +17,7 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
     abstract override fun initElements()
 
     open fun reloadData() {}
+    abstract fun bindPresenter(): BaseContract.Presenter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,5 +50,10 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
 
     override fun getMyString(@StringRes stringId: Int): String {
         return getString(stringId)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        bindPresenter().onDestroy()
     }
 }

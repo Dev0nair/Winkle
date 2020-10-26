@@ -15,5 +15,6 @@ interface BaseContract {
     interface Presenter {
         fun showLoading(show: Boolean)
         fun showError(error: String)
+        fun onDestroy()
     }
 }
