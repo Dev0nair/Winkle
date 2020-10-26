@@ -12,6 +12,7 @@ import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.factory.ProductsRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.GetAllProductsUseCase
+import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -68,6 +69,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
     override fun reloadData() {
         homePresenter.onInit()
     }
+
+    override fun bindPresenter(): BaseContract.Presenter = this.homePresenter
 
     override fun loadProducts(list: List<Producto>) {
         homeRecyclerAdapter.setList(list)

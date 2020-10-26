@@ -10,6 +10,7 @@ import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
 import com.ismaelgr.winkle.data.repository.local.AccountRepository
 import com.ismaelgr.winkle.domain.usecase.HasProfileUseCase
 import com.ismaelgr.winkle.domain.usecase.LoginUseCase
+import com.ismaelgr.winkle.presentation.base.BaseContract
 import kotlinx.android.synthetic.main.fragment_login.*
 
 /**
@@ -42,6 +43,8 @@ class LoginFragment : BaseFragment(R.layout.fragment_login), LoginContract.View 
 
         btn_signin.setOnClickListener { loginPresenter.onSignInBtnClick() }
     }
+
+    override fun bindPresenter(): BaseContract.Presenter = this.loginPresenter
 
     override fun loadMainApplication() {
         findNavController().navigate(R.id.action_loginFragment_to_flujo_principal)

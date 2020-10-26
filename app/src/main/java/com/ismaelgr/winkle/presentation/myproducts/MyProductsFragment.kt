@@ -14,6 +14,7 @@ import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
 import com.ismaelgr.winkle.data.repository.factory.ProductsRepositoryFactory
 import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.GetMyProductsUseCase
+import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.presentation.home.HomeRecyclerAdapter
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_myproducts.*
@@ -26,6 +27,7 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
     private lateinit var myproductsPresenter: MyProductsContract.Presenter
     private lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
 
+    override fun bindPresenter(): BaseContract.Presenter = this.myproductsPresenter
 
     override fun initElements() {
         myproductsPresenter =

@@ -6,6 +6,7 @@ import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.CreateAccountUseCase
+import com.ismaelgr.winkle.presentation.base.BaseContract
 import kotlinx.android.synthetic.main.fragment_signin.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -15,6 +16,8 @@ import kotlinx.android.synthetic.main.toolbar.*
 class SignInFragment : BaseFragment(R.layout.fragment_signin), SignInContract.View {
 
     private lateinit var signinPresenter: SignInContract.Presenter
+
+    override fun bindPresenter(): BaseContract.Presenter = this.signinPresenter
 
     override fun navigateNextSignIn() {
         findNavController().navigate(R.id.action_signInFragment_to_signIn2Fragment)
