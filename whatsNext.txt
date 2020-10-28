@@ -1,10 +1,13 @@
 Realmente las necesidades son:
-[] Realizar Home
-[] Realizar Mi Tienda
-[] Realizar Cesta
+[X] Realizar Home
+[X] Realizar Mi Tienda
+[~] Realizar Cesta
 [] Realizar Mi perfil
 
 Lo ultimo realizado fue:
+ - shopping_list: se ha quitado algun que otro observeOn que me he encontrado y he creado las vistas del 
+   recycler de la pantalla de la cesta. Falta crear el adaptador y configurar la vista con sus acciones y tal
+ - Se ha mergeado la parte de RX a develop y se ha creado las ramas ['insertar_dagger', 'shopping_list']
  - Se ha insertado en una rama a parte la integracion con Rx
  - Se ha añadido el usecase de Mi Tienda para recibir mis productos
  - Se ha pulido el filtro en la parte de ordenar por coincidencia del nombre o descripcion
