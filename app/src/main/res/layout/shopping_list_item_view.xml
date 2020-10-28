@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/shoppinglistitem_civ"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        tools:src="@mipmap/ic_launcher_round"
+        tools:background="@color/colorPrimaryDark"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="1dp"
+        />
+
+    <TextView
+        android:id="@+id/shoppinglistitem_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        app:layout_constraintLeft_toRightOf="@id/shoppinglistitem_civ"
+        app:layout_constraintRight_toLeftOf="@id/shopppinglistitem_price_tv"
+        app:layout_constraintTop_toTopOf="@id/shoppinglistitem_civ"
+        app:layout_constraintBottom_toBottomOf="@id/shoppinglistitem_civ"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginStart="10dp"
+        android:textColor="@android:color/black"
+        tools:text="Nombre del producto"
+        />
+
+    <TextView
+        android:id="@+id/shoppinglistitem_desc_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        app:layout_constraintLeft_toRightOf="@id/shoppinglistitem_civ"
+        app:layout_constraintRight_toRightOf="@id/shoppinglistitem_title_tv"
+        app:layout_constraintTop_toBottomOf="@id/shoppinglistitem_title_tv"
+        app:layout_constraintBottom_toBottomOf="@id/shoppinglistitem_civ"
+        app:layout_constraintVertical_bias="0"
+        android:layout_marginStart="10dp"
+        tools:text="Nombre del producto"
+        />
+
+
+    <TextView
+        android:id="@+id/shopppinglistitem_price_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/shoppinglistitem_quitar_btn"
+        app:layout_constraintTop_toTopOf="@id/shoppinglistitem_title_tv"
+        app:layout_constraintBottom_toBottomOf="@id/shoppinglistitem_desc_tv"
+        app:layout_constraintHorizontal_bias="1"
+        tools:text="62€"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_marginEnd="20dp"
+        />
+
+    <ImageView
+        android:id="@+id/shoppinglistitem_quitar_btn"
+        android:layout_width="33dp"
+        android:layout_height="35dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ic_bin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/shopppinglistitem_price_tv"
+        app:layout_constraintBottom_toBottomOf="@id/shopppinglistitem_price_tv"
+        app:layout_constraintHorizontal_bias="1"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

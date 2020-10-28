@@ -10,7 +10,6 @@ import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.util.GlideLoader
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.home_product_view.view.*
-import kotlin.math.absoluteValue
 
 class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Unit) :
     RecyclerView.Adapter<HomeRecyclerAdapter.HomeAdapter>() {
@@ -20,7 +19,7 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.home_product_view, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.home_product_item_view, parent, false)
         return HomeAdapter(view)
     }
 
