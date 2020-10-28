@@ -17,7 +17,7 @@ class HomePresenter(
         showLoading(true)
         getAllProductsUseCase.execute(
             onSuccess = { list ->
-                list.run(home::loadProducts)
+                home.loadProducts(list)
                 showLoading(false)
             },
             onError = {

@@ -11,8 +11,6 @@ class CreateAccountUseCase(private val accountRepository: AccountRepositoryNeed)
         accountRepository.createAccount(email, pass)
             .doOnComplete(onSuccess)
             .doOnError { it.message.toString().run(onError) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }
 }

@@ -11,7 +11,7 @@ class ProductRepository : ProductRepositoryNeed {
 
     override fun getProductsOf(
         idProfile: String
-    ) =
+    ): Maybe<List<Producto>> =
         FirebaseListener.makeOneTimeQueryListener(
             query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
                 .whereEqualTo("vendedorId", idProfile),
@@ -19,7 +19,7 @@ class ProductRepository : ProductRepositoryNeed {
         )
 
 
-    override fun getAllProducts() =
+    override fun getAllProducts(): Maybe<List<Producto>> =
         FirebaseListener.makeOneTimeQueryListener(
             query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS),
             classCast = Producto::class.java
@@ -28,8 +28,8 @@ class ProductRepository : ProductRepositoryNeed {
 
     override fun getProductInfo(
         idProducto: String
-    ) =
-        Maybe.create<Producto> { emitter ->
+    ): Maybe<Producto> =
+        Maybe.create { emitter ->
             FirebaseListener.makeOneTimeQueryListener(
                 query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
                     .whereEqualTo("id", idProducto),

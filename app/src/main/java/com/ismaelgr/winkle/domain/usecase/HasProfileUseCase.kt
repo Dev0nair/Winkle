@@ -15,8 +15,6 @@ class HasProfileUseCase(
             val myId = accountRepositoryFactory.getAccount().id
             profileRepositoryFactory.hasProfile(myId)
                 .doOnSuccess(onLoad)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
         } else {
             onLoad(false)

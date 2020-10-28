@@ -18,8 +18,6 @@ class CreateProfileUseCase(
         profileRepositoryNeed.createProfile(perfil)
             .doOnComplete(onSuccess)
             .doOnError { it.message.toString().run(onError) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
     }
 }

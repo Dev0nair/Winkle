@@ -24,8 +24,6 @@ class GetMyProductsUseCase(
                 listenerProductos = productRepositoryNeed.getProductsOf(perfil.id)
                     .doOnSuccess(onSuccess)
                     .doOnError { it.message.toString().run(onError) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe()
             }
             .subscribeOn(Schedulers.io())
