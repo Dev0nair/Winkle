@@ -11,7 +11,14 @@ object FirebaseListener {
         classCast: Class<T>
     ) = Maybe.create<List<T>> { emiter ->
         query.get()
-            .addOnSuccessListener { it.toObjects(classCast).run(emiter::onSuccess) }
+            .addOnSuccessListener {
+                val data = it.toObjects(classCast)
+                if (data.isNotEmpty()){
+                    data.run(emiter::onSuccess)
+                } else {
+                    emiter.onComplete()
+                }
+            }
             .addOnFailureListener(emiter::onError)
     }
 
@@ -34,7 +41,14 @@ object FirebaseListener {
         classCast: Class<T>
     ) = Maybe.create<T> { emiter ->
         documentReference.get()
-            .addOnSuccessListener { it.toObject(classCast).run(emiter::onSuccess) }
+            .addOnSuccessListener {
+                val data = it.toObject(classCast)
+                if (data != null) {
+                    data.run(emiter::onSuccess)
+                } else {
+                    emiter.onComplete()
+                }
+            }
             .addOnFailureListener(emiter::onError)
     }
 

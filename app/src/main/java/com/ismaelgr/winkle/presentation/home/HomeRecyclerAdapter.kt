@@ -19,7 +19,8 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.home_product_item_view, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.home_product_item_view, parent, false)
         return HomeViewHolder(view)
     }
 
@@ -87,13 +88,18 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
                 if (o1.nombre.toLowerCase().contains(filterNameDesc) || o2.nombre.toLowerCase()
                         .contains(filterNameDesc)
                 ) {
-                    if(o1.nombre.toLowerCase().compareTo(filterNameDesc) > o2.nombre.toLowerCase().compareTo(filterNameDesc)){
+                    if (o1.nombre.toLowerCase().compareTo(filterNameDesc) > o2.nombre.toLowerCase()
+                            .compareTo(filterNameDesc)
+                    ) {
                         1
                     } else {
                         0
                     }
                 } else {
-                    if(o1.descripcion.toLowerCase().compareTo(filterNameDesc) > o2.descripcion.toLowerCase().compareTo(filterNameDesc)){
+                    if (o1.descripcion.toLowerCase()
+                            .compareTo(filterNameDesc) > o2.descripcion.toLowerCase()
+                            .compareTo(filterNameDesc)
+                    ) {
                         1
                     } else {
                         0
@@ -143,7 +149,10 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
         }
 
         fun setPrice(price: Float) {
-            view.product_price.text = "$price €"
+            view.product_price.text = view.context.getString(
+                R.string.text_price,
+                Mapper.map(price)
+            )
         }
     }
 }

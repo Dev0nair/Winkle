@@ -39,7 +39,7 @@
         android:layout_marginStart="10dp"
         android:textSize="15sp"
         android:textColor="@android:color/black"
-        tools:text="TOTAL: "
+        android:text="@string/text_total"
         />
 
     <TextView
@@ -54,6 +54,8 @@
         android:textColor="@android:color/holo_green_dark"
         android:textSize="15sp"
         tools:text="62€"
+        android:layout_marginStart="2dp"
+        android:padding="5dp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -64,7 +66,7 @@
         app:layout_constraintLeft_toLeftOf="@id/buying_bar"
         app:layout_constraintTop_toTopOf="@id/buying_bar"
         app:layout_constraintBottom_toBottomOf="@id/buying_bar"
-        tools:text="Comprar"
+        android:text="@string/text_comprar"
         app:layout_constraintHorizontal_bias="1"
         android:background="@drawable/rounded_background"
         android:layout_marginEnd="10dp"

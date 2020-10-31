@@ -20,11 +20,13 @@ class GetProductosMiCesta(
     fun execute(onSuccess: (List<Producto>) -> Unit, onError: (String) -> Unit) {
         val getMyCestaUseCase =
             GetMyCestaUseCase(accountRepositoryNeed, profileRepositoryNeed, cestaRepositoryNeed)
+
         getMyCestaUseCase.execute(
             onSuccess = { cesta ->
                 productRepositoryListener = productRepositoryNeed.getProductsInfo(cesta.products)
                     .doOnSuccess(onSuccess)
                     .doOnError { error -> error.message.toString().run(onError) }
+                    .doOnComplete { onSuccess(emptyList()) }
                     .subscribe()
             },
             onError = onError

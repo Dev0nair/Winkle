@@ -40,10 +40,15 @@ class ProductRepository : ProductRepositoryNeed {
                 .doOnError(emitter::onError)
         }
 
-    override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> =
-        FirebaseListener.makeOneTimeQueryListener(
-            query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
-                .whereIn("vendedorId", idProductos),
-            classCast = Producto::class.java
-        )
+    override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> {
+        return if(idProductos.isNotEmpty()){
+            FirebaseListener.makeOneTimeQueryListener(
+                query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
+                    .whereIn("vendedorId", idProductos),
+                classCast = Producto::class.java
+            )
+        } else {
+            Maybe.just(emptyList())
+        }
+    }
 }

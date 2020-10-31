@@ -33,7 +33,7 @@ class ProductRepository : ProductRepositoryNeed {
         Producto(
             "3",
             "Apuntes de clase de informatica",
-            "Esta nuevo señores lo digo enserio...",
+            "De nada xd",
             "https://www.mentesliberadas.com/wp-content/uploads/2018/10/apuntes-bonitos-principal-1024x567.jpg",
             10F,
             "1",
@@ -44,7 +44,7 @@ class ProductRepository : ProductRepositoryNeed {
         Producto(
             "4",
             "Ajedrez seminuevo",
-            "De nada xd",
+            "Como juegue una mas con mi hijo lo estampo xd",
             "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Staunton_chess_set.jpg/300px-Staunton_chess_set.jpg",
             4.5F,
             "2",

@@ -23,8 +23,10 @@ class GetMyCestaUseCase(
                 listenerCesta = cestaRepositoryNeed.getCesta(perfil.id)
                     .doOnSuccess(onSuccess)
                     .doOnError { it.message.toString().run(onError) }
+                    .doOnComplete { onSuccess(Cesta("", arrayListOf())) }
                     .subscribe()
             }
+            .doOnError{ it.message.toString().run(onError) }
             .subscribe()
     }
 

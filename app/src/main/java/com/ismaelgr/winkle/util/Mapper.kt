@@ -16,6 +16,11 @@ object Mapper {
             image = firebaseUser.photoUrl.toString()
         )
 
+    fun map(price: Float) =
+        price.toString()
+            .replace(".0", "")
+            .replace('.', ',')
+
     fun map(context: Context, categorias: Categorias): String =
         when (categorias) {
             Categorias.ESPECIAL -> "Especial"

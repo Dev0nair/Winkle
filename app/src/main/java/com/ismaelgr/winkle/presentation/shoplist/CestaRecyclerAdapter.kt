@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.util.GlideLoader
+import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.shopping_list_item_view.view.*
 
 class CestaRecyclerAdapter(
@@ -66,8 +67,12 @@ class CestaRecyclerAdapter(
         }
 
         fun setPrice(price: Float) {
-            view.shoppinglistitem_price_tv.text = price.toString().replace(".0", "").replace('.', ',')
+            view.shoppinglistitem_price_tv.text = view.context.getString(
+                R.string.text_price,
+                Mapper.map(price)
+            )
         }
+
         fun setDeleteAction(action: (idProducto: String) -> Unit) {
             view.shoppinglistitem_quitar_btn.setOnClickListener { action(id) }
         }

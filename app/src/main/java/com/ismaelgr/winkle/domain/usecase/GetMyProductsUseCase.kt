@@ -24,6 +24,7 @@ class GetMyProductsUseCase(
                 listenerProductos = productRepositoryNeed.getProductsOf(perfil.id)
                     .doOnSuccess(onSuccess)
                     .doOnError { it.message.toString().run(onError) }
+                    .doOnComplete { onSuccess(emptyList()) }
                     .subscribe()
             }
             .subscribe()

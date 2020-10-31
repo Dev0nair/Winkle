@@ -11,7 +11,12 @@ class ShopListPresenter(
 
     override fun onInit() {
         getProductosMiCesta.execute(
-            onSuccess = shopList::loadCesta,
+            onSuccess = { productos ->
+                shopList.run {
+                    loadCesta(productos)
+                    setTotalPrice(productos.sumByDouble { it.precio.toDouble() }.toFloat())
+                }
+            },
             onError = this::showError
         )
     }

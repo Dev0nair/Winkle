@@ -13,6 +13,7 @@ import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.GetMyCestaUseCase
 import com.ismaelgr.winkle.domain.usecase.GetProductosMiCesta
 import com.ismaelgr.winkle.presentation.base.BaseContract
+import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_shoplist.*
 
 /**
@@ -52,5 +53,12 @@ class ShopListFragment : BaseFragment(R.layout.fragment_shoplist), ShopListContr
 
     override fun loadCesta(productos: List<Producto>) {
         cestaRecyclerAdapter.loadList(productos)
+    }
+
+    override fun setTotalPrice(price: Float) {
+        total_price_text.text = getString(
+            R.string.text_price,
+            Mapper.map(price)
+        )
     }
 }
