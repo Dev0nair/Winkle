@@ -5,6 +5,7 @@ Realmente las necesidades son:
 [] Realizar Mi perfil
 
 Lo ultimo realizado fue:
+ - shopping_list: ya aparece la lista de productos de mi cesta, con sus eventos insertados pero no implementados. Faltan los textos y tal y poner el simbolo del euro
  - ProductoRepo: Se ha metido una nueva funcion al que se le agrega x numero de IDs de productos y devuelve los productos que encuentre con esa ID
  - CestaRepo: se ha creado el factory.
  - shopping_list: se ha quitado algun que otro observeOn que me he encontrado y he creado las vistas del 

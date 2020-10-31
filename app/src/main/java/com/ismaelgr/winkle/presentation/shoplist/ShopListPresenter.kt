@@ -1,22 +1,26 @@
 package com.ismaelgr.winkle.presentation.shoplist
 
-import com.ismaelgr.winkle.domain.usecase.GetMyCestaUseCase
+import com.ismaelgr.winkle.domain.usecase.GetProductosMiCesta
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class ShopListPresenter(
     private val shopList: ShopListContract.View,
-    private val getMyCestaUseCase: GetMyCestaUseCase
+    private val getProductosMiCesta: GetProductosMiCesta
 ) :
     BasePresenter<ShopListContract.View>(shopList), ShopListContract.Presenter {
 
     override fun onInit() {
-        getMyCestaUseCase.execute(
+        getProductosMiCesta.execute(
             onSuccess = shopList::loadCesta,
             onError = this::showError
         )
     }
 
-    override fun onItemClick() {
+    override fun onItemClick(idProducto: String) {
+//        TODO("Not yet implemented")
+    }
+
+    override fun onDeleteItemClick(idProducto: String) {
 //        TODO("Not yet implemented")
     }
 
@@ -25,6 +29,6 @@ class ShopListPresenter(
     }
 
     override fun onDestroy() {
-        getMyCestaUseCase.dispose()
+        getProductosMiCesta.dispose()
     }
 }

@@ -11,7 +11,7 @@ class ProductRepository : ProductRepositoryNeed {
         Producto(
             "1",
             "Portatil HP i7 16RAM RTX 2070",
-            "Esta nuevo señores lo digo enserio...",
+            "Refacherisimo",
             "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
             1400F,
             "1",
@@ -24,7 +24,7 @@ class ProductRepository : ProductRepositoryNeed {
             "Peine bien fachero",
             "Esta nuevo señores lo digo enserio...",
             "https://ae01.alicdn.com/kf/H20ac92cf50e4496ea86209e348d9285aN/Peine-de-dientes-finos-1-unids-lote-peine-de-pl-stico-para-desenredar-peine-de-cola.jpg_q50.jpg",
-            12F,
+            12.21F,
             "2",
             true,
             listOf("peine", "accesorios"),
@@ -44,7 +44,7 @@ class ProductRepository : ProductRepositoryNeed {
         Producto(
             "4",
             "Ajedrez seminuevo",
-            "Esta nuevo señores lo digo enserio...",
+            "De nada xd",
             "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Staunton_chess_set.jpg/300px-Staunton_chess_set.jpg",
             4.5F,
             "2",
@@ -108,7 +108,7 @@ class ProductRepository : ProductRepositoryNeed {
         }
     }
 
-    override fun getProductsInfo(vararg idProductos: String): Maybe<List<Producto>> = Maybe.create { emitter ->
+    override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> = Maybe.create { emitter ->
         val producto = products.filter { product -> idProductos.contains(product.id) }
 
         if (producto.isNotEmpty()) {
