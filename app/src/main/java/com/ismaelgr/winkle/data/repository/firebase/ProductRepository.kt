@@ -39,4 +39,12 @@ class ProductRepository : ProductRepositoryNeed {
                 .doOnComplete(emitter::onComplete)
                 .doOnError(emitter::onError)
         }
+
+    override fun getProductsInfo(vararg idProductos: String): Maybe<List<Producto>> =
+        FirebaseListener.makeOneTimeQueryListener(
+            query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
+                .whereIn("vendedorId", idProductos.toList()),
+            classCast = Producto::class.java
+        )
+
 }

@@ -5,6 +5,8 @@ Realmente las necesidades son:
 [] Realizar Mi perfil
 
 Lo ultimo realizado fue:
+ - ProductoRepo: Se ha metido una nueva funcion al que se le agrega x numero de IDs de productos y devuelve los productos que encuentre con esa ID
+ - CestaRepo: se ha creado el factory.
  - shopping_list: se ha quitado algun que otro observeOn que me he encontrado y he creado las vistas del 
    recycler de la pantalla de la cesta. Falta crear el adaptador y configurar la vista con sus acciones y tal
  - Se ha mergeado la parte de RX a develop y se ha creado las ramas ['insertar_dagger', 'shopping_list']

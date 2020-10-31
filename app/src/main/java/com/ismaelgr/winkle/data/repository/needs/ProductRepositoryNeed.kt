@@ -10,4 +10,6 @@ interface ProductRepositoryNeed {
     fun getAllProducts(): Maybe<List<Producto>>
 
     fun getProductInfo(idProducto: String): Maybe<Producto>
+
+    fun getProductsInfo(vararg idProductos: String): Maybe<List<Producto>>
 }

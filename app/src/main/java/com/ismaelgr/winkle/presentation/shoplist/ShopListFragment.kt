@@ -4,6 +4,10 @@ import androidx.fragment.app.Fragment
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Cesta
+import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
+import com.ismaelgr.winkle.data.repository.factory.CestaRepositoryFactory
+import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
+import com.ismaelgr.winkle.domain.usecase.GetMyCestaUseCase
 import com.ismaelgr.winkle.presentation.base.BaseContract
 
 /**
@@ -15,7 +19,16 @@ class ShopListFragment : BaseFragment(R.layout.fragment_shoplist), ShopListContr
 
 
     override fun initElements() {
-        shoplistPresenter = ShopListPresenter(this as ShopListContract.View)
+        shoplistPresenter = ShopListPresenter(
+            this as ShopListContract.View,
+            GetMyCestaUseCase(
+                AccountRepositoryFactory().getRepository(),
+                ProfileRepositoryFactory().getRepository(),
+                CestaRepositoryFactory().getRepository()
+            )
+        )
+
+        configureRecyclerView()
     }
 
     fun configureRecyclerView(): Unit {

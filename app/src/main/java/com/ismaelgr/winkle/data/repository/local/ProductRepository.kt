@@ -107,4 +107,14 @@ class ProductRepository : ProductRepositoryNeed {
             emitter.onError(Error("There is no product with id $idProducto"))
         }
     }
+
+    override fun getProductsInfo(vararg idProductos: String): Maybe<List<Producto>> = Maybe.create { emitter ->
+        val producto = products.filter { product -> idProductos.contains(product.id) }
+
+        if (producto.isNotEmpty()) {
+            emitter.onSuccess(producto)
+        } else {
+            emitter.onError(Error("There is no product with id $idProductos"))
+        }
+    }
 }
