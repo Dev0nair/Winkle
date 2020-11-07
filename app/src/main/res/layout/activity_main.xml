@@ -39,6 +39,8 @@
         android:alpha="0.25"
         android:visibility="gone"
         tools:visibility="visible"
+        android:focusable="true"
+        android:clickable="true"
         />
 
     <androidx.core.widget.ContentLoadingProgressBar

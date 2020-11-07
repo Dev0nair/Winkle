@@ -23,4 +23,7 @@
     <string name="text_create_profile">Crear perfil</string>
     <string name="err_username_empty">No puede dejar el nombre de usuario vacío</string>
     <string name="text_exit_to_login">Volver al inicio de sesión</string>
+    <string name="text_total" translatable="false">Total</string>
+    <string name="text_comprar">Comprar</string>
+    <string name="text_price" translatable="false">%1$s€</string>
 </resources>

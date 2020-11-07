@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
             tools:itemCount="2"
-            tools:listitem="@layout/home_product_view"
+            tools:listitem="@layout/home_product_item_view"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             />

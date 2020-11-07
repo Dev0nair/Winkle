@@ -9,19 +9,19 @@ import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.util.GlideLoader
 import com.ismaelgr.winkle.util.Mapper
-import kotlinx.android.synthetic.main.home_product_view.view.*
-import kotlin.math.absoluteValue
+import kotlinx.android.synthetic.main.home_product_item_view.view.*
 
 class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Unit) :
-    RecyclerView.Adapter<HomeRecyclerAdapter.HomeAdapter>() {
+    RecyclerView.Adapter<HomeRecyclerAdapter.HomeViewHolder>() {
 
     private var listProducts = ArrayList<Producto>()
     private val listProductsCopy = ArrayList<Producto>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.home_product_view, parent, false)
-        return HomeAdapter(view)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.home_product_item_view, parent, false)
+        return HomeViewHolder(view)
     }
 
     private var filterTags = emptyList<String>()
@@ -40,7 +40,7 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
         filterNameDesc = string.toLowerCase().trim()
     }
 
-    override fun onBindViewHolder(holder: HomeAdapter, position: Int) {
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val item = listProducts[position]
 
         holder.run {
@@ -88,13 +88,18 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
                 if (o1.nombre.toLowerCase().contains(filterNameDesc) || o2.nombre.toLowerCase()
                         .contains(filterNameDesc)
                 ) {
-                    if(o1.nombre.toLowerCase().compareTo(filterNameDesc) > o2.nombre.toLowerCase().compareTo(filterNameDesc)){
+                    if (o1.nombre.toLowerCase().compareTo(filterNameDesc) > o2.nombre.toLowerCase()
+                            .compareTo(filterNameDesc)
+                    ) {
                         1
                     } else {
                         0
                     }
                 } else {
-                    if(o1.descripcion.toLowerCase().compareTo(filterNameDesc) > o2.descripcion.toLowerCase().compareTo(filterNameDesc)){
+                    if (o1.descripcion.toLowerCase()
+                            .compareTo(filterNameDesc) > o2.descripcion.toLowerCase()
+                            .compareTo(filterNameDesc)
+                    ) {
                         1
                     } else {
                         0
@@ -134,7 +139,7 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
         }
     }
 
-    class HomeAdapter(private val view: View) : RecyclerView.ViewHolder(view) {
+    class HomeViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun setImage(url: String) {
             GlideLoader.load(view.product_image, url)
         }
@@ -144,7 +149,10 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
         }
 
         fun setPrice(price: Float) {
-            view.product_price.text = "$price €"
+            view.product_price.text = view.context.getString(
+                R.string.text_price,
+                Mapper.map(price)
+            )
         }
     }
 }
