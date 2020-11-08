@@ -18,27 +18,24 @@ import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.presentation.home.HomeRecyclerAdapter
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_myproducts.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProductsContract.View {
 
-    private lateinit var myproductsPresenter: MyProductsContract.Presenter
+    private val myproductsPresenter: MyProductsContract.Presenter by inject<MyProductsPresenter> {
+        parametersOf(
+            this as MyProductsContract.View
+        )
+    }
     private lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
 
     override fun bindPresenter(): BaseContract.Presenter = this.myproductsPresenter
 
     override fun initElements() {
-        myproductsPresenter =
-            MyProductsPresenter(
-                this as MyProductsContract.View,
-                GetMyProductsUseCase(
-                    AccountRepositoryFactory().getRepository(),
-                    ProfileRepositoryFactory().getRepository(),
-                    ProductsRepositoryFactory().getRepository()
-                )
-            )
         homeRecyclerAdapter = HomeRecyclerAdapter { idProducto ->
             myproductsPresenter.onProductClick(idProducto)
         }

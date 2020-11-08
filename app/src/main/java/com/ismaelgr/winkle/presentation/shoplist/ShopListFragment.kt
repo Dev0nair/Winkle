@@ -15,33 +15,32 @@ import com.ismaelgr.winkle.domain.usecase.GetProductosMiCesta
 import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_shoplist.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class ShopListFragment : BaseFragment(R.layout.fragment_shoplist), ShopListContract.View {
 
-    private lateinit var shoplistPresenter: ShopListContract.Presenter
+    private val shoplistPresenter: ShopListContract.Presenter by inject<ShopListPresenter> {
+        parametersOf(
+            this
+        )
+    }
     private lateinit var cestaRecyclerAdapter: CestaRecyclerAdapter
 
     override fun initElements() {
-        shoplistPresenter = ShopListPresenter(
-            this as ShopListContract.View,
-            GetProductosMiCesta(
-                AccountRepositoryFactory().getRepository(),
-                ProfileRepositoryFactory().getRepository(),
-                CestaRepositoryFactory().getRepository(),
-                ProductsRepositoryFactory().getRepository()
-            )
-        )
-
         configureRecyclerView()
 
         shoplistPresenter.onInit()
     }
 
     private fun configureRecyclerView(): Unit {
-        cestaRecyclerAdapter = CestaRecyclerAdapter(shoplistPresenter::onDeleteItemClick, shoplistPresenter::onItemClick)
+        cestaRecyclerAdapter = CestaRecyclerAdapter(
+            shoplistPresenter::onDeleteItemClick,
+            shoplistPresenter::onItemClick
+        )
 
         shoppinglist_rv.run {
             adapter = cestaRecyclerAdapter
