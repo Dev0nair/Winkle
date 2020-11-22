@@ -44,7 +44,7 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
         val item = listProducts[position]
 
         holder.run {
-            setImage(item.image)
+            setImage(item.mainImage)
             setName(item.nombre)
             setPrice(item.precio)
             this.itemView.setOnClickListener { onProductClick(item) }

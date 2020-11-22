@@ -30,7 +30,7 @@ class CestaRecyclerAdapter(
             setId(item.id)
             setName(item.nombre)
             setDescription(item.descripcion)
-            setImage(item.image)
+            setImage(item.mainImage)
             setPrice(item.precio)
             setDeleteAction(onDeleteClick)
             setClickAction(onItemClick)
