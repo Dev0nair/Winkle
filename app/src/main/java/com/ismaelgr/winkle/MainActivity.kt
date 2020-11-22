@@ -15,7 +15,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.google.firebase.FirebaseApp
 import com.ismaelgr.winkle.presentation.base.BaseFragment
+import io.reactivex.rxjava3.functions.Consumer
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity() {
 

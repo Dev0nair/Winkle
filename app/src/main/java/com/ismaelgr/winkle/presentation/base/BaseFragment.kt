@@ -8,8 +8,10 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ismaelgr.winkle.R
+import kotlinx.android.synthetic.main.toolbar.view.*
 
 
 abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), BaseContract.View {
@@ -22,6 +24,7 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initElements()
+        view.toolbar_back?.setOnClickListener { findNavController().popBackStack() }
     }
 
     override fun hideLoading() {

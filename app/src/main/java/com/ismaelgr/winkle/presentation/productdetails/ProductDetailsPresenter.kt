@@ -1,9 +1,13 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
 import com.ismaelgr.winkle.data.entity.Producto
+import com.ismaelgr.winkle.domain.usecase.GetProductOwnerUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
-class ProductDetailsPresenter(private val view: ProductDetailsContract.View) :
+class ProductDetailsPresenter(
+    private val view: ProductDetailsContract.View,
+    private val getProductOwnerUseCase: GetProductOwnerUseCase
+) :
     BasePresenter<ProductDetailsContract.View>(view), ProductDetailsContract.Presenter {
 
     override fun onInit(producto: Producto) {
@@ -14,6 +18,12 @@ class ProductDetailsPresenter(private val view: ProductDetailsContract.View) :
             setImages(producto.images)
             setPrice(producto.precio)
         }
+        getProductOwnerUseCase.getInfoProfile(producto.vendedorId, onLoad = { perfil ->
+            view.run {
+                setImageProfile(perfil.image)
+                setNameProfile(perfil.username)
+            }
+        }, ::showError)
     }
 
     override fun onAddToShopListClick() {

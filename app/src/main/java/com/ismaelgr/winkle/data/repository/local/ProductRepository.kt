@@ -11,9 +11,23 @@ class ProductRepository : ProductRepositoryNeed {
         Producto(
             "1",
             "Portatil HP i7 16RAM RTX 2070",
-            "Refacherisimo",
-            "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
+            "*Este equipo NO cuenta con sistema operativo instalado. ¿Quieres adquirir un sistema operativo de forma separada?\n" +
+                    "\n" +
+                    "Portátil MSI Modern 14 B10MW 026XES con pantalla Full HD de 14\" y un procesador excelente para ultrabooks Intel® Core™ i7-10510U con un consumo bajo de solamente 15 W. \n" +
+                    "\n" +
+                    "Rendimiento y entretenimiento con la 10ª generación \n" +
+                    "Con el procesador Intel® Core™ i7-10510U de 4 núcleos tendrás la potencia suficiente para realizar todas las tareas de forma ágil y sin fallos. Diseñado para ser tan inteligente como sus usuarios, proporcionar experiencias de entretenimiento impresionantes y ofrecer una conectividad ultrarrápida, tendrás experiencias de entretenimiento increíblemente inmersivo, que antes eran muy difíciles de conseguir en dispositivos tan finos. La velocidad de 1.80 GHz, aunque puede llegar a los 4.90 GHz en modo turbo con Intel® Turbo Boost, te va a permitir realizar aquellas tareas que requieren más recursos de una manera ligera y la tecnología Intel® Hyper-Threading te permitirá realizar más trabajo en paralelo en las aplicaciones con muchos subprocesos, completando antes las tareas. Además, está equipado con 16 GB de RAM DDR4 de 2666 MHz, con lo que no tendrás problemas tanto si quieres trabajar en multitarea como correr procesos que requieran mucho espacio.\n" +
+                    "\n" +
+                    "Excelente autonomía de batería de 3 celdas\n" +
+                    "Gracias a su procesador y tarjeta gráfica integrada, el consumo de batería se reduce considerablemente siendo ideal para ultrabooks. Con una batería de 52 Whr tendrás gran autonomía para todo el día.\n" +
+                    "\n" +
+                    "¿Tiene ventajas no tener sistema operativo en tu equipo? \n" +
+                    "Los equipos FreeDos (sin sistema operativo) como el de este ordenador te dan la libertad de funcionar con el sistema operativo que te vaya mejor para trabajar. Si no te convence un sistema concreto o necesitas algo muy específico que no te pueden ofrecer los sistemas convencionales, los ordenadores FreeDos son la mejor opción para ello.",
+            "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225297/fee_786_587_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
             listOf(
+                "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225294/fee_52_41_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
+                "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225295/fee_52_41_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
+                "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225296/fee_52_41_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
                 "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
                 "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
                 "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",

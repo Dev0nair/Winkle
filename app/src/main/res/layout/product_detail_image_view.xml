@@ -4,6 +4,6 @@
     android:layout_height="90dp"
     xmlns:tools="http://schemas.android.com/tools"
     tools:src="@mipmap/ic_launcher_round"
-    android:layout_marginEnd="10dp">
-
-</ImageView>
+    android:layout_marginEnd="10dp"
+    android:id="@+id/product_detail_description_image"
+    />
