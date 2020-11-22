@@ -15,22 +15,18 @@ import com.ismaelgr.winkle.domain.usecase.GetAllProductsUseCase
 import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
 
-    private lateinit var homePresenter: HomeContract.Presenter
+    private val homePresenter: HomeContract.Presenter by inject<HomePresenter> { parametersOf(this) }
     private lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
 
     override fun initElements() {
-        homePresenter =
-            HomePresenter(
-                this as HomeContract.View,
-                GetAllProductsUseCase(ProductsRepositoryFactory().getRepository())
-            )
-
         homeRecyclerAdapter = HomeRecyclerAdapter { idProducto ->
             homePresenter.onProductClick(idProducto)
         }

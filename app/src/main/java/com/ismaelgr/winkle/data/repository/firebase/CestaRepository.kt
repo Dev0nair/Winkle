@@ -10,9 +10,11 @@ import io.reactivex.rxjava3.core.Maybe
 
 class CestaRepository : CestaRepositoryNeed {
 
+    private var firestore: FirebaseFirestore? = null
+
     override fun getCesta(idProfile: String): Maybe<Cesta> =
         FirebaseListener.makeOneTimeDocumentListener(
-            FirebaseFirestore.getInstance().collection(Routes.CESTAS).document(idProfile),
+            getFirestore().collection(Routes.CESTAS).document(idProfile),
             Cesta::class.java
         )
 
@@ -21,7 +23,7 @@ class CestaRepository : CestaRepositoryNeed {
         idProduct: String
     ) = Completable.create { emiter ->
         FirebaseListener.makeOneTimeDocumentListener(
-            documentReference = FirebaseFirestore.getInstance().collection(Routes.CESTAS)
+            documentReference = getFirestore().collection(Routes.CESTAS)
                 .document(idProfile),
             Cesta::class.java
         )
@@ -42,7 +44,7 @@ class CestaRepository : CestaRepositoryNeed {
         onSuccess: () -> Unit,
         onError: (Throwable) -> Unit
     ) {
-        FirebaseFirestore.getInstance().collection(Routes.CESTAS).document(idProfile)
+        getFirestore().collection(Routes.CESTAS).document(idProfile)
             .set(cesta)
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener { onError(it) }
@@ -50,7 +52,7 @@ class CestaRepository : CestaRepositoryNeed {
 
     override fun clearCesta(idProfile: String) =
         Completable.create { emitter ->
-            FirebaseFirestore.getInstance().collection(Routes.CESTAS).document(idProfile)
+            getFirestore().collection(Routes.CESTAS).document(idProfile)
                 .delete()
                 .addOnSuccessListener { emitter.onComplete() }
                 .addOnFailureListener { it.run(emitter::onError) }
@@ -61,7 +63,7 @@ class CestaRepository : CestaRepositoryNeed {
         idProduct: String
     ) = Completable.create { emitter ->
         FirebaseListener.makeOneTimeDocumentListener(
-            documentReference = FirebaseFirestore.getInstance().collection(Routes.CESTAS)
+            documentReference = getFirestore().collection(Routes.CESTAS)
                 .document(idProfile),
             Cesta::class.java
         )
@@ -81,5 +83,13 @@ class CestaRepository : CestaRepositoryNeed {
                     emitter::onError
                 )
             }
+    }
+
+    private fun getFirestore(): FirebaseFirestore {
+        if(firestore == null){
+            firestore = FirebaseFirestore.getInstance()
+        }
+
+        return firestore!!
     }
 }
