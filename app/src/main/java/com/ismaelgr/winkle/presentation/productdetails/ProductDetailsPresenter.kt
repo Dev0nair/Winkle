@@ -17,13 +17,16 @@ class ProductDetailsPresenter(
             setMainImage(producto.mainImage)
             setImages(producto.images)
             setPrice(producto.precio)
+
+            getProductOwnerUseCase.execute(
+                producto.vendedorId,
+                onLoad = { perfil ->
+                    setImageProfile(perfil.image)
+                    setNameProfile(perfil.username)
+                },
+                onError = ::showError
+            )
         }
-        getProductOwnerUseCase.getInfoProfile(producto.vendedorId, onLoad = { perfil ->
-            view.run {
-                setImageProfile(perfil.image)
-                setNameProfile(perfil.username)
-            }
-        }, ::showError)
     }
 
     override fun onAddToShopListClick() {
@@ -42,4 +45,7 @@ class ProductDetailsPresenter(
         TODO("Not yet implemented")
     }
 
+    override fun onDestroy() {
+        getProductOwnerUseCase.dispose()
+    }
 }

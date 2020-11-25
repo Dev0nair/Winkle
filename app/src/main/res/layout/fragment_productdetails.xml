@@ -108,8 +108,8 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/product_detail_profile_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:layout_marginTop="6dp"
             app:layout_constraintLeft_toLeftOf="@id/text_contact_profile"
             app:layout_constraintTop_toBottomOf="@id/text_contact_profile"

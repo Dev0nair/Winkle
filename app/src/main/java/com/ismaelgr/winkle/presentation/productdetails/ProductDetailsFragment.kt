@@ -13,6 +13,8 @@ import com.ismaelgr.winkle.util.GlideLoader
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_productdetails.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
@@ -20,7 +22,7 @@ import kotlinx.android.synthetic.main.toolbar.*
 class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     ProductDetailsContract.View {
 
-    private lateinit var productdetailsPresenter: ProductDetailsContract.Presenter
+    private val productdetailsPresenter: ProductDetailsContract.Presenter by inject<ProductDetailsPresenter> { parametersOf(this) }
     private lateinit var productDetailsRecycler: ProductDetailsRecycler
 
     override fun setMainImage(url: String) {
@@ -32,7 +34,7 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun setPrice(price: Float) {
-        product_detail_price.text = Mapper.map(price)
+        product_detail_price.text = "${Mapper.map(price)}€"
     }
 
     override fun setDescription(description: String) {
@@ -52,11 +54,11 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun setImageProfile(url: String) {
-        TODO("Not yet implemented")
+        GlideLoader.load(product_detail_profile_image, url)
     }
 
     override fun setNameProfile(name: String) {
-        TODO("Not yet implemented")
+        product_detail_profile_name.text = name
     }
 
     override fun setHasFav(hasFav: Boolean) {
@@ -64,11 +66,6 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun initElements() {
-        productdetailsPresenter = ProductDetailsPresenter(
-            this as ProductDetailsContract.View,
-            GetProductOwnerUseCase(ProfileRepositoryFactory().getRepository())
-        )
-
         productDetailsRecycler = ProductDetailsRecycler { url ->
             // TODO("AMPLIACION DE LA IMAGEN DE DESCRIPCION DE UN PRODUCTO")
         }

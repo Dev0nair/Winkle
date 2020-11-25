@@ -23,8 +23,8 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initElements()
         view.toolbar_back?.setOnClickListener { findNavController().popBackStack() }
+        initElements()
     }
 
     override fun hideLoading() {
