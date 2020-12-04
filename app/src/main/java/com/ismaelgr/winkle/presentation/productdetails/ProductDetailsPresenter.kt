@@ -45,6 +45,14 @@ class ProductDetailsPresenter(
         TODO("Not yet implemented")
     }
 
+    private fun setOwnerMode() {
+
+    }
+
+    private fun setClientMode() {
+
+    }
+
     override fun onDestroy() {
         getProductOwnerUseCase.dispose()
     }
