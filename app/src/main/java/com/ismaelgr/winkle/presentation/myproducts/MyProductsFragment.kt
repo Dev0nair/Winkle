@@ -36,8 +36,8 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
     override fun bindPresenter(): BaseContract.Presenter = this.myproductsPresenter
 
     override fun initElements() {
-        homeRecyclerAdapter = HomeRecyclerAdapter { idProducto ->
-            myproductsPresenter.onProductClick(idProducto)
+        homeRecyclerAdapter = HomeRecyclerAdapter { producto ->
+            myproductsPresenter.onProductClick(producto)
         }
 
         myProducts_products_rv.run {
@@ -99,7 +99,7 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
 
     override fun navigateToProductDetail(producto: Producto) {
         findNavController().navigate(
-            R.id.action_myProductsFragment_to_productDetailsFragment,
+            R.id.action_myProductsFragment_to_newProductFragment,
             bundleOf("producto" to producto)
         )
     }

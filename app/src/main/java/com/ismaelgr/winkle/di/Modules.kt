@@ -20,7 +20,7 @@ import org.koin.dsl.module
 
 val presenterModules = module {
     factory { (view: HomeContract.View) ->
-        HomePresenter(view, get())
+        HomePresenter(view, get(), get())
     }
 
     factory { (view: MyProductsContract.View) ->
@@ -47,6 +47,7 @@ val useCaseModule = module {
     factory { GetMyCestaUseCase(get(), get(), get()) }
     factory { HasProfileUseCase(get(), get()) }
     factory { GetProductOwnerUseCase(get()) }
+    factory { IsMyProductUseCase(get()) }
 }
 
 val repositoryModules = module {

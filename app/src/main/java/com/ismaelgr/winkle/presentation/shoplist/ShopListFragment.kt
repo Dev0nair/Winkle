@@ -1,6 +1,8 @@
 package com.ismaelgr.winkle.presentation.shoplist
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
@@ -28,6 +30,7 @@ class ShopListFragment : BaseFragment(R.layout.fragment_shoplist), ShopListContr
             this
         )
     }
+
     private lateinit var cestaRecyclerAdapter: CestaRecyclerAdapter
 
     override fun initElements() {
@@ -36,7 +39,7 @@ class ShopListFragment : BaseFragment(R.layout.fragment_shoplist), ShopListContr
         shoplistPresenter.onInit()
     }
 
-    private fun configureRecyclerView(): Unit {
+    private fun configureRecyclerView() {
         cestaRecyclerAdapter = CestaRecyclerAdapter(
             shoplistPresenter::onDeleteItemClick,
             shoplistPresenter::onItemClick
@@ -59,5 +62,9 @@ class ShopListFragment : BaseFragment(R.layout.fragment_shoplist), ShopListContr
             R.string.text_price,
             Mapper.map(price)
         )
+    }
+
+    override fun navigateToProductDetails(producto: Producto) {
+        findNavController().navigate(R.id.action_shopListFragment_to_productDetailsFragment, bundleOf("producto" to producto))
     }
 }

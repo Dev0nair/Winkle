@@ -1,5 +1,6 @@
 package com.ismaelgr.winkle.presentation.shoplist
 
+import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.domain.usecase.GetProductosMiCesta
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
@@ -21,8 +22,8 @@ class ShopListPresenter(
         )
     }
 
-    override fun onItemClick(idProducto: String) {
-//        TODO("Not yet implemented")
+    override fun onItemClick(producto: Producto) {
+        shopList.navigateToProductDetails(producto)
     }
 
     override fun onDeleteItemClick(idProducto: String) {

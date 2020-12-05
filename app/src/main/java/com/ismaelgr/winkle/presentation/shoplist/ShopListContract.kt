@@ -8,10 +8,11 @@ interface ShopListContract {
     interface View : BaseContract.View {
         fun loadCesta(productos: List<Producto>)
         fun setTotalPrice(price: Float)
+        fun navigateToProductDetails(producto: Producto)
     }
     interface Presenter : BaseContract.Presenter {
         fun onInit()
-        fun onItemClick(idProducto: String)
+        fun onItemClick(producto: Producto)
         fun onDeleteItemClick(idProducto: String)
         fun onBuyBtnClick()
     }

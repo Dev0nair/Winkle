@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.shopping_list_item_view.view.*
 
 class CestaRecyclerAdapter(
     private val onDeleteClick: (idProducto: String) -> Unit,
-    private val onItemClick: (idProducto: String) -> Unit
+    private val onItemClick: (producto: Producto) -> Unit
 ) :
     RecyclerView.Adapter<CestaRecyclerAdapter.CestaViewHolder>() {
 
@@ -27,11 +27,11 @@ class CestaRecyclerAdapter(
     override fun onBindViewHolder(holder: CestaViewHolder, position: Int) {
         val item = this.productList[position]
         holder.run {
-            setId(item.id)
-            setName(item.nombre)
-            setDescription(item.descripcion)
-            setImage(item.mainImage)
-            setPrice(item.precio)
+            setProduct(item)
+            updateImage()
+            updateName()
+            updatePrice()
+            updateDescription()
             setDeleteAction(onDeleteClick)
             setClickAction(onItemClick)
         }
@@ -48,37 +48,37 @@ class CestaRecyclerAdapter(
     }
 
     class CestaViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        private var id: String = ""
+        private lateinit var producto: Producto
 
-        fun setId(id: String) {
-            this.id = id
+        fun setProduct(producto: Producto) {
+            this.producto = producto
         }
 
-        fun setName(name: String) {
-            view.shoppinglistitem_title_tv.text = name
+        fun updateName() {
+            view.shoppinglistitem_title_tv.text = this.producto.nombre
         }
 
-        fun setDescription(desc: String) {
-            view.shoppinglistitem_desc_tv.text = desc
+        fun updateDescription() {
+            view.shoppinglistitem_desc_tv.text = this.producto.descripcion
         }
 
-        fun setImage(url: String) {
-            GlideLoader.load(view.shoppinglistitem_civ, url)
+        fun updateImage() {
+            GlideLoader.load(view.shoppinglistitem_civ, this.producto.mainImage)
         }
 
-        fun setPrice(price: Float) {
+        fun updatePrice() {
             view.shoppinglistitem_price_tv.text = view.context.getString(
                 R.string.text_price,
-                Mapper.map(price)
+                Mapper.map(this.producto.precio)
             )
         }
 
         fun setDeleteAction(action: (idProducto: String) -> Unit) {
-            view.shoppinglistitem_quitar_btn.setOnClickListener { action(id) }
+            view.shoppinglistitem_quitar_btn.setOnClickListener { action(this.producto.id) }
         }
 
-        fun setClickAction(onItemClick: (idProducto: String) -> Unit) {
-            view.setOnClickListener { onItemClick(id) }
+        fun setClickAction(onItemClick: (Producto) -> Unit) {
+            view.setOnClickListener { onItemClick(this.producto) }
         }
     }
 }

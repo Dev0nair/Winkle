@@ -12,6 +12,7 @@ interface HomeContract {
         fun filterCategories(list: List<Categorias>)
         fun filterNameDesc(string: String)
         fun navigateToProductDetail(producto: Producto)
+        fun navigateToProductEdition(producto: Producto)
     }
 
     interface Presenter : BaseContract.Presenter {

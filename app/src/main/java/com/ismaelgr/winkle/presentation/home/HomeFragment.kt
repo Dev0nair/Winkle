@@ -96,4 +96,8 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
     override fun navigateToProductDetail(producto: Producto) {
         findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, bundleOf("producto" to producto))
     }
+
+    override fun navigateToProductEdition(producto: Producto) {
+        findNavController().navigate(R.id.action_homeFragment_to_newProductFragment, bundleOf("producto" to producto))
+    }
 }
