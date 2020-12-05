@@ -2,6 +2,7 @@ package com.ismaelgr.winkle.presentation.myproducts
 
 import android.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -95,6 +96,17 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
             setNameDesc(string)
             setFilters()
         }
+    }
+
+    override fun refreshFilters(list: List<Categorias>) {
+        for(v in myProducts_categories_cg.children){
+            if(v is Chip){
+                if(list.any{ it.name == v.text.toString().toUpperCase()}) {
+                    v.isChecked = true
+                }
+            }
+        }
+        filterCategories(list)
     }
 
     override fun navigateToProductDetail(producto: Producto) {

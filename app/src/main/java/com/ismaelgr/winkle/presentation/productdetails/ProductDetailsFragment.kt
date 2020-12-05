@@ -1,6 +1,8 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
@@ -46,11 +48,11 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun setNumberOnShopList(count: Int) {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
     }
 
     override fun setPuntuation(puntuation: String) {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
     }
 
     override fun setImageProfile(url: String) {
@@ -62,7 +64,11 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun setHasFav(hasFav: Boolean) {
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
+    }
+
+    override fun navigateToProfileDetails(idPerfil: String) {
+        findNavController().navigate(R.id.action_productDetailsFragment_to_infoProfileFragment, bundleOf("idPerfil" to idPerfil))
     }
 
     override fun initElements() {
@@ -77,6 +83,8 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         }
 
         toolbar_title.text = getString(R.string.text_product_info)
+
+        product_detail_profile_viewprofile.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
 
         productdetailsPresenter.onInit(arguments?.get("producto") as Producto)
     }

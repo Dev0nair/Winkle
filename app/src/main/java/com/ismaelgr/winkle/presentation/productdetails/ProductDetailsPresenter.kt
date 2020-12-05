@@ -10,7 +10,10 @@ class ProductDetailsPresenter(
 ) :
     BasePresenter<ProductDetailsContract.View>(view), ProductDetailsContract.Presenter {
 
+    private lateinit var producto: Producto
+
     override fun onInit(producto: Producto) {
+        this.producto = producto
         view.run {
             setName(producto.nombre)
             setDescription(producto.descripcion)
@@ -45,12 +48,8 @@ class ProductDetailsPresenter(
         TODO("Not yet implemented")
     }
 
-    private fun setOwnerMode() {
-
-    }
-
-    private fun setClientMode() {
-
+    override fun onViewProfileClick() {
+        view.navigateToProfileDetails(producto.vendedorId)
     }
 
     override fun onDestroy() {

@@ -19,7 +19,10 @@ class HomePresenter(
         showLoading(true)
         getAllProductsUseCase.execute(
             onSuccess = { list ->
-                home.loadProducts(list)
+                home.run {
+                    loadProducts(list)
+                    refreshFilters(categorias)
+                }
                 showLoading(false)
             },
             onError = {

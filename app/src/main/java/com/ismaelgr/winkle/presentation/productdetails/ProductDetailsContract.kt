@@ -1,5 +1,6 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
+import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.presentation.base.BaseContract
 
@@ -16,6 +17,7 @@ interface ProductDetailsContract {
         fun setImageProfile(url: String)
         fun setNameProfile(name: String)
         fun setHasFav(hasFav: Boolean)
+        fun navigateToProfileDetails(idPerfil: String)
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -24,5 +26,6 @@ interface ProductDetailsContract {
         fun onReportClick()
         fun onLikeClick()
         fun onAlternateDisableOnBuyClick()
+        fun onViewProfileClick()
     }
 }
