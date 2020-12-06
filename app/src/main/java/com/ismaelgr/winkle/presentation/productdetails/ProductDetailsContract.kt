@@ -17,6 +17,7 @@ interface ProductDetailsContract {
         fun setImageProfile(url: String)
         fun setNameProfile(name: String)
         fun setHasFav(hasFav: Boolean)
+        fun setCountProduct(count: Int)
         fun navigateToProfileDetails(idPerfil: String)
     }
 

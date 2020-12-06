@@ -30,4 +30,5 @@
     <string name="text_add_to_cart">Add to cart</string>
     <string name="text_disable_product_next_sale">Disable product after next sale</string>
     <string name="text_product_info">Product info</string>
+    <string name="text_count_product_shoplist">You already have %1$d in your shoplist</string>
 </resources>

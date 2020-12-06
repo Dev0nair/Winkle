@@ -1,12 +1,16 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
 import com.ismaelgr.winkle.data.entity.Producto
+import com.ismaelgr.winkle.domain.usecase.AddProductToCestaUseCase
+import com.ismaelgr.winkle.domain.usecase.GetCountProductInCestaUseCase
 import com.ismaelgr.winkle.domain.usecase.GetProductOwnerUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class ProductDetailsPresenter(
     private val view: ProductDetailsContract.View,
-    private val getProductOwnerUseCase: GetProductOwnerUseCase
+    private val getProductOwnerUseCase: GetProductOwnerUseCase,
+    private val getCountProductInCestaUseCase: GetCountProductInCestaUseCase,
+    private val addProductToCestaUseCase: AddProductToCestaUseCase
 ) :
     BasePresenter<ProductDetailsContract.View>(view), ProductDetailsContract.Presenter {
 
@@ -21,19 +25,39 @@ class ProductDetailsPresenter(
             setImages(producto.images)
             setPrice(producto.precio)
 
-            getProductOwnerUseCase.execute(
-                producto.vendedorId,
-                onLoad = { perfil ->
-                    setImageProfile(perfil.image)
-                    setNameProfile(perfil.username)
-                },
-                onError = ::showError
-            )
+            refreshProfileData()
+            refreshCountOnCesta()
         }
     }
 
+    private fun refreshProfileData() {
+        getProductOwnerUseCase.execute(
+            producto.vendedorId,
+            onLoad = { perfil ->
+                view.run {
+                    setImageProfile(perfil.image)
+                    setNameProfile(perfil.username)
+                }
+            },
+            onError = ::showError
+        )
+    }
+
+    private fun refreshCountOnCesta() {
+        getCountProductInCestaUseCase.execute(
+            producto.id,
+            onSuccess = { count ->
+                view.setCountProduct(count)
+            }, ::showError
+        )
+    }
+
     override fun onAddToShopListClick() {
-        TODO("Not yet implemented")
+        addProductToCestaUseCase.execute(
+            producto.id,
+            ::refreshCountOnCesta,
+            ::showError
+        )
     }
 
     override fun onReportClick() {

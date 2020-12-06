@@ -67,6 +67,10 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
 //        TODO("Not yet implemented")
     }
 
+    override fun setCountProduct(count: Int) {
+        product_detail_count_shoplist.text = getString(R.string.text_count_product_shoplist, count)
+    }
+
     override fun navigateToProfileDetails(idPerfil: String) {
         findNavController().navigate(R.id.action_productDetailsFragment_to_infoProfileFragment, bundleOf("idPerfil" to idPerfil))
     }
@@ -85,6 +89,8 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         toolbar_title.text = getString(R.string.text_product_info)
 
         product_detail_profile_viewprofile.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
+
+        product_detail_add_to_shoplist.setOnClickListener { productdetailsPresenter.onAddToShopListClick() }
 
         productdetailsPresenter.onInit(arguments?.get("producto") as Producto)
     }

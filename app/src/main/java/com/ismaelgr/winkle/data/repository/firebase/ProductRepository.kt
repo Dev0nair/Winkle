@@ -46,7 +46,7 @@ class ProductRepository : ProductRepositoryNeed {
         return if(idProductos.isNotEmpty()){
             FirebaseListener.makeOneTimeQueryListener(
                 query = getFirestore().collection(Routes.PRODUCTOS)
-                    .whereIn("vendedorId", idProductos),
+                    .whereIn("id", idProductos),
                 classCast = Producto::class.java
             )
         } else {

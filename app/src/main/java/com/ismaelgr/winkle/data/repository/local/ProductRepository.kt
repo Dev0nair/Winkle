@@ -179,10 +179,10 @@ class ProductRepository : ProductRepositoryNeed {
     }
 
     override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> = Maybe.create { emitter ->
-        val producto = products.filter { product -> idProductos.contains(product.id) }
+        val productos = products.filter { product -> idProductos.contains(product.id) }
 
-        if (producto.isNotEmpty()) {
-            emitter.onSuccess(producto)
+        if (productos.isNotEmpty()) {
+            emitter.onSuccess(productos)
         } else {
             emitter.onError(Error("There is no product with id $idProductos"))
         }

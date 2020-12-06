@@ -9,7 +9,7 @@ class CestaRepository: CestaRepositoryNeed {
 
     val cesta = Cesta(
         id = "1",
-        products = arrayListOf("1", "2", "3")
+        products = arrayListOf("2", "2", "3")
     )
 
     override fun getCesta(idProfile: String): Maybe<Cesta> =
