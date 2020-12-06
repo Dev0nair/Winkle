@@ -1,9 +1,14 @@
 package com.ismaelgr.winkle.presentation.base
 
+import android.animation.Animator
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.AnimRes
+import androidx.annotation.AnimatorRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.core.widget.ContentLoadingProgressBar
@@ -58,5 +63,31 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
     override fun onDestroy() {
         super.onDestroy()
         bindPresenter().onDestroy()
+    }
+
+    override fun animate(
+        vararg views: View,
+        @AnimRes animId: Int,
+        onStart: () -> Unit,
+        onFinish: () -> Unit
+    ) {
+        views.forEach { target ->
+            val anim = AnimationUtils.loadAnimation(requireContext(), animId).apply {
+                setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationRepeat(animation: Animation?) {
+                    }
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        onFinish.invoke()
+                    }
+
+                    override fun onAnimationStart(animation: Animation?) {
+                        onStart.invoke()
+                    }
+
+                })
+            }
+            target.startAnimation(anim)
+        }
     }
 }

@@ -1,16 +1,14 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
+import android.view.View.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.data.repository.factory.ProductsRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
-import com.ismaelgr.winkle.domain.usecase.GetProductOwnerUseCase
 import com.ismaelgr.winkle.presentation.base.BaseContract
+import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.util.GlideLoader
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_productdetails.*
@@ -75,10 +73,34 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         findNavController().navigate(R.id.action_productDetailsFragment_to_infoProfileFragment, bundleOf("idPerfil" to idPerfil))
     }
 
-    override fun initElements() {
-        productDetailsRecycler = ProductDetailsRecycler { url ->
-            // TODO("AMPLIACION DE LA IMAGEN DE DESCRIPCION DE UN PRODUCTO")
+    override fun showBigImage(url: String) {
+        product_detail_bigimage.run { GlideLoader.load(this, url) }
+    }
+
+    override fun showBigImage(show: Boolean){
+        if(show){
+            animate(
+                product_detail_bigimage,
+                animId = R.anim.animate_in,
+                onStart = {
+                    product_detail_back_screen.visibility = VISIBLE
+                    product_detail_bigimage.visibility = VISIBLE
+                }
+            )
+        } else {
+            animate(
+                product_detail_bigimage,
+                animId = R.anim.animate_out,
+                onFinish = {
+                    product_detail_back_screen.visibility = GONE
+                    product_detail_bigimage.visibility = INVISIBLE
+                }
+            )
         }
+    }
+
+    override fun initElements() {
+        productDetailsRecycler = ProductDetailsRecycler(productdetailsPresenter::onDetailImageClick)
 
         product_detail_images_rv.run {
             adapter = productDetailsRecycler
@@ -91,6 +113,8 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         product_detail_profile_viewprofile.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
 
         product_detail_add_to_shoplist.setOnClickListener { productdetailsPresenter.onAddToShopListClick() }
+
+        product_detail_back_screen.setOnClickListener { productdetailsPresenter.onBackScreenClick() }
 
         productdetailsPresenter.onInit(arguments?.get("producto") as Producto)
     }

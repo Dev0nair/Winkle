@@ -19,6 +19,8 @@ interface ProductDetailsContract {
         fun setHasFav(hasFav: Boolean)
         fun setCountProduct(count: Int)
         fun navigateToProfileDetails(idPerfil: String)
+        fun showBigImage(url: String)
+        fun showBigImage(show: Boolean)
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -28,5 +30,7 @@ interface ProductDetailsContract {
         fun onLikeClick()
         fun onAlternateDisableOnBuyClick()
         fun onViewProfileClick()
+        fun onDetailImageClick(url: String)
+        fun onBackScreenClick()
     }
 }

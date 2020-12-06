@@ -76,6 +76,19 @@ class ProductDetailsPresenter(
         view.navigateToProfileDetails(producto.vendedorId)
     }
 
+    override fun onDetailImageClick(url: String) {
+        view.run {
+            showBigImage(url)
+            showBigImage(true)
+        }
+    }
+
+    override fun onBackScreenClick() {
+        view.showBigImage(false)
+    }
+
+
+
     override fun onDestroy() {
         getProductOwnerUseCase.dispose()
     }
