@@ -7,30 +7,33 @@ import io.reactivex.rxjava3.core.Maybe
 
 class CestaRepository: CestaRepositoryNeed {
 
-    val cesta = Cesta(
-        id = "1",
-        products = arrayListOf("1", "2", "2", "3")
+    val cesta: ArrayList<Cesta> = arrayListOf(
+        Cesta("1", "1", "1"),
+        Cesta("1", "1", "2"),
+        Cesta("1", "1", "2"),
+        Cesta("1", "1", "3"),
+        Cesta("1", "1", "4"),
     )
 
-    override fun getCesta(idProfile: String): Maybe<Cesta> =
-        Maybe.just(cesta)
+    override fun getCesta(idProfile: String): Maybe<List<Cesta>> =
+        Maybe.just(cesta.filter { it.idProfile == idProfile })
 
     override fun addToCesta(idProfile: String, idProduct: String): Completable {
-        cesta.products.add(idProduct)
+        cesta.add(Cesta("1", idProfile, idProduct))
         return Completable.complete()
     }
 
     override fun clearCesta(idProfile: String): Completable {
-        cesta.products.clear()
+        cesta.clear()
         return Completable.complete()
     }
 
     override fun deleteFromCesta(
         idProfile: String,
-        idProduct: String
+        idCesta: String
     ): Completable = Completable.create { emitter ->
-        if(cesta.products.contains(idProduct)) {
-            cesta.products.remove(idProduct)
+
+        if(cesta.removeAll { it.id == idCesta && idProfile == idProfile }){
             emitter.onComplete()
         } else {
             emitter.onError(Error("No se pudo borrar un producto que no existe"))

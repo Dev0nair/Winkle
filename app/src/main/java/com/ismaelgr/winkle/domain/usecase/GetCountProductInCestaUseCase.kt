@@ -7,7 +7,7 @@ class GetCountProductInCestaUseCase(
     fun execute(idProduct: String, onSuccess: (Int) -> Unit, onError: (String) -> Unit) {
         getMyCestaUseCase.execute(
             onSuccess = { listProducts ->
-                onSuccess(listProducts.products.filter { it == idProduct }.size)
+                onSuccess(listProducts.filter { it.idProduct == idProduct }.size)
             },
             onError
         )

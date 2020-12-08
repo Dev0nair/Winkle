@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.data.entity.Cesta
+import com.ismaelgr.winkle.data.entity.CestaProduct
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.util.GlideLoader
 import com.ismaelgr.winkle.util.Mapper
@@ -16,7 +18,7 @@ class CestaRecyclerAdapter(
 ) :
     RecyclerView.Adapter<CestaRecyclerAdapter.CestaViewHolder>() {
 
-    private var productList = arrayListOf<Producto>()
+    private var productList = arrayListOf<CestaProduct>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CestaViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -27,7 +29,8 @@ class CestaRecyclerAdapter(
     override fun onBindViewHolder(holder: CestaViewHolder, position: Int) {
         val item = this.productList[position]
         holder.run {
-            setProduct(item)
+            setProduct(item.producto)
+            setCount(item.count)
             updateImage()
             updateName()
             updatePrice()
@@ -39,7 +42,7 @@ class CestaRecyclerAdapter(
 
     override fun getItemCount(): Int = this.productList.size
 
-    fun loadList(productos: List<Producto>) {
+    fun loadList(productos: List<CestaProduct>) {
         this.productList.run {
             clear()
             addAll(productos)
@@ -52,6 +55,10 @@ class CestaRecyclerAdapter(
 
         fun setProduct(producto: Producto) {
             this.producto = producto
+        }
+
+        fun setCount(count: Int){
+            view.shoppinglistitem_count.text = view.context.getString(R.string.text_counter_product, count)
         }
 
         fun updateName() {

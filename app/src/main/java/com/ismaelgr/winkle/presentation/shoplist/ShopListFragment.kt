@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Cesta
+import com.ismaelgr.winkle.data.entity.CestaProduct
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
 import com.ismaelgr.winkle.data.repository.factory.CestaRepositoryFactory
@@ -53,7 +54,7 @@ class ShopListFragment : BaseFragment(R.layout.fragment_shoplist), ShopListContr
 
     override fun bindPresenter(): BaseContract.Presenter = this.shoplistPresenter
 
-    override fun loadCesta(productos: List<Producto>) {
+    override fun loadCesta(productos: List<CestaProduct>) {
         cestaRecyclerAdapter.loadList(productos)
     }
 

@@ -32,4 +32,5 @@
     <string name="text_disable_product_next_sale">Desactivar producto en la proxima venta</string>
     <string name="text_product_info">Información de producto</string>
     <string name="text_count_product_shoplist">Actualmente tienes este producto %1$d veces en la cesta</string>
+    <string name="text_counter_product" translatable="false">x%1$d</string>
 </resources>

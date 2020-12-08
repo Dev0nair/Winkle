@@ -15,7 +15,7 @@ class GetMyCestaUseCase(
     private var listenerPerfil: Disposable? = null
     private var listenerCesta: Disposable? = null
 
-    fun execute(onSuccess: (Cesta) -> Unit, onError: (String) -> Unit){
+    fun execute(onSuccess: (List<Cesta>) -> Unit, onError: (String) -> Unit){
         val myAccId = accountRepositoryNeed.getAccount().id
 
         listenerPerfil = profileRepositoryNeed.getProfileFromAcc(myAccId)
@@ -23,7 +23,7 @@ class GetMyCestaUseCase(
                 listenerCesta = cestaRepositoryNeed.getCesta(perfil.id)
                     .doOnSuccess(onSuccess)
                     .doOnError { it.message.toString().run(onError) }
-                    .doOnComplete { onSuccess(Cesta("", arrayListOf())) }
+                    .doOnComplete { onSuccess(arrayListOf()) }
                     .subscribe()
             }
             .doOnError{ it.message.toString().run(onError) }

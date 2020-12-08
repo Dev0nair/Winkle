@@ -12,9 +12,9 @@ class CestaRepository : CestaRepositoryNeed {
 
     private var firestore: FirebaseFirestore? = null
 
-    override fun getCesta(idProfile: String): Maybe<Cesta> =
-        FirebaseListener.makeOneTimeDocumentListener(
-            getFirestore().collection(Routes.CESTAS).document(idProfile),
+    override fun getCesta(idProfile: String): Maybe<List<Cesta>> =
+        FirebaseListener.makeOneTimeQueryListener(
+            getFirestore().collection(Routes.CESTAS).whereEqualTo("idProfile", idProfile),
             Cesta::class.java
         )
 
@@ -22,32 +22,12 @@ class CestaRepository : CestaRepositoryNeed {
         idProfile: String,
         idProduct: String
     ) = Completable.create { emiter ->
-        FirebaseListener.makeOneTimeDocumentListener(
-            documentReference = getFirestore().collection(Routes.CESTAS)
-                .document(idProfile),
-            Cesta::class.java
-        )
-            .doOnSuccess { cesta ->
-                cesta.products.add(idProduct)
-                applyCesta(idProfile, cesta, emiter::onComplete, emiter::onError)
-            }
-            .doOnComplete {
-                val cesta = Cesta(idProfile, arrayListOf())
-                cesta.products.add(idProduct)
-                applyCesta(idProfile, cesta, emiter::onComplete, emiter::onError)
-            }
-    }
-
-    private fun applyCesta(
-        idProfile: String,
-        cesta: Cesta,
-        onSuccess: () -> Unit,
-        onError: (Throwable) -> Unit
-    ) {
-        getFirestore().collection(Routes.CESTAS).document(idProfile)
-            .set(cesta)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener { onError(it) }
+        val cestaRef = getFirestore().collection(Routes.CESTAS).document()
+        val cesta = Cesta(cestaRef.id, idProfile, idProduct)
+        cestaRef.set(cesta)
+            .addOnSuccessListener { emiter.onComplete() }
+            .addOnFailureListener(emiter::onError)
+            .addOnCompleteListener { emiter.onComplete() }
     }
 
     override fun clearCesta(idProfile: String) =
@@ -60,33 +40,16 @@ class CestaRepository : CestaRepositoryNeed {
 
     override fun deleteFromCesta(
         idProfile: String,
-        idProduct: String
+        idCesta: String
     ) = Completable.create { emitter ->
-        FirebaseListener.makeOneTimeDocumentListener(
-            documentReference = getFirestore().collection(Routes.CESTAS)
-                .document(idProfile),
-            Cesta::class.java
-        )
-            .doOnSuccess { cesta ->
-                if (cesta.products.contains(idProduct)) {
-                    cesta.products.remove(idProduct)
-                    applyCesta(idProfile, cesta, emitter::onComplete, emitter::onError)
-                } else {
-                    emitter.onComplete()
-                }
-            }
-            .doOnComplete {
-                applyCesta(
-                    idProfile,
-                    Cesta(idProfile, arrayListOf()),
-                    { emitter.onComplete() },
-                    emitter::onError
-                )
-            }
+        getFirestore().document(idCesta).delete()
+            .addOnSuccessListener { emitter.onComplete() }
+            .addOnCompleteListener { emitter.onComplete() }
+            .addOnFailureListener(emitter::onError)
     }
 
     private fun getFirestore(): FirebaseFirestore {
-        if(firestore == null){
+        if (firestore == null) {
             firestore = FirebaseFirestore.getInstance()
         }
 
