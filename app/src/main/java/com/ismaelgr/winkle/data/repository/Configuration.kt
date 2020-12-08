@@ -6,4 +6,5 @@ object Configuration {
     internal val PROFILE_USAGE = RepositoryOptions.LOCAL
     internal val PRODUCTS_USAGE = RepositoryOptions.LOCAL
     internal val CESTA_USAGE = RepositoryOptions.LOCAL
+    internal val REPORTS_USAGE = RepositoryOptions.LOCAL
 }

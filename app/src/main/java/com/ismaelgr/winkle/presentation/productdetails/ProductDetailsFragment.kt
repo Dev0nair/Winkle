@@ -99,6 +99,10 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         }
     }
 
+    override fun writeReasonReport() {
+        
+    }
+
     override fun initElements() {
         productDetailsRecycler = ProductDetailsRecycler(productdetailsPresenter::onDetailImageClick)
 
@@ -115,6 +119,8 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         product_detail_add_to_shoplist.setOnClickListener { productdetailsPresenter.onAddToShopListClick() }
 
         product_detail_back_screen.setOnClickListener { productdetailsPresenter.onBackScreenClick() }
+
+        product_detail_report_btn.setOnClickListener{ productdetailsPresenter.onReportClick() }
 
         productdetailsPresenter.onInit(arguments?.get("producto") as Producto)
     }

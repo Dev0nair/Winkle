@@ -61,7 +61,7 @@ class ProductDetailsPresenter(
     }
 
     override fun onReportClick() {
-        TODO("Not yet implemented")
+        view.writeReasonReport()
     }
 
     override fun onLikeClick() {
@@ -87,6 +87,9 @@ class ProductDetailsPresenter(
         view.showBigImage(false)
     }
 
+    override fun sendReport(reason: String) {
+
+    }
 
 
     override fun onDestroy() {

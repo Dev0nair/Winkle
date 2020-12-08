@@ -21,6 +21,7 @@ interface ProductDetailsContract {
         fun navigateToProfileDetails(idPerfil: String)
         fun showBigImage(url: String)
         fun showBigImage(show: Boolean)
+        fun writeReasonReport()
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -32,5 +33,6 @@ interface ProductDetailsContract {
         fun onViewProfileClick()
         fun onDetailImageClick(url: String)
         fun onBackScreenClick()
+        fun sendReport(reason: String)
     }
 }
