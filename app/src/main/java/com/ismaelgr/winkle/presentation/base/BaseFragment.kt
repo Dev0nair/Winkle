@@ -1,12 +1,15 @@
 package com.ismaelgr.winkle.presentation.base
 
 import android.animation.Animator
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.annotation.AnimRes
 import androidx.annotation.AnimatorRes
 import androidx.annotation.LayoutRes
@@ -89,5 +92,32 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
             }
             target.startAnimation(anim)
         }
+    }
+
+    fun inputTextDialog(
+        title: String,
+        okText: String,
+        cancelText: String,
+        onNameSet: (name: String) -> Unit,
+        onCancel: () -> Unit = {}
+    ) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(title)
+        val input = EditText(requireContext())
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setView(input)
+        input.requestFocus()
+
+        builder.setPositiveButton(
+            okText
+        ) { _, _ -> onNameSet(input.text.toString()) }
+        builder.setNegativeButton(
+            cancelText
+        ) { dialog, _ ->
+            dialog.cancel()
+            onCancel()
+        }
+
+        builder.show()
     }
 }

@@ -1,5 +1,6 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
+import android.content.res.ColorStateList
 import android.view.View.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -100,7 +101,32 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun writeReasonReport() {
-        
+        inputTextDialog(
+            title = getString(R.string.text_title_report),
+            okText = getString(R.string.text_send_report),
+            cancelText = getString(R.string.text_cancel),
+            onNameSet = productdetailsPresenter::sendReport,
+            onCancel = productdetailsPresenter::onCancelReport
+        )
+    }
+
+    override fun enableReportButton(boolean: Boolean) {
+        product_detail_report_btn.isEnabled = boolean
+    }
+
+    override fun setReported() {
+        product_detail_report_btn.run {
+            compoundDrawableTintList = ColorStateList.valueOf(requireContext().getColor(R.color.colorPrimary))
+            text = getText(R.string.text_reported)
+            isEnabled = false
+        }
+    }
+
+    override fun setNotReported() {
+        product_detail_report_btn.run {
+            text = getString(R.string.text_report)
+            isEnabled = true
+        }
     }
 
     override fun initElements() {

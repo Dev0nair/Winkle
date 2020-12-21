@@ -1,10 +1,8 @@
 package com.ismaelgr.winkle.di
 
-import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.CestaRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.ProductsRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
+import com.ismaelgr.winkle.data.repository.factory.*
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
+import com.ismaelgr.winkle.data.repository.needs.ReportsRepositoryNeed
 import com.ismaelgr.winkle.domain.usecase.*
 import com.ismaelgr.winkle.presentation.home.HomeContract
 import com.ismaelgr.winkle.presentation.home.HomePresenter
@@ -36,7 +34,7 @@ val presenterModules = module {
     }
 
     factory { (view: ProductDetailsContract.View) ->
-        ProductDetailsPresenter(view, get(), get(), get())
+        ProductDetailsPresenter(view, get(), get(), get(), get(), get())
     }
 }
 
@@ -50,6 +48,8 @@ val useCaseModule = module {
     factory { IsMyProductUseCase(get()) }
     factory { GetCountProductInCestaUseCase(get()) }
     factory { AddProductToCestaUseCase(get(), get(), get()) }
+    factory { HasReportedProductUseCase(get(), get(), get()) }
+    factory { SendReportUseCase(get(), get(), get()) }
 }
 
 val repositoryModules = module {
@@ -57,4 +57,5 @@ val repositoryModules = module {
     single { ProfileRepositoryFactory().getRepository() }
     single { CestaRepositoryFactory().getRepository() }
     single { AccountRepositoryFactory().getRepository() }
+    single { ReportsRepositoryFactory().getRepository() }
 }

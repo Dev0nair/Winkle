@@ -33,4 +33,9 @@
     <string name="text_product_info">Información de producto</string>
     <string name="text_count_product_shoplist">Actualmente tienes este producto %1$d veces en la cesta</string>
     <string name="text_counter_product" translatable="false">x%1$d</string>
+    <string name="text_reported">Reportado</string>
+    <string name="text_report">Reportar</string>
+    <string name="text_title_report">Motivo del reporte</string>
+    <string name="text_send_report">Enviar reporte</string>
+    <string name="text_cancel">Cancelar</string>
 </resources>

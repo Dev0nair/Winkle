@@ -31,4 +31,9 @@
     <string name="text_disable_product_next_sale">Disable product after next sale</string>
     <string name="text_product_info">Product info</string>
     <string name="text_count_product_shoplist">You already have %1$d in your shoplist</string>
+    <string name="text_reported">Reported</string>
+    <string name="text_report">Reportar</string>
+    <string name="text_title_report">Report reason</string>
+    <string name="text_send_report">Send report</string>
+    <string name="text_cancel">Abort</string>
 </resources>

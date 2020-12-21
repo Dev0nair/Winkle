@@ -9,11 +9,6 @@ class ReportsRepository: ReportsRepositoryNeed {
 
     private val reports = arrayListOf(
         Report("1", "1", "1", "Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo 1"),
-        Report("1", "1", "2", "Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo 2"),
-        Report("1", "2", "2", "Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo 3"),
-        Report("1", "1", "3", "Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo 4"),
-        Report("1", "1", "4", "Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo 5"),
-        Report("1", "1", "5", "Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo Ofensivo 6"),
     )
 
     override fun getAllReports(): Maybe<List<Report>> =

@@ -1,16 +1,16 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.domain.usecase.AddProductToCestaUseCase
-import com.ismaelgr.winkle.domain.usecase.GetCountProductInCestaUseCase
-import com.ismaelgr.winkle.domain.usecase.GetProductOwnerUseCase
+import com.ismaelgr.winkle.domain.usecase.*
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class ProductDetailsPresenter(
     private val view: ProductDetailsContract.View,
     private val getProductOwnerUseCase: GetProductOwnerUseCase,
     private val getCountProductInCestaUseCase: GetCountProductInCestaUseCase,
-    private val addProductToCestaUseCase: AddProductToCestaUseCase
+    private val addProductToCestaUseCase: AddProductToCestaUseCase,
+    private val hasReportedProductUseCase: HasReportedProductUseCase,
+    private val reportUseCase: SendReportUseCase
 ) :
     BasePresenter<ProductDetailsContract.View>(view), ProductDetailsContract.Presenter {
 
@@ -24,10 +24,24 @@ class ProductDetailsPresenter(
             setMainImage(producto.mainImage)
             setImages(producto.images)
             setPrice(producto.precio)
-
-            refreshProfileData()
-            refreshCountOnCesta()
         }
+
+        refreshProfileData()
+        refreshCountOnCesta()
+        refreshReported()
+    }
+
+    private fun refreshReported() {
+        hasReportedProductUseCase.execute(
+            producto.id,
+            onSuccess = {
+                if (it) {
+                    view.setReported()
+                } else {
+                    view.setNotReported()
+                }
+            }, ::showError
+        )
     }
 
     private fun refreshProfileData() {
@@ -61,14 +75,13 @@ class ProductDetailsPresenter(
     }
 
     override fun onReportClick() {
-        view.writeReasonReport()
+        view.run {
+            enableReportButton(false)
+            writeReasonReport()
+        }
     }
 
     override fun onLikeClick() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onAlternateDisableOnBuyClick() {
         TODO("Not yet implemented")
     }
 
@@ -88,9 +101,12 @@ class ProductDetailsPresenter(
     }
 
     override fun sendReport(reason: String) {
-
+        reportUseCase.execute(reason, producto.id, ::refreshReported, ::showError)
     }
 
+    override fun onCancelReport() {
+        view.enableReportButton(true)
+    }
 
     override fun onDestroy() {
         getProductOwnerUseCase.dispose()
