@@ -2,8 +2,6 @@ package com.ismaelgr.winkle.domain.usecase
 
 import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 
 class HasProfileUseCase(
     private val accountRepositoryFactory: AccountRepositoryNeed,

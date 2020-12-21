@@ -1,8 +1,6 @@
 package com.ismaelgr.winkle.di
 
 import com.ismaelgr.winkle.data.repository.factory.*
-import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
-import com.ismaelgr.winkle.data.repository.needs.ReportsRepositoryNeed
 import com.ismaelgr.winkle.domain.usecase.*
 import com.ismaelgr.winkle.presentation.home.HomeContract
 import com.ismaelgr.winkle.presentation.home.HomePresenter

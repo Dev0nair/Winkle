@@ -67,15 +67,36 @@
                 android:scaleX="1.1"
                 android:scaleY="1.1"
                 app:layout_constraintTop_toTopOf="@id/product_detail_price"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/product_detail_fav_btn"
                 app:layout_constraintHorizontal_bias="1"
                 android:button="@null"
                 android:drawableTop="@drawable/ic_report"
                 android:drawableTint="#555"
                 android:textColor="@android:color/black"
                 android:enabled="false"
+                android:layout_marginEnd="5dp"
+                tools:text="@string/text_report"
+                />
+
+            <RadioButton
+                android:id="@+id/product_detail_fav_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                app:layout_constraintTop_toTopOf="@id/product_detail_report_btn"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/product_detail_report_btn"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_fav"
+                android:drawableTint="#555"
+                android:textColor="@android:color/black"
+                android:enabled="false"
                 android:layout_marginEnd="20dp"
+                tools:text="@string/text_favourite"
+                android:textAlignment="center"
                 />
 
             <TextView

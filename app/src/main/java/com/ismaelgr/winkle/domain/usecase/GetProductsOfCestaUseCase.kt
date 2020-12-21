@@ -2,10 +2,7 @@ package com.ismaelgr.winkle.domain.usecase
 
 import com.ismaelgr.winkle.data.entity.Cesta
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
-import com.ismaelgr.winkle.data.repository.needs.CestaRepositoryNeed
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
-import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
 import io.reactivex.rxjava3.disposables.Disposable
 
 class GetProductosMiCesta(

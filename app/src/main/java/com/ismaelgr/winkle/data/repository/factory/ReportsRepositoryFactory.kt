@@ -8,7 +8,7 @@ import com.ismaelgr.winkle.data.repository.local.ReportsRepository as LocalRepo
 
 class ReportsRepositoryFactory {
 
-    fun getRepository(repositoryOptions: RepositoryOptions = Configuration.PROFILE_USAGE): ReportsRepositoryNeed =
+    fun getRepository(repositoryOptions: RepositoryOptions = Configuration.REPORTS_USAGE): ReportsRepositoryNeed =
         when(repositoryOptions){
             RepositoryOptions.NETWORK -> NetworkRepo()
             else -> LocalRepo()

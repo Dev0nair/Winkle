@@ -2,7 +2,6 @@ package com.ismaelgr.winkle.data.repository.firebase
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 import com.ismaelgr.winkle.data.entity.Cuenta
 import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 import com.ismaelgr.winkle.util.Mapper

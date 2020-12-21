@@ -5,7 +5,6 @@ import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
-import java.util.concurrent.CompletableFuture
 
 class ProfileRepository : ProfileRepositoryNeed {
 
