@@ -1,6 +1,5 @@
 package com.ismaelgr.winkle.presentation.base
 
-import android.animation.Animator
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
@@ -11,7 +10,6 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.annotation.AnimRes
-import androidx.annotation.AnimatorRes
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.core.widget.ContentLoadingProgressBar
@@ -19,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.ismaelgr.winkle.R
+import kotlinx.android.synthetic.main.toolbar.*
 import kotlinx.android.synthetic.main.toolbar.view.*
 
 
@@ -31,8 +30,15 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.toolbar_back?.setOnClickListener { findNavController().popBackStack() }
+        view.run {
+            toolbar_back?.setOnClickListener { findNavController().popBackStack() }
+            toolbar_report?.visibility = View.GONE
+        }
         initElements()
+    }
+
+    override fun showReportToolbar(show: Boolean) {
+        toolbar_report?.visibility = if(show) View.VISIBLE else View.GONE
     }
 
     override fun hideLoading() {

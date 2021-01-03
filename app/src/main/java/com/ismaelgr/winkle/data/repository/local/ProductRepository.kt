@@ -10,7 +10,7 @@ class ProductRepository : ProductRepositoryNeed {
     private val products = listOf(
         Producto(
             "1",
-            "Portatil HP i7 16RAM RTX 2070",
+            "Portatil MSI i7 16RAM RTX 2070",
             "*Este equipo NO cuenta con sistema operativo instalado. ¿Quieres adquirir un sistema operativo de forma separada?\n" +
                     "\n" +
                     "Portátil MSI Modern 14 B10MW 026XES con pantalla Full HD de 14\" y un procesador excelente para ultrabooks Intel® Core™ i7-10510U con un consumo bajo de solamente 15 W. \n" +

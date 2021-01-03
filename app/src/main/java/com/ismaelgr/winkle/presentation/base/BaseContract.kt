@@ -18,6 +18,7 @@ interface BaseContract {
             onStart: () -> Unit = {},
             onFinish: () -> Unit = {}
         )
+        fun showReportToolbar(show: Boolean)
     }
 
     interface Presenter {

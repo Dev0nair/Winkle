@@ -21,13 +21,12 @@ class ProductDetailsRecycler(private val onImageClick: (String) -> Unit): Recycl
 
     fun setList(list: List<String>){
         this.list.run {
-            clear()
             addAll(list)
         }
     }
 
     fun add(url: String){
-        list.add(url)
+        list.add(0, url)
     }
 
     fun remove(url: String){

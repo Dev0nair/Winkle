@@ -1,6 +1,8 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
 import android.content.res.ColorStateList
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -27,7 +29,7 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     private lateinit var productDetailsRecycler: ProductDetailsRecycler
 
     override fun setMainImage(url: String) {
-        GlideLoader.load(product_detail_image, url)
+        productDetailsRecycler.add(url)
     }
 
     override fun setName(name: String) {
@@ -111,11 +113,11 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun enableReportButton(boolean: Boolean) {
-        product_detail_report_btn.isEnabled = boolean
+        toolbar_report.isEnabled = boolean
     }
 
     override fun setReported() {
-        product_detail_report_btn.run {
+        toolbar_report.run {
             compoundDrawableTintList = ColorStateList.valueOf(requireContext().getColor(R.color.colorPrimary))
             text = getText(R.string.text_reported)
             isEnabled = false
@@ -123,7 +125,7 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun setNotReported() {
-        product_detail_report_btn.run {
+        toolbar_report.run {
             text = getString(R.string.text_report)
             isEnabled = true
         }
@@ -132,13 +134,11 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     override fun initElements() {
         productDetailsRecycler = ProductDetailsRecycler(productdetailsPresenter::onDetailImageClick)
 
-        product_detail_images_rv.run {
+        product_detail_images.run {
             adapter = productDetailsRecycler
             layoutManager =
                 LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
         }
-
-        toolbar_title.text = getString(R.string.text_product_info)
 
         product_detail_profile_viewprofile.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
 
@@ -146,7 +146,7 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
 
         product_detail_back_screen.setOnClickListener { productdetailsPresenter.onBackScreenClick() }
 
-        product_detail_report_btn.setOnClickListener{ productdetailsPresenter.onReportClick() }
+        toolbar_report.setOnClickListener{ productdetailsPresenter.onReportClick() }
 
         productdetailsPresenter.onInit(arguments?.get("producto") as Producto)
     }
