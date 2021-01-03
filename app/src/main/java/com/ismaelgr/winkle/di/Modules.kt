@@ -37,7 +37,7 @@ val presenterModules = module {
 }
 
 val useCaseModule = module {
-    factory { GetAllProductsUseCase(get()) }
+    factory { GetAllProductsExceptMineUseCase(get(), get(), get()) }
     factory { GetProductosMiCesta(get(), get()) }
     factory { GetMyProductsUseCase(get(), get(), get()) }
     factory { GetMyCestaUseCase(get(), get(), get()) }

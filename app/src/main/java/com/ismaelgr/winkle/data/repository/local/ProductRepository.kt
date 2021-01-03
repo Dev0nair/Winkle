@@ -167,6 +167,8 @@ class ProductRepository : ProductRepositoryNeed {
 
     override fun getAllProducts(): Maybe<List<Producto>> = Maybe.just(products)
 
+    override fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>> = Maybe.just(products.filter { it.vendedorId != idProfile })
+
     override fun getProductInfo(
         idProducto: String
     ): Maybe<Producto> = Maybe.create { emitter ->

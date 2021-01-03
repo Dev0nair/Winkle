@@ -2,9 +2,8 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:adjustViewBounds="true"
+    android:scaleType="fitCenter"
     xmlns:tools="http://schemas.android.com/tools"
     tools:src="@mipmap/ic_launcher_round"
-    android:layout_margin="20dp"
     android:id="@+id/product_detail_description_image"
     />

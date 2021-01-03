@@ -9,6 +9,8 @@ interface ProductRepositoryNeed {
 
     fun getAllProducts(): Maybe<List<Producto>>
 
+    fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>>
+
     fun getProductInfo(idProducto: String): Maybe<Producto>
 
     fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>>

@@ -27,6 +27,12 @@ class ProductRepository : ProductRepositoryNeed {
             classCast = Producto::class.java
         )
 
+    override fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>> =
+        FirebaseListener.makeOneTimeQueryListener(
+            query = getFirestore().collection(Routes.PRODUCTOS).whereNotEqualTo("vendedorId", idProfile),
+            classCast = Producto::class.java
+        )
+
 
     override fun getProductInfo(
         idProducto: String

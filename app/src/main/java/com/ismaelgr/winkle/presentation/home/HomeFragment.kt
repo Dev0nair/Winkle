@@ -11,8 +11,6 @@ import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.data.repository.factory.ProductsRepositoryFactory
-import com.ismaelgr.winkle.domain.usecase.GetAllProductsUseCase
 import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_home.*
