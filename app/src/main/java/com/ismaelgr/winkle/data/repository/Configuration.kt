@@ -7,6 +7,7 @@ object Configuration {
     internal val PRODUCTS_USAGE = RepositoryOptions.LOCAL
     internal val CESTA_USAGE = RepositoryOptions.LOCAL
     internal val REPORTS_USAGE = RepositoryOptions.LOCAL
+    internal val RATE_USAGE = RepositoryOptions.LOCAL
 
     internal val MAX_RATE = 5
 }

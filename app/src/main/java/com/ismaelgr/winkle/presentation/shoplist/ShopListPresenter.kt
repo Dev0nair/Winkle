@@ -50,6 +50,8 @@ class ShopListPresenter(
 
     override fun onDeleteItemClick(idProducto: String) {
         val cestaId = this.cesta.findLast { it.idProduct == idProducto }
+        cesta.dropLastWhile { it.idProduct == idProducto }
+        // TODO
     }
 
     override fun onBuyBtnClick() {

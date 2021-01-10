@@ -10,6 +10,7 @@ class ProductDetailsPresenter(
     private val getCountProductInCestaUseCase: GetCountProductInCestaUseCase,
     private val addProductToCestaUseCase: AddProductToCestaUseCase,
     private val hasReportedProductUseCase: HasReportedProductUseCase,
+    private val getRateUseCase: GetRateUseCase,
     private val reportUseCase: SendReportUseCase
 ) :
     BasePresenter<ProductDetailsContract.View>(view), ProductDetailsContract.Presenter {
@@ -29,6 +30,11 @@ class ProductDetailsPresenter(
         refreshProfileData()
         refreshCountOnCesta()
         refreshReported()
+        refreshRating()
+    }
+
+    private fun refreshRating() {
+        getRateUseCase.execute(producto.id, { view.setPuntuation(it) }, ::showError)
     }
 
     private fun refreshReported() {

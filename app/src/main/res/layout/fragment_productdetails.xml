@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.productdetails.ProductDetailsFragment"
-    >
+    tools:context=".presentation.productdetails.ProductDetailsFragment">
 
     <ScrollView
         android:id="@+id/scroll_product_info"
@@ -20,148 +19,158 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:paddingBottom="20dp"
-            >
+            android:paddingBottom="20dp">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.ismaelgr.winkle.components.ImageSlider
                 android:id="@+id/product_detail_images"
                 android:layout_width="0dp"
-                android:layout_height="180dp"
-                android:adjustViewBounds="true"
+                android:layout_height="@dimen/image_slider_height"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0"
-                android:layout_marginTop="65dp"
-                tools:itemCount="1"
-                tools:listitem="@layout/product_detail_image_view" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <View
+                android:id="@+id/content_ver_position"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.65"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_detail_images"
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:id="@+id/product_detail_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintWidth_percent="0.92"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/content_ver_position"
                 app:layout_constraintTop_toBottomOf="@id/product_detail_images"
+                app:layout_constraintVertical_bias="0"
+                tools:text="Portatil MSI i7 16RAM RTX 2070" />
+
+            <TextView
+                android:id="@+id/product_detail_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/product_detail_name"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintLeft_toRightOf="@id/content_ver_position"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/product_detail_name"
+                app:layout_constraintVertical_bias="0"
+                tools:text="20.6€" />
+
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.3"
+                android:background="@android:color/black"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/top_rounded_background"
-                >
+                app:layout_constraintTop_toBottomOf="@id/product_detail_name"
+                app:layout_constraintWidth_percent="0.95" />
 
-                <View
-                    android:id="@+id/content_ver_position"
-                    android:layout_width="1dp"
-                    android:layout_height="1dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.65"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/product_detail_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/product_detail_name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/separator1"
+                app:layout_constraintVertical_bias="0"
+                tools:text="Descripcion" />
 
-                <TextView
-                    android:id="@+id/product_detail_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="15dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/content_ver_position"
-                    app:layout_constraintVertical_bias="0"
-                    tools:text="Portatil MSI i7 16RAM RTX 2070" />
+            <View
+                android:id="@+id/separator2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:alpha="0.3"
+                android:background="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_detail_description"
+                app:layout_constraintWidth_percent="0.95" />
 
-                <TextView
-                    android:id="@+id/product_detail_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@id/product_detail_name"
-                    app:layout_constraintLeft_toRightOf="@id/content_ver_position"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/product_detail_name"
-                    app:layout_constraintHorizontal_bias="1"
-                    app:layout_constraintVertical_bias="0"
-                    android:layout_marginEnd="15dp"
-                    tools:text="20.6€" />
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/product_detail_profile_image"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="@id/product_detail_description"
+                app:layout_constraintTop_toBottomOf="@id/separator2"
+                tools:src="@mipmap/ic_launcher_round" />
 
-                <TextView
-                    android:id="@+id/product_detail_description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:minLines="2"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/product_detail_name"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/product_detail_name"
-                    app:layout_constraintVertical_bias="0"
-                    tools:text="Descripcion" />
+            <TextView
+                android:id="@+id/product_detail_profile_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:paddingStart="2dp"
+                android:textColor="@android:color/black"
+                android:textSize="23sp"
+                app:layout_constraintBottom_toTopOf="@id/product_detail_rating"
+                app:layout_constraintLeft_toRightOf="@id/product_detail_profile_image"
+                app:layout_constraintRight_toLeftOf="@id/product_detail_price"
+                app:layout_constraintTop_toTopOf="@id/product_detail_profile_image"
+                tools:text="Ismael González" />
 
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/product_detail_profile_image"
-                    android:layout_width="55dp"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="6dp"
-                    app:layout_constraintLeft_toLeftOf="@id/product_detail_description"
-                    app:layout_constraintTop_toBottomOf="@id/product_detail_description"
-                    tools:src="@mipmap/ic_launcher_round" />
+            <RatingBar
+                android:id="@+id/product_detail_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                app:layout_constraintTop_toBottomOf="@id/product_detail_profile_name"
+                app:layout_constraintLeft_toLeftOf="@id/product_detail_profile_name"
+                app:layout_constraintRight_toRightOf="@id/product_detail_price"
+                app:layout_constraintBottom_toBottomOf="@id/product_detail_profile_image"
+                app:layout_constraintHorizontal_bias="0"
+                />
 
-                <TextView
-                    android:id="@+id/product_detail_profile_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:textColor="@android:color/black"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toBottomOf="@id/product_detail_profile_image"
-                    app:layout_constraintLeft_toRightOf="@id/product_detail_profile_image"
-                    app:layout_constraintRight_toLeftOf="@id/product_detail_profile_viewprofile"
-                    app:layout_constraintTop_toTopOf="@id/product_detail_profile_image"
-                    tools:text="Ismael González" />
+            <Button
+                android:id="@+id/product_detail_add_to_shoplist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_background"
+                android:text="@string/text_add_to_cart"
+                app:layout_goneMarginTop="203dp"
+                app:layout_constraintLeft_toLeftOf="@id/product_detail_description"
+                app:layout_constraintRight_toRightOf="@id/product_detail_price"
+                app:layout_constraintTop_toBottomOf="@id/product_detail_rating"
+                app:layout_constraintVertical_bias="0"
+                />
 
-                <Button
-                    android:id="@+id/product_detail_profile_viewprofile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="@string/text_view_profile"
-                    android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="@id/product_detail_profile_name"
-                    app:layout_constraintRight_toRightOf="@id/product_detail_price"
-                    app:layout_constraintTop_toTopOf="@id/product_detail_profile_name" />
-
-                <Button
-                    android:id="@+id/product_detail_add_to_shoplist"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/rounded_background"
-                    android:text="@string/text_add_to_cart"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="@id/product_detail_description"
-                    app:layout_constraintRight_toRightOf="@id/product_detail_price"
-                    app:layout_constraintTop_toBottomOf="@id/product_detail_profile_viewprofile"
-                    app:layout_constraintVertical_bias="0" />
-
-                <TextView
-                    android:id="@+id/product_detail_count_shoplist"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/product_detail_add_to_shoplist"
-                    app:layout_constraintVertical_bias="0"
-                    tools:text="@string/text_count_product_shoplist" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/product_detail_count_shoplist"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_detail_add_to_shoplist"
+                app:layout_constraintVertical_bias="0"
+                tools:text="@string/text_count_product_shoplist" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -172,8 +181,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/product_detail_back_screen"
@@ -182,31 +190,29 @@
         android:alpha="0.45"
         android:background="@android:color/black"
         android:elevation="5dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/product_detail_bigimage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_default="percent"
-        app:layout_constraintHeight_default="percent"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintHeight_percent="0.6"
+        android:adjustViewBounds="true"
         android:background="@android:color/white"
         android:elevation="6dp"
-        android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        tools:src="@drawable/googleg_standard_color_18"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.6"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"
-        />
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.8"
+        tools:src="@drawable/googleg_standard_color_18" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

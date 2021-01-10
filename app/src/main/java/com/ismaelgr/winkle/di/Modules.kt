@@ -32,7 +32,7 @@ val presenterModules = module {
     }
 
     factory { (view: ProductDetailsContract.View) ->
-        ProductDetailsPresenter(view, get(), get(), get(), get(), get())
+        ProductDetailsPresenter(view, get(), get(), get(), get(), get(), get())
     }
 }
 
@@ -48,6 +48,7 @@ val useCaseModule = module {
     factory { AddProductToCestaUseCase(get(), get(), get()) }
     factory { HasReportedProductUseCase(get(), get(), get()) }
     factory { SendReportUseCase(get(), get(), get()) }
+    factory { GetRateUseCase(get()) }
 }
 
 val repositoryModules = module {
@@ -56,4 +57,5 @@ val repositoryModules = module {
     single { CestaRepositoryFactory().getRepository() }
     single { AccountRepositoryFactory().getRepository() }
     single { ReportsRepositoryFactory().getRepository() }
+    single { RateRepositoryFactory().getRepository() }
 }

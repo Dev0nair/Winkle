@@ -25,7 +25,11 @@ import org.koin.core.parameter.parametersOf
 class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     ProductDetailsContract.View {
 
-    private val productdetailsPresenter: ProductDetailsContract.Presenter by inject<ProductDetailsPresenter> { parametersOf(this) }
+    private val productdetailsPresenter: ProductDetailsContract.Presenter by inject<ProductDetailsPresenter> {
+        parametersOf(
+            this
+        )
+    }
     private lateinit var productDetailsRecycler: ProductDetailsRecycler
 
     override fun setMainImage(url: String) {
@@ -45,15 +49,11 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun setImages(images: List<String>) {
-        productDetailsRecycler.setList(images)
+        product_detail_images.addImage(*images.toTypedArray())
     }
 
-    override fun setNumberOnShopList(count: Int) {
-//        TODO("Not yet implemented")
-    }
-
-    override fun setPuntuation(puntuation: String) {
-//        TODO("Not yet implemented")
+    override fun setPuntuation(puntuation: Float) {
+        product_detail_rating.rating = puntuation
     }
 
     override fun setImageProfile(url: String) {
@@ -64,24 +64,23 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         product_detail_profile_name.text = name
     }
 
-    override fun setHasFav(hasFav: Boolean) {
-//        TODO("Not yet implemented")
-    }
-
     override fun setCountProduct(count: Int) {
         product_detail_count_shoplist.text = getString(R.string.text_count_product_shoplist, count)
     }
 
     override fun navigateToProfileDetails(idPerfil: String) {
-        findNavController().navigate(R.id.action_productDetailsFragment_to_infoProfileFragment, bundleOf("idPerfil" to idPerfil))
+        findNavController().navigate(
+            R.id.action_productDetailsFragment_to_infoProfileFragment,
+            bundleOf("idPerfil" to idPerfil)
+        )
     }
 
     override fun showBigImage(url: String) {
         product_detail_bigimage.run { GlideLoader.load(this, url) }
     }
 
-    override fun showBigImage(show: Boolean){
-        if(show){
+    override fun showBigImage(show: Boolean) {
+        if (show) {
             animate(
                 product_detail_bigimage,
                 animId = R.anim.animate_in,
@@ -118,7 +117,8 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
 
     override fun setReported() {
         toolbar_report.run {
-            compoundDrawableTintList = ColorStateList.valueOf(requireContext().getColor(R.color.colorPrimary))
+            compoundDrawableTintList =
+                ColorStateList.valueOf(requireContext().getColor(R.color.colorPrimary))
             text = getText(R.string.text_reported)
             isEnabled = false
         }
@@ -134,19 +134,18 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     override fun initElements() {
         productDetailsRecycler = ProductDetailsRecycler(productdetailsPresenter::onDetailImageClick)
 
-        product_detail_images.run {
-            adapter = productDetailsRecycler
-            layoutManager =
-                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
-        }
-
-        product_detail_profile_viewprofile.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
+        product_detail_profile_name.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
+        product_detail_profile_image.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
 
         product_detail_add_to_shoplist.setOnClickListener { productdetailsPresenter.onAddToShopListClick() }
 
         product_detail_back_screen.setOnClickListener { productdetailsPresenter.onBackScreenClick() }
 
-        toolbar_report.setOnClickListener{ productdetailsPresenter.onReportClick() }
+        toolbar_report.setOnClickListener { productdetailsPresenter.onReportClick() }
+
+        product_detail_images.setOnImageClick { urlImage ->
+            productdetailsPresenter.onDetailImageClick(urlImage)
+        }
 
         productdetailsPresenter.onInit(arguments?.get("producto") as Producto)
     }
