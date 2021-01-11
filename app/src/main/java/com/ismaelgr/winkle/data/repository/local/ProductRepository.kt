@@ -25,15 +25,9 @@ class ProductRepository : ProductRepositoryNeed {
                     "Los equipos FreeDos (sin sistema operativo) como el de este ordenador te dan la libertad de funcionar con el sistema operativo que te vaya mejor para trabajar. Si no te convence un sistema concreto o necesitas algo muy específico que no te pueden ofrecer los sistemas convencionales, los ordenadores FreeDos son la mejor opción para ello.",
             "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225297/fee_786_587_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
             listOf(
-                "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225294/fee_52_41_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
-                "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225295/fee_52_41_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
-                "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_78225296/fee_52_41_png/Port%C3%A1til---MSI-Modern-14--14-%22-Full-HD--Intel%C2%AE-Core%E2%84%A2-i7-10510U--16-GB--512-GB-SSD--UHD-Graphics--FreeDOS",
+                "https://www.macitynet.it/wp-content/uploads/2020/07/msi-creator-17-2-1280x720.jpg",
+                "https://beebom.com/wp-content/uploads/2020/03/msi-modern-14-review-featured.jpg",
                 "https://images-na.ssl-images-amazon.com/images/I/71h6PpGaz9L._AC_SL1500_.jpg",
-                "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
-                "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
-                "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
-                "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
-                "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg",
                 "https://www.worten.es/i/f27fa9006a15d9bd4cc281f97681b14585bc4216.jpg"
             ),
             1400F,

@@ -6,7 +6,6 @@ import com.ismaelgr.winkle.presentation.base.BaseContract
 interface ProductDetailsContract {
 
     interface View : BaseContract.View {
-        fun setMainImage(url: String)
         fun setName(name: String)
         fun setPrice(price: Float)
         fun setDescription(description: String)

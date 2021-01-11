@@ -30,6 +30,10 @@ class ImageSlider(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
     private lateinit var imagePagerAdapter: ImagePagerAdapter
     private var userActionWithImage: (String) -> Unit = {}
 
+    private val unselectedDot = android.R.color.white
+    private val selectedDot = R.color.colorPrimaryDark
+    private val dotsPanelAlpha = 0.6f
+
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.image_slider_view, this)
@@ -59,7 +63,7 @@ class ImageSlider(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
 
         })
 
-        slots.background.alpha = (255 * 0.6).roundToInt()
+        slots.background.alpha = (255 * dotsPanelAlpha).roundToInt()
 
         viewPager.adapter = imagePagerAdapter
     }
@@ -84,7 +88,7 @@ class ImageSlider(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
             view.background.setTint(
                 ContextCompat.getColor(
                     context,
-                    if (positionShownDot == index) R.color.colorPrimary else R.color.unselectedDot
+                    if (positionShownDot == index) selectedDot else unselectedDot
                 )
             )
         }
@@ -127,22 +131,24 @@ class ImageSlider(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
         }
 
         fun addImage(vararg image: String) {
-            image.forEach {
-                images.add(0, it)
-            }
+            images.addAll(image)
             notifyDataSetChanged()
         }
 
         override fun isViewFromObject(view: View, `object`: Any): Boolean =
-            view == `object` as ZoomageView
+            view == `object` as ImageView
 
-        override fun instantiateItem(container: ViewGroup, position: Int): ZoomageView {
-            val imageView = ZoomageView(context)
+        override fun instantiateItem(container: ViewGroup, position: Int): ImageView {
+            val imageView = ImageView(context)
             if (position < images.size) {
                 val image = images[position]
+                imageView.run {
+                    setOnClickListener { userActionClick(image) }
+                    adjustViewBounds = true
+                    scaleType = ImageView.ScaleType.CENTER_CROP
+                }
                 GlideLoader.load(imageView, image)
                 container.addView(imageView)
-                imageView.setOnClickListener { userActionClick(image) }
             }
             return imageView
         }

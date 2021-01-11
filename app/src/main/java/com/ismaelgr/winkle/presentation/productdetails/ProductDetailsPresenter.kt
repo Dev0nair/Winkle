@@ -22,8 +22,7 @@ class ProductDetailsPresenter(
         view.run {
             setName(producto.nombre)
             setDescription(producto.descripcion)
-            setMainImage(producto.mainImage)
-            setImages(producto.images)
+            setImages(listOf(producto.mainImage) + producto.images)
             setPrice(producto.precio)
         }
 

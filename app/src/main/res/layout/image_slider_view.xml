@@ -10,6 +10,7 @@
         android:id="@+id/image_slider_viewpager"
         android:layout_width="0dp"
         android:layout_height="@dimen/image_slider_height"
+        android:elevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,11 +25,32 @@
         android:gravity="start|center"
         android:orientation="horizontal"
         android:paddingVertical="10dp"
-        android:paddingStart="5dp"
+        android:paddingStart="@dimen/image_slider_dot_marginEnd"
         android:paddingEnd="15dp"
+        android:elevation="10dp"
+        android:focusable="true"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="1">
 
+        <View
+            android:layout_width="@dimen/image_slider_dot_size"
+            android:layout_height="@dimen/image_slider_dot_size"
+            android:layout_marginEnd="@dimen/image_slider_dot_marginEnd"
+            android:background="@drawable/image_slider_dot"
+            android:backgroundTint="@color/colorPrimary"
+            android:alpha="1"/>
+        <View
+            android:layout_width="@dimen/image_slider_dot_size"
+            android:layout_height="@dimen/image_slider_dot_size"
+            android:layout_marginEnd="@dimen/image_slider_dot_marginEnd"
+            android:background="@drawable/image_slider_dot"
+            android:backgroundTint="@color/colorPrimary"
+            android:alpha="1"/>
         <View
             android:layout_width="@dimen/image_slider_dot_size"
             android:layout_height="@dimen/image_slider_dot_size"

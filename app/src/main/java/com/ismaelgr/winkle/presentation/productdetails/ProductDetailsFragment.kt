@@ -30,11 +30,6 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
             this
         )
     }
-    private lateinit var productDetailsRecycler: ProductDetailsRecycler
-
-    override fun setMainImage(url: String) {
-        productDetailsRecycler.add(url)
-    }
 
     override fun setName(name: String) {
         product_detail_name.text = name
@@ -132,9 +127,10 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
     }
 
     override fun initElements() {
-        productDetailsRecycler = ProductDetailsRecycler(productdetailsPresenter::onDetailImageClick)
+        showReportToolbar(true)
 
         product_detail_profile_name.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
+
         product_detail_profile_image.setOnClickListener { productdetailsPresenter.onViewProfileClick() }
 
         product_detail_add_to_shoplist.setOnClickListener { productdetailsPresenter.onAddToShopListClick() }
