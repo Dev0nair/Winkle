@@ -1,11 +1,44 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="BottomNavigationView">
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="MyEditText.Full" parent="MyEditText">
+        <item name="shapeAppearance">@style/FullRounded</item>
+    </style>
+
+    <style name="MyEditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="shapeAppearance">@style/HalfRounded</item>
+        <item name="boxStrokeWidth">1.5dp</item>
+        <item name="boxStrokeColor">@android:color/black</item>
+        <item name="android:textColorHint">@android:color/white</item>
+    </style>
+
+    <style name="FullRounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">45dp</item>
+    </style>
+
+    <style name="HalfRounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeBottomLeft">25dp</item>
+        <item name="cornerSizeBottomRight">25dp</item>
+    </style>
+
+    <style name="Screen_title">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">41sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

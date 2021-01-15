@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:background="@android:color/transparent">
+
+    <ImageView
+        android:id="@+id/toolbar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:src="@drawable/ic_back"
+        android:adjustViewBounds="true"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioButton
+        android:id="@+id/toolbar_report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleX="1.1"
+        android:scaleY="1.1"
+        android:button="@null"
+        android:drawableTop="@drawable/ic_report"
+        android:drawableTint="#555"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:layout_marginEnd="20dp"
+        android:enabled="false"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="@string/text_report"
+        />
+
+</LinearLayout>

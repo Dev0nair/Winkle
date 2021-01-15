@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/primary_navigation"
+    app:startDestination="@id/flujo_inicial">
+
+    <navigation
+        android:id="@+id/flujo_principal"
+        app:startDestination="@id/homeFragment">
+        <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.ismaelgr.winkle.presentation.profile.ProfileFragment"
+            android:label="@string/secondary_menu_perfil"
+            tools:layout="@layout/fragment_profile">
+            <action
+                android:id="@+id/action_profileFragment_to_purchasesFragment"
+                app:destination="@id/purchasesFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_salesSummaryFragment"
+                app:destination="@id/salesSummaryFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_incidencesFragment"
+                app:destination="@id/incidencesFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_infoProfileFragment"
+                app:destination="@id/infoProfileFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+            <action
+                android:id="@+id/action_profileFragment_to_flujo_nicial"
+                app:destination="@id/flujo_inicial" />
+
+        </fragment>
+        <fragment
+            android:id="@+id/paymentFragment"
+            android:name="com.ismaelgr.winkle.presentation.payment.PaymentFragment"
+            android:label="fragment_payment"
+            tools:layout="@layout/fragment_payment" />
+        <fragment
+            android:id="@+id/myProductsFragment"
+            android:name="com.ismaelgr.winkle.presentation.myproducts.MyProductsFragment"
+            android:label="@string/secondary_menu_mi_tienda"
+            tools:layout="@layout/fragment_myproducts">
+            <action
+                android:id="@+id/action_myProductsFragment_to_newProductFragment"
+                app:destination="@id/newProductFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/newProductFragment"
+            android:name="com.ismaelgr.winkle.presentation.newproduct.NewProductFragment"
+            android:label="fragment_newproduct"
+            tools:layout="@layout/fragment_newproduct" >
+            <argument
+                android:name="producto"
+                app:argType="com.ismaelgr.winkle.data.entity.Producto"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </fragment>
+        <fragment
+            android:id="@+id/salesSummaryFragment"
+            android:name="com.ismaelgr.winkle.presentation.salessummary.SalesSummaryFragment"
+            android:label="fragment_salessummary"
+            tools:layout="@layout/fragment_salessummary" />
+        <fragment
+            android:id="@+id/infoProfileFragment"
+            android:name="com.ismaelgr.winkle.presentation.infoprofile.InfoProfileFragment"
+            android:label="fragment_infoprofile"
+            tools:layout="@layout/fragment_infoprofile" />
+        <fragment
+            android:id="@+id/incidencesFragment"
+            android:name="com.ismaelgr.winkle.presentation.incidences.IncidencesFragment"
+            android:label="fragment_incidences"
+            tools:layout="@layout/fragment_incidences" />
+        <fragment
+            android:id="@+id/productDetailsFragment"
+            android:name="com.ismaelgr.winkle.presentation.productdetails.ProductDetailsFragment"
+            android:label="fragment_productdetails"
+            tools:layout="@layout/fragment_productdetails" >
+            <action
+                android:id="@+id/action_productDetailsFragment_to_infoProfileFragment"
+                app:destination="@id/infoProfileFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.ismaelgr.winkle.presentation.home.HomeFragment"
+            android:label="@string/secondary_menu_home"
+            tools:layout="@layout/fragment_home" >
+            <action
+                android:id="@+id/action_homeFragment_to_productDetailsFragment"
+                app:destination="@id/productDetailsFragment" />
+            <action
+                android:id="@+id/action_homeFragment_to_newProductFragment"
+                app:destination="@id/newProductFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/shopListFragment"
+            android:name="com.ismaelgr.winkle.presentation.shoplist.ShopListFragment"
+            android:label="@string/secondary_menu_cesta"
+            tools:layout="@layout/fragment_shoplist">
+            <action
+                android:id="@+id/action_shopListFragment_to_productDetailsFragment"
+                app:destination="@id/productDetailsFragment" />
+            <action
+                android:id="@+id/action_shopListFragment_to_paymentFragment"
+                app:destination="@id/paymentFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/purchasesFragment"
+            android:name="com.ismaelgr.winkle.presentation.purchases.PurchasesFragment"
+            android:label="fragment_purchases"
+            tools:layout="@layout/fragment_purchases" />
+    </navigation>
+    <navigation
+        android:id="@+id/flujo_inicial"
+        app:startDestination="@id/splashFragment">
+        <fragment
+            android:id="@+id/signIn2Fragment"
+            android:name="com.ismaelgr.winkle.presentation.signin2.SignIn2Fragment"
+            android:label="fragment_signin2"
+            tools:layout="@layout/fragment_signin2">
+            <action
+                android:id="@+id/action_signIn2Fragment_to_flujo_principal"
+                app:destination="@id/flujo_principal"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/flujo_inicial"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_signIn2Fragment_to_loginFragment"
+                app:destination="@id/loginFragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/signIn2Fragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/legalScreenFragment"
+            android:name="com.ismaelgr.winkle.presentation.legalscreen.LegalScreenFragment"
+            android:label="fragment_legalscreen"
+            tools:layout="@layout/fragment_legalscreen">
+            <action
+                android:id="@+id/action_legalScreenFragment_to_loginFragment"
+                app:destination="@id/loginFragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/flujo_inicial"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/signInFragment"
+            android:name="com.ismaelgr.winkle.presentation.signin.SignInFragment"
+            android:label="fragment_signin"
+            tools:layout="@layout/fragment_signin">
+            <action
+                android:id="@+id/action_signInFragment_to_signIn2Fragment"
+                app:destination="@id/signIn2Fragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/signInFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+        <fragment
+            android:id="@+id/loginFragment"
+            android:name="com.ismaelgr.winkle.presentation.login.LoginFragment"
+            android:label="fragment_login"
+            tools:layout="@layout/fragment_login">
+            <action
+                android:id="@+id/action_loginFragment_to_signInFragment"
+                app:destination="@id/signInFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_flujo_principal"
+                app:destination="@id/flujo_principal"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/flujo_inicial"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_loginFragment_to_signIn2Fragment"
+                app:destination="@id/signIn2Fragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/splashFragment"
+            android:name="com.ismaelgr.winkle.presentation.splash.SplashFragment"
+            android:label="fragment_splash"
+            tools:layout="@layout/fragment_splash">
+            <action
+                android:id="@+id/action_splashFragment_to_loginFragment"
+                app:destination="@id/loginFragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/splashFragment"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_splashFragment_to_legalScreenFragment"
+                app:destination="@id/legalScreenFragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/splashFragment"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_splashFragment_to_flujo_rincipal"
+                app:destination="@id/flujo_principal"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/flujo_inicial"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_splashFragment_to_signIn2Fragment"
+                app:destination="@id/signIn2Fragment"
+                app:launchSingleTop="true"
+                app:popUpTo="@id/splashFragment"
+                app:popUpToInclusive="true" />
+        </fragment>
+    </navigation>
+</navigation>

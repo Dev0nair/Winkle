@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Winkle</string>
+    <string name="secondary_menu_home">Home</string>
+    <string name="secondary_menu_mi_tienda">My shop</string>
+    <string name="secondary_menu_cesta">Shopping list</string>
+    <string name="secondary_menu_perfil">Profile</string>
+    <string name="text_email">Email</string>
+    <string name="text_pass">Password</string>
+    <string name="err_email_empty">You cannot leave email field empty</string>
+    <string name="err_pass_empty">You cannot leave password field empty</string>
+    <string name="text_login">Log In</string>
+    <string name="text_signin">Sign in</string>
+    <string name="text_continue">Continue</string>
+    <string name="text_username">Username</string>
+    <string name="text_description">Description</string>
+    <string name="text_contact_phone">Contact phone</string>
+    <string name="text_contact_email">Contact email</string>
+    <string name="text_create_new_profile">Create\nNew\nProfile</string>
+    <string name="text_create_new_account">Create\nNew\nAccount</string>
+    <string name="text_new_email">New email</string>
+    <string name="text_new_pass">New password</string>
+    <string name="text_create_account">Create account</string>
+    <string name="text_create_profile">Create profile</string>
+    <string name="err_username_empty">You cannot leave username field empty</string>
+    <string name="text_exit_to_login">Back to login</string>
+    <string name="text_comprar">Buy</string>
+    <string name="text_view_profile">View profile</string>
+    <string name="text_contact_profile">Contact profile</string>
+    <string name="text_add_to_cart">Add to cart</string>
+    <string name="text_disable_product_next_sale">Disable product after next sale</string>
+    <string name="text_product_info">Product info</string>
+    <string name="text_count_product_shoplist">You already have %1$d in your shoplist</string>
+    <string name="text_reported">Reported</string>
+    <string name="text_report">Reportar</string>
+    <string name="text_title_report">Report reason</string>
+    <string name="text_send_report">Send report</string>
+    <string name="text_cancel">Abort</string>
+    <string name="text_favourite">%1$d/%2$d\nRate</string>
+</resources>
