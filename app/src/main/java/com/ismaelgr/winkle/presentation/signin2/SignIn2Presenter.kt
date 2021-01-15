@@ -8,7 +8,7 @@ import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class SignIn2Presenter(
     private val signin2: SignIn2Contract.View,
-    private val createProfileUseCase: CreateProfileUseCase
+    private val createProfileUseCase: CreateProfileUseCase,
 ) :
     BasePresenter<SignIn2Contract.View>(signin2), SignIn2Contract.Presenter {
 
@@ -21,6 +21,7 @@ class SignIn2Presenter(
         if (username.isNotEmpty()) {
             val perfil = Perfil(
                 id = "",
+                idAccount = FirebaseAuth.getInstance().uid.toString(),
                 email = "",
                 emailContacto = contactEmail,
                 descripcion = description,

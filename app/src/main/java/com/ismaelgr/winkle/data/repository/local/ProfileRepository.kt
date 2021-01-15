@@ -2,32 +2,36 @@ package com.ismaelgr.winkle.data.repository.local
 
 import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Single
 
-class ProfileRepository: ProfileRepositoryNeed {
+class ProfileRepository : ProfileRepositoryNeed {
 
     private val perfil = Perfil(
         id = "1",
+        idAccount = "1",
         username = "Ismael González",
         email = "correo_prueba@gmail.com",
         telefono = "654725348",
-        image = "",
+        image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeik6d5EHLTi89m_CKLXyShylk4L92YflpJQ&usqp=CAU",
         descripcion = "Una descripcion de ejemplo",
         emailContacto = "correo2_prueba@gmail.com"
     )
 
-    override fun hasProfile(idAccount: String, onSuccess: (Boolean) -> Unit, onError: (String) -> Unit) {
-        onSuccess(true)
-    }
+    private var withProfile = true
+
+    override fun hasProfile(idAccount: String): Single<Boolean> =
+        Single.just(withProfile)
 
     override fun getProfile(
-        idProfile: String,
-        onSuccess: (Perfil) -> Unit,
-        onError: (String) -> Unit
-    ) {
-        onSuccess(perfil)
-    }
+        idProfile: String
+    ): Maybe<Perfil> = Maybe.just(perfil)
 
-    override fun createProfile(perfil: Perfil, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        onSuccess()
-    }
+    override fun getProfileFromAcc(
+        idAccount: String
+    ): Maybe<Perfil> = Maybe.just(perfil)
+
+    override fun createProfile(perfil: Perfil): Completable =
+        Completable.complete()
 }

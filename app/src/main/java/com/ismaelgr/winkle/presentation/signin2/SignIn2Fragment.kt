@@ -7,6 +7,7 @@ import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
 import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.CreateProfileUseCase
+import com.ismaelgr.winkle.presentation.base.BaseContract
 import kotlinx.android.synthetic.main.fragment_signin2.*
 
 /**
@@ -15,6 +16,8 @@ import kotlinx.android.synthetic.main.fragment_signin2.*
 class SignIn2Fragment : BaseFragment(R.layout.fragment_signin2), SignIn2Contract.View {
 
     private lateinit var signin2Presenter: SignIn2Contract.Presenter
+
+    override fun bindPresenter(): BaseContract.Presenter = this.signin2Presenter
 
     override fun navigateBack() {
         findNavController().popBackStack()

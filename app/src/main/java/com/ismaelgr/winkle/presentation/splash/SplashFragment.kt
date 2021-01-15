@@ -10,6 +10,7 @@ import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
 import com.ismaelgr.winkle.domain.usecase.HasProfileUseCase
 import com.ismaelgr.winkle.domain.usecase.IsUserLoggedUseCase
 import com.ismaelgr.winkle.domain.usecase.LegalConfirmationUseCase
+import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 
 /**
@@ -18,6 +19,8 @@ import com.ismaelgr.winkle.presentation.base.BaseFragment
 class SplashFragment : BaseFragment(R.layout.fragment_splash), SplashContract.View {
 
     private lateinit var splashPresenter: SplashContract.Presenter
+
+    override fun bindPresenter(): BaseContract.Presenter = this.splashPresenter
 
     override fun initElements() {
         splashPresenter = SplashPresenter(

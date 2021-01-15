@@ -11,8 +11,11 @@ class CreateProfileUseCase(
 
     fun execute(perfil: Perfil, onSuccess: () -> Unit, onError: (String) -> Unit) {
         val account = accountRepositoryNeed.getAccount()
-        perfil.id = account.id
+        perfil.idAccount = account.id
         perfil.email = account.email
-        profileRepositoryNeed.createProfile(perfil, onSuccess, onError)
+        profileRepositoryNeed.createProfile(perfil)
+            .doOnComplete(onSuccess)
+            .doOnError { it.message.toString().run(onError) }
+            .subscribe()
     }
 }

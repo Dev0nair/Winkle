@@ -11,10 +11,9 @@ class HasProfileUseCase(
     fun execute(onLoad: (Boolean) -> Unit) {
         if (accountRepositoryFactory.isLogged()) {
             val myId = accountRepositoryFactory.getAccount().id
-            profileRepositoryFactory.hasProfile(
-                myId,
-                onSuccess = { onLoad(it) },
-                onError = { onLoad(false) })
+            profileRepositoryFactory.hasProfile(myId)
+                .doOnSuccess(onLoad)
+                .subscribe()
         } else {
             onLoad(false)
         }

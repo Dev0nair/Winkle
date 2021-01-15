@@ -46,15 +46,18 @@
             <action
                 android:id="@+id/action_myProductsFragment_to_newProductFragment"
                 app:destination="@id/newProductFragment" />
-            <action
-                android:id="@+id/action_myProductsFragment_to_productDetailsFragment"
-                app:destination="@id/productDetailsFragment" />
         </fragment>
         <fragment
             android:id="@+id/newProductFragment"
             android:name="com.ismaelgr.winkle.presentation.newproduct.NewProductFragment"
             android:label="fragment_newproduct"
-            tools:layout="@layout/fragment_newproduct" />
+            tools:layout="@layout/fragment_newproduct" >
+            <argument
+                android:name="producto"
+                app:argType="com.ismaelgr.winkle.data.entity.Producto"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </fragment>
         <fragment
             android:id="@+id/salesSummaryFragment"
             android:name="com.ismaelgr.winkle.presentation.salessummary.SalesSummaryFragment"
@@ -74,12 +77,23 @@
             android:id="@+id/productDetailsFragment"
             android:name="com.ismaelgr.winkle.presentation.productdetails.ProductDetailsFragment"
             android:label="fragment_productdetails"
-            tools:layout="@layout/fragment_productdetails" />
+            tools:layout="@layout/fragment_productdetails" >
+            <action
+                android:id="@+id/action_productDetailsFragment_to_infoProfileFragment"
+                app:destination="@id/infoProfileFragment" />
+        </fragment>
         <fragment
             android:id="@+id/homeFragment"
             android:name="com.ismaelgr.winkle.presentation.home.HomeFragment"
             android:label="@string/secondary_menu_home"
-            tools:layout="@layout/fragment_home" />
+            tools:layout="@layout/fragment_home" >
+            <action
+                android:id="@+id/action_homeFragment_to_productDetailsFragment"
+                app:destination="@id/productDetailsFragment" />
+            <action
+                android:id="@+id/action_homeFragment_to_newProductFragment"
+                app:destination="@id/newProductFragment" />
+        </fragment>
         <fragment
             android:id="@+id/shopListFragment"
             android:name="com.ismaelgr.winkle.presentation.shoplist.ShopListFragment"

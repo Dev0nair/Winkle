@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.domain.usecase.LegalConfirmationUseCase
+import com.ismaelgr.winkle.presentation.base.BaseContract
 import kotlinx.android.synthetic.main.fragment_legalscreen.*
 
 /**
@@ -24,4 +25,6 @@ class LegalScreenFragment : BaseFragment(R.layout.fragment_legalscreen), LegalSc
 
         legal_accept_btn.setOnClickListener { legalscreenPresenter.onAcceptButtonClick() }
     }
+
+    override fun bindPresenter(): BaseContract.Presenter = this.legalscreenPresenter
 }

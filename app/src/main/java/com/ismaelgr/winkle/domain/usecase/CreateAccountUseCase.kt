@@ -5,6 +5,9 @@ import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 class CreateAccountUseCase(private val accountRepository: AccountRepositoryNeed) {
 
     fun execute(email: String, pass: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
-        accountRepository.createAccount(email, pass, onSuccess, onError)
+        accountRepository.createAccount(email, pass)
+            .doOnComplete(onSuccess)
+            .doOnError { it.message.toString().run(onError) }
+            .subscribe()
     }
 }
