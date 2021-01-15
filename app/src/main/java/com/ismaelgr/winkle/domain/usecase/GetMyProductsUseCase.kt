@@ -4,9 +4,7 @@ import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
 import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 
 class GetMyProductsUseCase(
     private val accountRepositoryNeed: AccountRepositoryNeed,

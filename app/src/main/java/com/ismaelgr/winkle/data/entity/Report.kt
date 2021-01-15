@@ -1,7 +1,8 @@
 package com.ismaelgr.winkle.data.entity
 
 data class Report (
-    val id: String,
-    val vendedorId: String,
-    val productoId: String
+    var id: String,
+    val reportadorId: String,
+    val productoId: String,
+    val motivo: String
 )

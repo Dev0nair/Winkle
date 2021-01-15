@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="image_slider_height">250dp</dimen>
+    <dimen name="image_slider_dot_size">10dp</dimen>
+    <dimen name="image_slider_dot_marginEnd">10dp</dimen>
+</resources>

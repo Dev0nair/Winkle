@@ -9,11 +9,13 @@ import io.reactivex.rxjava3.core.Maybe
 
 class ProductRepository : ProductRepositoryNeed {
 
+    private var firestore: FirebaseFirestore? = null
+
     override fun getProductsOf(
         idProfile: String
     ): Maybe<List<Producto>> =
         FirebaseListener.makeOneTimeQueryListener(
-            query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
+            query = getFirestore().collection(Routes.PRODUCTOS)
                 .whereEqualTo("vendedorId", idProfile),
             classCast = Producto::class.java
         )
@@ -21,7 +23,13 @@ class ProductRepository : ProductRepositoryNeed {
 
     override fun getAllProducts(): Maybe<List<Producto>> =
         FirebaseListener.makeOneTimeQueryListener(
-            query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS),
+            query = getFirestore().collection(Routes.PRODUCTOS),
+            classCast = Producto::class.java
+        )
+
+    override fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>> =
+        FirebaseListener.makeOneTimeQueryListener(
+            query = getFirestore().collection(Routes.PRODUCTOS).whereNotEqualTo("vendedorId", idProfile),
             classCast = Producto::class.java
         )
 
@@ -31,7 +39,7 @@ class ProductRepository : ProductRepositoryNeed {
     ): Maybe<Producto> =
         Maybe.create { emitter ->
             FirebaseListener.makeOneTimeQueryListener(
-                query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
+                query = getFirestore().collection(Routes.PRODUCTOS)
                     .whereEqualTo("id", idProducto),
                 classCast = Producto::class.java
             )
@@ -43,12 +51,20 @@ class ProductRepository : ProductRepositoryNeed {
     override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> {
         return if(idProductos.isNotEmpty()){
             FirebaseListener.makeOneTimeQueryListener(
-                query = FirebaseFirestore.getInstance().collection(Routes.PRODUCTOS)
-                    .whereIn("vendedorId", idProductos),
+                query = getFirestore().collection(Routes.PRODUCTOS)
+                    .whereIn("id", idProductos),
                 classCast = Producto::class.java
             )
         } else {
             Maybe.just(emptyList())
         }
+    }
+
+    private fun getFirestore(): FirebaseFirestore {
+        if(firestore == null){
+            firestore = FirebaseFirestore.getInstance()
+        }
+
+        return firestore!!
     }
 }

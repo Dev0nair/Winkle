@@ -2,12 +2,14 @@ package com.ismaelgr.winkle.presentation.home
 
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.domain.usecase.GetAllProductsUseCase
+import com.ismaelgr.winkle.domain.usecase.GetAllProductsExceptMineUseCase
+import com.ismaelgr.winkle.domain.usecase.IsMyProductUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class HomePresenter(
     private val home: HomeContract.View,
-    private val getAllProductsUseCase: GetAllProductsUseCase
+    private val getAllProductsExceptMineUseCase: GetAllProductsExceptMineUseCase,
+    private val isMyProductUseCase: IsMyProductUseCase
 ) :
     BasePresenter<HomeContract.View>(home), HomeContract.Presenter {
 
@@ -15,9 +17,12 @@ class HomePresenter(
 
     override fun onInit() {
         showLoading(true)
-        getAllProductsUseCase.execute(
+        getAllProductsExceptMineUseCase.execute(
             onSuccess = { list ->
-                home.loadProducts(list)
+                home.run {
+                    loadProducts(list)
+                    refreshFilters(categorias)
+                }
                 showLoading(false)
             },
             onError = {
@@ -28,11 +33,18 @@ class HomePresenter(
     }
 
     override fun onProductClick(producto: Producto) {
-        home.navigateToProductDetail(producto)
+        isMyProductUseCase.execute(
+            producto.id,
+            onSuccess = { imOwner ->
+                if (imOwner) home.navigateToProductEdition(producto)
+                else home.navigateToProductDetail(producto)
+            },
+            ::showError
+        )
     }
 
     override fun onCategorySelected(categoria: Categorias) {
-        if(categorias.contains(categoria)){
+        if (categorias.contains(categoria)) {
             categorias.remove(categoria)
         } else {
             categorias.add(categoria)
@@ -60,6 +72,7 @@ class HomePresenter(
     }
 
     override fun onDestroy() {
-        getAllProductsUseCase.dispose()
+        getAllProductsExceptMineUseCase.dispose()
+        isMyProductUseCase.dispose()
     }
 }

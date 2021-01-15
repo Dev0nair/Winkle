@@ -1,9 +1,12 @@
 package com.ismaelgr.winkle.presentation.myproducts
 
+import androidx.core.view.children
+import com.google.android.material.chip.Chip
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.domain.usecase.GetMyProductsUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class MyProductsPresenter(
     private val myProds: MyProductsContract.View,
@@ -18,6 +21,7 @@ class MyProductsPresenter(
         getMyProductsUseCase.execute(
             onSuccess = { list ->
                 list.run(myProds::loadProducts)
+                myProds.refreshFilters(categorias)
                 showLoading(false)
             },
             onError = {
@@ -62,5 +66,4 @@ class MyProductsPresenter(
     override fun onDestroy() {
         getMyProductsUseCase.dispose()
     }
-
 }
