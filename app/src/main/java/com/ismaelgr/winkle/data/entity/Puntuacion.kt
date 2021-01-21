@@ -1,8 +1,8 @@
 package com.ismaelgr.winkle.data.entity
 
 data class Puntuacion (
-    val id: String,
+    var id: String? = "",
     val perfilId: String,
     val productoId: String,
-    val puntuacion: Int
+    val puntuacion: Float
 )

@@ -1,6 +1,8 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
+import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.data.entity.Producto
+import com.ismaelgr.winkle.data.entity.Puntuacion
 import com.ismaelgr.winkle.domain.usecase.*
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
@@ -11,7 +13,9 @@ class ProductDetailsPresenter(
     private val addProductToCestaUseCase: AddProductToCestaUseCase,
     private val hasReportedProductUseCase: HasReportedProductUseCase,
     private val getRateUseCase: GetRateUseCase,
-    private val reportUseCase: SendReportUseCase
+    private val reportUseCase: SendReportUseCase,
+    private val getActualProfileUseCase: GetActualProfileUseCase,
+    private val rateProductUseCase: RateProductUseCase
 ) :
     BasePresenter<ProductDetailsContract.View>(view), ProductDetailsContract.Presenter {
 
@@ -86,8 +90,18 @@ class ProductDetailsPresenter(
         }
     }
 
-    override fun onLikeClick() {
-        TODO("Not yet implemented")
+    override fun onRateClick(rating: Float) {
+        getProfile { perfil ->
+            val puntuacion = Puntuacion(perfilId = perfil.id, productoId = producto.id, puntuacion = rating)
+            rateProductUseCase.execute(puntuacion, onSuccess = ::refreshRating, onError = ::showError)
+        }
+    }
+
+    private fun getProfile(action: (Perfil) -> Unit){
+        getActualProfileUseCase.execute(
+            onSuccess = action,
+            onError = ::showError
+        )
     }
 
     override fun onViewProfileClick() {
@@ -115,5 +129,10 @@ class ProductDetailsPresenter(
 
     override fun onDestroy() {
         getProductOwnerUseCase.dispose()
+        getCountProductInCestaUseCase.dispose()
+        getRateUseCase.dispose()
+        addProductToCestaUseCase.dispose()
+        getProductOwnerUseCase.dispose()
+        hasReportedProductUseCase.dispose()
     }
 }

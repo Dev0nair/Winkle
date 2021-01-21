@@ -1,12 +1,13 @@
 package com.ismaelgr.winkle.data.repository.local
 
+import android.content.Context
 import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
-class ProfileRepository : ProfileRepositoryNeed {
+class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
     private val perfil = Perfil(
         id = "1",
@@ -30,7 +31,16 @@ class ProfileRepository : ProfileRepositoryNeed {
 
     override fun getProfileFromAcc(
         idAccount: String
-    ): Maybe<Perfil> = Maybe.just(perfil)
+    ): Maybe<Perfil> = Maybe.just(perfil).doAfterSuccess(::saveProfile)
+
+    override fun getSavedProfile(): Maybe<Perfil> = Maybe.just(perfil)
+
+    private fun saveProfile(perfil: Perfil){
+        context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
+            .edit()
+            .putString("profileID", perfil.id)
+            .apply()
+    }
 
     override fun createProfile(perfil: Perfil): Completable =
         Completable.complete()

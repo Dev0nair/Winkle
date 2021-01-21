@@ -12,6 +12,7 @@ import com.ismaelgr.winkle.presentation.profile.ProfileContract
 import com.ismaelgr.winkle.presentation.profile.ProfilePresenter
 import com.ismaelgr.winkle.presentation.shoplist.ShopListContract
 import com.ismaelgr.winkle.presentation.shoplist.ShopListPresenter
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val presenterModules = module {
@@ -32,7 +33,7 @@ val presenterModules = module {
     }
 
     factory { (view: ProductDetailsContract.View) ->
-        ProductDetailsPresenter(view, get(), get(), get(), get(), get(), get())
+        ProductDetailsPresenter(view, get(), get(), get(), get(), get(), get(), get(), get())
     }
 }
 
@@ -49,11 +50,13 @@ val useCaseModule = module {
     factory { HasReportedProductUseCase(get(), get(), get()) }
     factory { SendReportUseCase(get(), get(), get()) }
     factory { GetRateUseCase(get()) }
+    factory { RateProductUseCase(get()) }
+    factory { GetActualProfileUseCase(get(), get()) }
 }
 
 val repositoryModules = module {
     single { ProductsRepositoryFactory().getRepository() }
-    single { ProfileRepositoryFactory().getRepository() }
+    single { ProfileRepositoryFactory(androidContext()).getRepository() }
     single { CestaRepositoryFactory().getRepository() }
     single { AccountRepositoryFactory().getRepository() }
     single { ReportsRepositoryFactory().getRepository() }

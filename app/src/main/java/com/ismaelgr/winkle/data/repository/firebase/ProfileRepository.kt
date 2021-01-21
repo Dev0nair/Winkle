@@ -1,5 +1,6 @@
 package com.ismaelgr.winkle.data.repository.firebase
 
+import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
@@ -8,7 +9,7 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
-class ProfileRepository : ProfileRepositoryNeed {
+class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
     private var firestore: FirebaseFirestore? = null
 
@@ -42,11 +43,27 @@ class ProfileRepository : ProfileRepositoryNeed {
         getFirestore().collection(Routes.PERFILES)
             .whereEqualTo("id", idAccount)
             .get()
-            .addOnSuccessListener { it.toObjects(Perfil::class.java)[0].run(emitter::onSuccess) }
+            .addOnSuccessListener {
+                val perfil = it.toObjects(Perfil::class.java)[0]
+                emitter.onSuccess(perfil)
+                saveProfile(perfil)
+            }
             .addOnFailureListener {
                 it.run(emitter::onError)
             }
     }
+
+    private fun saveProfile(perfil: Perfil) {
+        context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
+            .edit()
+            .putString("profileID", perfil.id)
+            .apply()
+    }
+
+    override fun getSavedProfile(): Maybe<Perfil> = getProfile(
+        context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
+            .getString("profileID", "no-profile").toString()
+    )
 
     override fun createProfile(perfil: Perfil): Completable =
         Completable.create { emitter ->
@@ -59,7 +76,7 @@ class ProfileRepository : ProfileRepositoryNeed {
         }
 
     private fun getFirestore(): FirebaseFirestore {
-        if(firestore == null){
+        if (firestore == null) {
             firestore = FirebaseFirestore.getInstance()
         }
 

@@ -3,6 +3,7 @@ package com.ismaelgr.winkle.presentation.productdetails
 import android.content.res.ColorStateList
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.View
 import android.view.View.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -112,18 +113,14 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
 
     override fun setReported() {
         toolbar_report.run {
-            compoundDrawableTintList =
+            imageTintList =
                 ColorStateList.valueOf(requireContext().getColor(R.color.colorPrimary))
-            text = getText(R.string.text_reported)
             isEnabled = false
         }
     }
 
     override fun setNotReported() {
-        toolbar_report.run {
-            text = getString(R.string.text_report)
-            isEnabled = true
-        }
+        toolbar_report.isEnabled = true
     }
 
     override fun initElements() {
@@ -138,6 +135,8 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
         product_detail_back_screen.setOnClickListener { productdetailsPresenter.onBackScreenClick() }
 
         toolbar_report.setOnClickListener { productdetailsPresenter.onReportClick() }
+
+        product_detail_rating.setOnClickListener { productdetailsPresenter.onRateClick(product_detail_rating.rating) }
 
         product_detail_images.setOnImageClick { urlImage ->
             productdetailsPresenter.onDetailImageClick(urlImage)
