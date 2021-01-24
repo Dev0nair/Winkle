@@ -45,7 +45,7 @@ class SignIn2Fragment : BaseFragment(R.layout.fragment_signin2), SignIn2Contract
         signin2Presenter = SignIn2Presenter(
             this as SignIn2Contract.View,
             CreateProfileUseCase(
-                ProfileRepositoryFactory().getRepository(),
+                ProfileRepositoryFactory(requireContext()).getRepository(),
                 AccountRepositoryFactory().getRepository()
             )
         )

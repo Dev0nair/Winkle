@@ -3,34 +3,25 @@ package com.ismaelgr.winkle.presentation.login
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
-import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
-import com.ismaelgr.winkle.data.repository.local.AccountRepository
-import com.ismaelgr.winkle.domain.usecase.HasProfileUseCase
-import com.ismaelgr.winkle.domain.usecase.LoginUseCase
 import com.ismaelgr.winkle.presentation.base.BaseContract
+import com.ismaelgr.winkle.presentation.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_login.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class LoginFragment : BaseFragment(R.layout.fragment_login), LoginContract.View {
 
-    private lateinit var loginPresenter: LoginContract.Presenter
+    private val loginPresenter: LoginContract.Presenter by inject<LoginPresenter> {
+        parametersOf(
+            this as LoginContract.View
+        )
+    }
 
     override fun initElements() {
-        loginPresenter =
-            LoginPresenter(
-                this as LoginContract.View,
-                LoginUseCase(AccountRepositoryFactory().getRepository()),
-                HasProfileUseCase(
-                    AccountRepositoryFactory().getRepository(),
-                    ProfileRepositoryFactory().getRepository()
-                )
-            )
-
         edit_email.setOnFocusChangeListener(::onFocusListener)
         edit_pass.setOnFocusChangeListener(::onFocusListener)
 

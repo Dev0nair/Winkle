@@ -9,13 +9,13 @@ import io.reactivex.rxjava3.core.Maybe
 class RateRepository: RateRepositoryNeed {
 
     private val rates = arrayListOf(
-        Puntuacion("1", "1", "1", 5),
-        Puntuacion("2", "1", "1", 2),
-        Puntuacion("3", "2", "2", 4),
-        Puntuacion("4", "1", "2", 3),
-        Puntuacion("5", "1", "4", 5),
-        Puntuacion("6", "2", "4", 1),
-        Puntuacion("7", "1", "5", 4),
+        Puntuacion("1", "1", "1", 5f),
+        Puntuacion("2", "1", "1", 2f),
+        Puntuacion("3", "2", "2", 4f),
+        Puntuacion("4", "1", "2", 3f),
+        Puntuacion("5", "1", "4", 5f),
+        Puntuacion("6", "2", "4", 1f),
+        Puntuacion("7", "1", "5", 4f),
     )
 
     override fun getTotalRate() = Configuration.MAX_RATE

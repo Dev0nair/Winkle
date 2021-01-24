@@ -36,8 +36,10 @@ class RateRepository : RateRepositoryNeed {
 
     override fun rate(puntuacion: Puntuacion): Completable =
         Completable.create { emitter ->
-            getFirestore().collection(Routes.FAVORITOS)
-                .add(puntuacion)
+            val newPos = getFirestore().collection(Routes.FAVORITOS).document()
+            puntuacion.id = newPos.id
+
+            newPos.set(puntuacion)
                 .addOnSuccessListener { emitter.onComplete() }
                 .addOnFailureListener(emitter::onError)
         }

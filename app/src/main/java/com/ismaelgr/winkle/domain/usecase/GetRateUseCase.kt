@@ -10,7 +10,7 @@ class GetRateUseCase(private val rateRepositoryNeed: RateRepositoryNeed) {
     fun execute(idProduct: String, onSuccess: (Float) -> Unit, onError: (String) -> Unit) {
         rateRepositoryNeed.getRatesOf(idProduct)
             .subscribe(
-                { list -> onSuccess((list.sumOf { it.puntuacion } / list.size).toFloat()) },
+                { list -> onSuccess((list.sumOf { it.puntuacion.toDouble() } / list.size).toFloat()) },
                 { onError(it.message.toString()) },
                 { onSuccess(0f) })
     }

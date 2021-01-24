@@ -122,7 +122,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:paddingStart="4dp"
                 android:textColor="@android:color/black"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toTopOf="@id/product_detail_rating"
@@ -133,15 +132,15 @@
 
             <RatingBar
                 android:id="@+id/product_detail_rating"
+                style="@style/Widget.AppCompat.RatingBar.Indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/Widget.AppCompat.RatingBar.Indicator"
-                app:layout_constraintTop_toBottomOf="@id/product_detail_profile_name"
-                app:layout_constraintLeft_toLeftOf="@id/product_detail_profile_name"
-                app:layout_constraintRight_toRightOf="@id/product_detail_price"
                 app:layout_constraintBottom_toBottomOf="@id/product_detail_profile_image"
                 app:layout_constraintHorizontal_bias="0"
-                />
+                android:isIndicator="false"
+                app:layout_constraintLeft_toLeftOf="@id/product_detail_profile_name"
+                app:layout_constraintRight_toRightOf="@id/product_detail_price"
+                app:layout_constraintTop_toBottomOf="@id/product_detail_profile_name" />
 
             <Button
                 android:id="@+id/product_detail_add_to_shoplist"
@@ -150,12 +149,11 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_background"
                 android:text="@string/text_add_to_cart"
-                app:layout_goneMarginTop="203dp"
                 app:layout_constraintLeft_toLeftOf="@id/product_detail_description"
                 app:layout_constraintRight_toRightOf="@id/product_detail_price"
                 app:layout_constraintTop_toBottomOf="@id/product_detail_rating"
                 app:layout_constraintVertical_bias="0"
-                />
+                app:layout_goneMarginTop="203dp" />
 
             <TextView
                 android:id="@+id/product_detail_count_shoplist"
@@ -215,6 +213,5 @@
         app:layout_constraintWidth_percent="0.8"
         tools:src="@drawable/googleg_standard_color_18" />
 
-    
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,11 +31,11 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
     override fun getProfileFromAcc(
         idAccount: String
-    ): Maybe<Perfil> = Maybe.just(perfil).doAfterSuccess(::saveProfile)
+    ): Maybe<Perfil> = Maybe.just(perfil)
 
     override fun getSavedProfile(): Maybe<Perfil> = Maybe.just(perfil)
 
-    private fun saveProfile(perfil: Perfil){
+    override fun saveProfile(perfil: Perfil): Completable = Completable.fromAction {
         context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
             .edit()
             .putString("profileID", perfil.id)

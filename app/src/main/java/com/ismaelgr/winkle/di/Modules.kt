@@ -4,6 +4,8 @@ import com.ismaelgr.winkle.data.repository.factory.*
 import com.ismaelgr.winkle.domain.usecase.*
 import com.ismaelgr.winkle.presentation.home.HomeContract
 import com.ismaelgr.winkle.presentation.home.HomePresenter
+import com.ismaelgr.winkle.presentation.login.LoginContract
+import com.ismaelgr.winkle.presentation.login.LoginPresenter
 import com.ismaelgr.winkle.presentation.myproducts.MyProductsContract
 import com.ismaelgr.winkle.presentation.myproducts.MyProductsPresenter
 import com.ismaelgr.winkle.presentation.productdetails.ProductDetailsContract
@@ -16,12 +18,17 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val presenterModules = module {
+
+    factory { (view: LoginContract.View) ->
+        LoginPresenter(view, get(), get(), get())
+    }
+
     factory { (view: HomeContract.View) ->
         HomePresenter(view, get(), get())
     }
 
     factory { (view: MyProductsContract.View) ->
-        MyProductsPresenter(view, GetMyProductsUseCase(get(), get(), get()))
+        MyProductsPresenter(view, get())
     }
 
     factory { (view: ShopListContract.View) ->

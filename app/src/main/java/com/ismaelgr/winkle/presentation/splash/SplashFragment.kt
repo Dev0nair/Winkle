@@ -29,7 +29,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash), SplashContract.Vi
             IsUserLoggedUseCase(AccountRepositoryFactory().getRepository()),
             HasProfileUseCase(
                 AccountRepositoryFactory().getRepository(),
-                ProfileRepositoryFactory().getRepository()
+                ProfileRepositoryFactory(requireContext()).getRepository()
             )
         )
 

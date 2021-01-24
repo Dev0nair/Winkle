@@ -4,6 +4,7 @@ import android.content.Context
 import com.google.firebase.firestore.FirebaseFirestore
 import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
+import com.ismaelgr.winkle.util.FirebaseListener
 import com.ismaelgr.winkle.util.Routes
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
@@ -15,15 +16,14 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
     override fun hasProfile(
         idAccount: String
-    ): Single<Boolean> = Single.create { emitter ->
-        getFirestore().collection(Routes.PERFILES)
-            .whereEqualTo("id", idAccount)
-            .get()
-            .addOnSuccessListener { (!it.isEmpty).run(emitter::onSuccess) }
-            .addOnFailureListener {
-                false.run(emitter::onSuccess)
-                it.run(emitter::onError)
-            }
+    ): Single<Boolean> = Single.create { maybe ->
+        FirebaseListener.makeOneTimeQueryListener(
+            query = getFirestore().collection(Routes.PERFILES).whereEqualTo("id", idAccount),
+            classCast = Perfil::class.java
+        )
+            .doOnSuccess { list -> maybe.onSuccess(list.isNotEmpty()) }
+            .doOnError(maybe::onError)
+            .doOnComplete { maybe.onSuccess(false) }
     }
 
     override fun getProfile(
@@ -46,14 +46,13 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
             .addOnSuccessListener {
                 val perfil = it.toObjects(Perfil::class.java)[0]
                 emitter.onSuccess(perfil)
-                saveProfile(perfil)
             }
             .addOnFailureListener {
                 it.run(emitter::onError)
             }
     }
 
-    private fun saveProfile(perfil: Perfil) {
+    override fun saveProfile(perfil: Perfil): Completable = Completable.fromAction {
         context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
             .edit()
             .putString("profileID", perfil.id)
