@@ -137,14 +137,6 @@ class ProductDetailsFragment : BaseFragment(R.layout.fragment_productdetails),
 
         toolbar_report.setOnClickListener { productdetailsPresenter.onReportClick() }
 
-        product_detail_rating.setOnClickListener {
-            productdetailsPresenter.onRateClick(product_detail_rating.rating)
-        }
-
-        product_detail_rating.onRatingBarChangeListener = RatingBar.OnRatingBarChangeListener { ratingBar, fl, b ->
-            productdetailsPresenter.onRateClick(fl)
-        }
-
         product_detail_images.setOnImageClick { urlImage ->
             productdetailsPresenter.onDetailImageClick(urlImage)
         }

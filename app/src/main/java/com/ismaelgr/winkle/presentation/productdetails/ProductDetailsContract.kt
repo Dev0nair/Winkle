@@ -27,7 +27,6 @@ interface ProductDetailsContract {
         fun onInit(producto: Producto)
         fun onAddToShopListClick()
         fun onReportClick()
-        fun onRateClick(rating: Float)
         fun onViewProfileClick()
         fun onDetailImageClick(url: String)
         fun onBackScreenClick()

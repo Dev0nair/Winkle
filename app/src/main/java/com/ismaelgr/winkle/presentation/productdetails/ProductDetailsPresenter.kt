@@ -14,8 +14,7 @@ class ProductDetailsPresenter(
     private val hasReportedProductUseCase: HasReportedProductUseCase,
     private val getRateUseCase: GetRateUseCase,
     private val reportUseCase: SendReportUseCase,
-    private val getActualProfileUseCase: GetActualProfileUseCase,
-    private val rateProductUseCase: RateProductUseCase
+    private val getActualProfileUseCase: GetActualProfileUseCase
 ) :
     BasePresenter<ProductDetailsContract.View>(view), ProductDetailsContract.Presenter {
 
@@ -37,7 +36,7 @@ class ProductDetailsPresenter(
     }
 
     private fun refreshRating() {
-        getRateUseCase.execute(producto.id, { view.setPuntuation(it) }, ::showError)
+        getRateUseCase.execute(producto.vendedorId, { view.setPuntuation(it) }, ::showError)
     }
 
     private fun refreshReported() {
@@ -87,13 +86,6 @@ class ProductDetailsPresenter(
         view.run {
             enableReportButton(false)
             writeReasonReport()
-        }
-    }
-
-    override fun onRateClick(rating: Float) {
-        getProfile { perfil ->
-            val puntuacion = Puntuacion(perfilId = perfil.id, productoId = producto.id, puntuacion = rating)
-            rateProductUseCase.execute(puntuacion, onSuccess = ::refreshRating, onError = ::showError)
         }
     }
 

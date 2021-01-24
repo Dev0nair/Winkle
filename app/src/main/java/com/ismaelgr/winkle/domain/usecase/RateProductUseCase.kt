@@ -9,7 +9,7 @@ class RateProductUseCase(private val rateRepositoryNeed: RateRepositoryNeed) {
     private var disposable: Disposable? = null
 
     fun execute(puntuacion: Puntuacion, onSuccess: () -> Unit, onError: (String) -> Unit){
-        disposable = rateRepositoryNeed.rate(puntuacion)
+        disposable = rateRepositoryNeed.addRating(puntuacion)
             .subscribe(
                 onSuccess,
                 {onError(it.message.toString())}

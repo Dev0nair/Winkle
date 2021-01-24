@@ -40,7 +40,7 @@ val presenterModules = module {
     }
 
     factory { (view: ProductDetailsContract.View) ->
-        ProductDetailsPresenter(view, get(), get(), get(), get(), get(), get(), get(), get())
+        ProductDetailsPresenter(view, get(), get(), get(), get(), get(), get(), get())
     }
 }
 

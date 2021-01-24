@@ -6,6 +6,6 @@ import io.reactivex.rxjava3.core.Maybe
 
 interface RateRepositoryNeed {
     fun getTotalRate(): Int
-    fun getRatesOf(idProduct: String): Maybe<List<Puntuacion>>
-    fun rate(puntuacion: Puntuacion): Completable
+    fun getRatesOf(idProfile: String): Maybe<List<Puntuacion>>
+    fun addRating(puntuacion: Puntuacion): Completable
 }

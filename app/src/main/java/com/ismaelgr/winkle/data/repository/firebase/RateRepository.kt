@@ -15,11 +15,11 @@ class RateRepository : RateRepositoryNeed {
 
     override fun getTotalRate(): Int = Configuration.MAX_RATE
 
-    override fun getRatesOf(idProduct: String): Maybe<List<Puntuacion>> =
+    override fun getRatesOf(idProfile: String): Maybe<List<Puntuacion>> =
         Maybe.create { emitter ->
             FirebaseListener.makeOneTimeQueryListener(
                 query = getFirestore().collection(Routes.FAVORITOS)
-                    .whereEqualTo("productoId", idProduct),
+                    .whereEqualTo("vendedorId", idProfile),
                 Puntuacion::class.java
             ).subscribe(
                 { list ->
@@ -34,7 +34,7 @@ class RateRepository : RateRepositoryNeed {
             )
         }
 
-    override fun rate(puntuacion: Puntuacion): Completable =
+    override fun addRating(puntuacion: Puntuacion): Completable =
         Completable.create { emitter ->
             val newPos = getFirestore().collection(Routes.FAVORITOS).document()
             puntuacion.id = newPos.id
