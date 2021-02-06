@@ -1,15 +1,10 @@
 package com.ismaelgr.winkle.presentation.productdetails
 
 import android.content.res.ColorStateList
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.View
 import android.view.View.*
-import android.widget.RatingBar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.presentation.base.BaseContract
