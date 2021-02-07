@@ -5,14 +5,19 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Producto (
-    val id: String,
-    val nombre: String,
-    val descripcion: String,
-    val mainImage: String,
-    val images: List<String>,
-    val precio: Float,
-    val vendedorId: String,
-    val activo: Boolean,
-    val etiquetas: List<String>,
-    val categorias: Int
-): Parcelable
+    var id: String,
+    var nombre: String,
+    var descripcion: String,
+    var mainImage: String,
+    var images: List<String>,
+    var precio: Float,
+    var vendedorId: String,
+    var activo: Boolean,
+    var etiquetas: List<String>,
+    var categoria: Int,
+    var disableNextBuy: Boolean = false
+): Parcelable {
+    constructor() : this("","","","", emptyList(),0f, "", false, emptyList(), -1) {
+
+    }
+}

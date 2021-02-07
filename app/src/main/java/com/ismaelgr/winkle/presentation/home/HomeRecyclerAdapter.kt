@@ -56,7 +56,7 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
     private fun filterCategories() {
         if (filterCategorias.isNotEmpty()) {
             val filtered =
-                listProducts.filter { producto -> filterCategorias.contains(Mapper.map(producto.categorias)) }
+                listProducts.filter { producto -> filterCategorias.contains(Mapper.map(producto.categoria)) }
                     .toTypedArray().clone()
             listProducts.run {
                 clear()
