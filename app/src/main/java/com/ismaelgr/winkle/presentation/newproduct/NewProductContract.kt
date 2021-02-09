@@ -12,6 +12,7 @@ interface NewProductContract {
         fun loadDescription(description: String)
         fun loadDescriptionImage(url: String)
         fun loadDisabledOnNextBuy(disableNextBuy: Boolean)
+        fun loadPrice(float: Float)
         fun enableSaveCreateButton()
         fun loadCategories(categorias: List<Categorias>)
         fun loadCategoria(categoria: Categorias)

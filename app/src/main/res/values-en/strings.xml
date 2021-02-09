@@ -37,4 +37,14 @@
     <string name="text_send_report">Send report</string>
     <string name="text_cancel">Abort</string>
     <string name="text_favourite">%1$d/%2$d\nRate</string>
+    <string name="text_especial">Special</string>
+    <string name="text_accesorios">Accessories</string>
+    <string name="text_tecnologia">Technology</string>
+    <string name="text_servicio">Service</string>
+    <string name="text_estudios">Studies</string>
+    <string name="text_juegos">Games</string>
+    <string name="text_ropamujer">Women Clothes</string>
+    <string name="text_ropahombre">Men Clothes</string>
+    <string name="text_hogar">Home</string>
+    <string name="text_otros">Others</string>
 </resources>

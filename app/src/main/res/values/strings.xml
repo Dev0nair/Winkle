@@ -39,4 +39,14 @@
     <string name="text_send_report">Enviar reporte</string>
     <string name="text_cancel">Cancelar</string>
     <string name="text_favourite">%1$d/%2$d\nPuntuar</string>
+    <string name="text_especial">Especial</string>
+    <string name="text_accesorios">Accesorios</string>
+    <string name="text_tecnologia">Tecnología</string>
+    <string name="text_servicio">Servicio</string>
+    <string name="text_estudios">Estudios</string>
+    <string name="text_juegos">Juegos</string>
+    <string name="text_ropamujer">Ropa mujer</string>
+    <string name="text_ropahombre">Ropa Hombre</string>
+    <string name="text_hogar">Hogar</string>
+    <string name="text_otros">Otros</string>
 </resources>

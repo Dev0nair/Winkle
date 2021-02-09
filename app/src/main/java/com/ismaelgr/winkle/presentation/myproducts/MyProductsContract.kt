@@ -12,7 +12,7 @@ interface MyProductsContract {
         fun filterCategories(list: List<Categorias>)
         fun filterNameDesc(string: String)
         fun refreshFilters(list: List<Categorias>)
-        fun navigateToProductDetail(producto: Producto)
+        fun navigateToProductDetail(producto: Producto?)
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -20,5 +20,6 @@ interface MyProductsContract {
         fun onProductClick(producto: Producto)
         fun onCategorySelected(categoria: Categorias)
         fun onSearch(search: String)
+        fun onAddProductClick()
     }
 }

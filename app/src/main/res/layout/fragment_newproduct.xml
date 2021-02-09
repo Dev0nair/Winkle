@@ -6,6 +6,190 @@
     android:layout_height="match_parent"
     tools:context=".presentation.newproduct.NewProductFragment">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="65dp"
+            android:paddingBottom="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/new_big_image_iv"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_marginStart="20dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/back_only_border"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_product_name_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:hint="Insertar nombre"
+                app:layout_constraintBottom_toTopOf="@id/new_price_et"
+                app:layout_constraintLeft_toRightOf="@id/new_big_image_iv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/new_big_image_iv"
+                app:layout_constraintVertical_bias="0" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_price_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:hint="Insertar precio"
+                app:layout_constraintBottom_toBottomOf="@id/new_big_image_iv"
+                app:layout_constraintLeft_toRightOf="@id/new_big_image_iv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_product_name_et"
+                app:layout_constraintVertical_bias="1" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_description_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:gravity="top|start"
+                android:hint="Insertar descripcion"
+                android:maxLines="15"
+                android:minLines="5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_big_image_iv"
+                app:layout_constraintVertical_bias="0" />
+
+
+            <TextView
+                android:id="@+id/add_multiple_photos_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Insertar imagenes"
+                android:textSize="17.5sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_description_et"
+                app:layout_constraintVertical_bias="0" />
+
+            <ImageView
+                android:id="@+id/new_description_image_iv"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/back_only_border"
+                android:src="@drawable/ic_add"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_multiple_photos_title_tv"
+                app:layout_constraintVertical_bias="0"
+                app:tint="@android:color/black" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/new_description_images_rv"
+                android:layout_width="0dp"
+                android:layout_height="85dp"
+                android:layout_marginHorizontal="10dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@id/new_description_image_iv"
+                app:layout_constraintLeft_toRightOf="@id/new_description_image_iv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/new_description_image_iv"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/new_categorias_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:text="Categorias"
+                android:textSize="17.5sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_description_images_rv"
+                app:layout_constraintVertical_bias="0" />
+
+            <Spinner
+                android:id="@+id/new_categorias_sp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_categorias_title_tv"
+                app:layout_constraintVertical_bias="0" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_etiquetas_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="Etiquetas (separados por coma)"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_categorias_sp"
+                app:layout_constraintVertical_bias="0" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/new_disable_on_buy_cb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Desactivar producto tras siguiente compra"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_etiquetas_et" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/new_update_create_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_background"
+                android:enabled="false"
+                android:text="Registrar producto"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/new_disable_on_buy_cb"
+                app:layout_constraintVertical_bias="0"
+                tools:enabled="true" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
@@ -13,137 +197,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/new_big_image_iv"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="20dp"
-        android:background="@drawable/back_only_border"
-        android:padding="15dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0"
-        app:tint="@android:color/black" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/new_product_name_et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:hint="Insertar nombre"
-        app:layout_constraintBottom_toTopOf="@id/new_price_et"
-        app:layout_constraintLeft_toRightOf="@id/new_big_image_iv"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/new_big_image_iv"
-        app:layout_constraintVertical_bias="0" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/new_price_et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:hint="Insertar precio"
-        app:layout_constraintBottom_toBottomOf="@id/new_big_image_iv"
-        app:layout_constraintLeft_toRightOf="@id/new_big_image_iv"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/new_product_name_et"
-        app:layout_constraintVertical_bias="1" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/new_description_et"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:gravity="top|start"
-        android:hint="Insertar descripcion"
-        android:minLines="5"
-        android:maxLines="15"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/new_big_image_iv"
-        app:layout_constraintVertical_bias="0" />
-
-
-    <TextView
-        android:id="@+id/add_multiple_photos_title_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Insertar imagenes"
-        android:textSize="17.5sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/new_description_et"
-        app:layout_constraintVertical_bias="0" />
-
-    <ImageView
-        android:id="@+id/new_description_image_iv"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/back_only_border"
-        android:padding="15dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_multiple_photos_title_tv"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintHorizontal_bias="0"
-        app:tint="@android:color/black" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/new_description_images_rv"
-        android:layout_width="0dp"
-        android:layout_height="85dp"
-        app:layout_constraintLeft_toRightOf="@id/new_description_image_iv"
-        app:layout_constraintTop_toTopOf="@id/new_description_image_iv"
-        app:layout_constraintBottom_toBottomOf="@id/new_description_image_iv"
-        android:layout_marginHorizontal="10dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="invisible"
-        tools:visibility="visible"
-        />
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/new_disable_on_buy_cb"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Desactivar producto tras siguiente compra"
-        app:layout_constraintTop_toBottomOf="@id/new_description_images_rv"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="20dp"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/new_update_create_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background"
-        app:layout_constraintTop_toBottomOf="@id/new_disable_on_buy_cb"
-        android:layout_marginTop="10dp"
-        android:text="Registrar producto"
-        android:textAllCaps="false"
-        android:textColor="@android:color/white"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="20dp"
-        app:layout_constraintVertical_bias="0"
-        android:enabled="false"
-        tools:enabled="true"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

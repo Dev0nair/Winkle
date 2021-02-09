@@ -70,6 +70,8 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
             }
         })
 
+        myProducts_add_product_btn.setOnClickListener { myproductsPresenter.onAddProductClick() }
+
         myproductsPresenter.onInit()
     }
 
@@ -109,7 +111,7 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
         filterCategories(list)
     }
 
-    override fun navigateToProductDetail(producto: Producto) {
+    override fun navigateToProductDetail(producto: Producto?) {
         findNavController().navigate(
             R.id.action_myProductsFragment_to_newProductFragment,
             bundleOf("producto" to producto)

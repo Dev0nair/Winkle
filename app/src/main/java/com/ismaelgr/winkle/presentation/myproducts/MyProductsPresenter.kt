@@ -1,7 +1,5 @@
 package com.ismaelgr.winkle.presentation.myproducts
 
-import androidx.core.view.children
-import com.google.android.material.chip.Chip
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.domain.usecase.GetMyProductsUseCase
@@ -61,6 +59,10 @@ class MyProductsPresenter(
             filterTags(realTags) // si hay un 'Texto ejemplo "hola" nosek', será [Texto ejemplo, hola, nosek]. de esta forma, solo cogemos hola
             filterNameDesc(nameDesc)
         }
+    }
+
+    override fun onAddProductClick() {
+        myProds.navigateToProductDetail(null)
     }
 
     override fun onDestroy() {

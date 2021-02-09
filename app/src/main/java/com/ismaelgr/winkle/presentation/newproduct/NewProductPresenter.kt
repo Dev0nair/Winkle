@@ -11,17 +11,20 @@ class NewProductPresenter(private val view: NewProductContract.View) :
     private lateinit var productoEdition: Producto
 
     override fun onInit(producto: Producto?) {
+        view.loadCategories(Categorias.values().toList())
         if(producto != null) {
             productoEdition = producto
             loadDataFromProduct()
         } else {
             productoEdition = Producto()
+            selectDefaultValueCategory()
         }
 
-        view.run {
-            loadCategories(Categorias.values().toList())
-            enableSaveCreateButton()
-        }
+        view.enableSaveCreateButton()
+    }
+
+    private fun selectDefaultValueCategory() {
+        view.loadCategoria(Categorias.OTROS)
     }
 
     private fun loadDataFromProduct() {
@@ -29,6 +32,7 @@ class NewProductPresenter(private val view: NewProductContract.View) :
             loadBigImage(productoEdition.mainImage)
             loadName(productoEdition.nombre)
             loadDescription(productoEdition.descripcion)
+            loadPrice(productoEdition.precio)
             productoEdition.images.forEach { image ->
                 loadDescriptionImage(image)
             }

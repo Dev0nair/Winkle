@@ -9,5 +9,6 @@ enum class Categorias {
     SERVICIO,
     HOGAR,
     JUEGOS,
-    ACCESORIOS
+    ACCESORIOS,
+    OTROS
 }
