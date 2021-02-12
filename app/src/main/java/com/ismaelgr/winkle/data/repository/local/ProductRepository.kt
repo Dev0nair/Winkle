@@ -3,11 +3,12 @@ package com.ismaelgr.winkle.data.repository.local
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 
 class ProductRepository : ProductRepositoryNeed {
 
-    private val products = listOf(
+    private val products = arrayListOf(
         Producto(
             "1",
             "Portatil MSI i7 16RAM RTX 2070",
@@ -161,7 +162,8 @@ class ProductRepository : ProductRepositoryNeed {
 
     override fun getAllProducts(): Maybe<List<Producto>> = Maybe.just(products)
 
-    override fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>> = Maybe.just(products.filter { it.vendedorId != idProfile })
+    override fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>> =
+        Maybe.just(products.filter { it.vendedorId != idProfile })
 
     override fun getProductInfo(
         idProducto: String
@@ -175,17 +177,31 @@ class ProductRepository : ProductRepositoryNeed {
         }
     }
 
-    override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> = Maybe.create { emitter ->
-        val productos = arrayListOf<Producto>()
+    override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> =
+        Maybe.create { emitter ->
+            val productos = arrayListOf<Producto>()
 
-        idProductos.forEach { id ->
-            productos.add(this.products.filter { it.id == id }[0])
+            idProductos.forEach { id ->
+                productos.add(this.products.filter { it.id == id }[0])
+            }
+
+            if (productos.isNotEmpty()) {
+                emitter.onSuccess(productos)
+            } else {
+                emitter.onError(Error("There is no product with id $idProductos"))
+            }
         }
 
-        if (productos.isNotEmpty()) {
-            emitter.onSuccess(productos)
-        } else {
-            emitter.onError(Error("There is no product with id $idProductos"))
+    override fun saveProduct(vararg producto: Producto): Completable =
+        Completable.fromAction {
+            products.run {
+                removeAll { it.id in producto.map { p -> p.id } }
+                addAll(producto)
+            }
         }
-    }
+
+    override fun createProduct(vararg producto: Producto): Completable =
+        Completable.fromAction {
+            products.addAll(producto)
+        }
 }

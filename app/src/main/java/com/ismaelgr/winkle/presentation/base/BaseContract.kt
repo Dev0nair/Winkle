@@ -1,6 +1,5 @@
 package com.ismaelgr.winkle.presentation.base
 
-import android.view.View
 import androidx.annotation.AnimRes
 import androidx.annotation.StringRes
 
@@ -9,6 +8,7 @@ interface BaseContract {
     interface View {
         fun initElements()
         fun showError(error: String)
+        fun showMsg(msg: String)
         fun getMyString(@StringRes stringId: Int): String
         fun showLoading()
         fun hideLoading()
@@ -24,6 +24,7 @@ interface BaseContract {
     interface Presenter {
         fun showLoading(show: Boolean)
         fun showError(error: String)
+        fun showMsg(msg: String)
         fun onDestroy()
     }
 }

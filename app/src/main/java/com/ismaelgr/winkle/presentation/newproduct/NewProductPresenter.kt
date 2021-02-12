@@ -2,17 +2,26 @@ package com.ismaelgr.winkle.presentation.newproduct
 
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
+import com.ismaelgr.winkle.domain.usecase.CreateProductUseCase
+import com.ismaelgr.winkle.domain.usecase.GetActualProfileUseCase
+import com.ismaelgr.winkle.domain.usecase.SaveProductUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 import com.ismaelgr.winkle.util.Mapper
 
-class NewProductPresenter(private val view: NewProductContract.View) :
+class NewProductPresenter(
+    private val view: NewProductContract.View,
+    private val getActualProfileUseCase: GetActualProfileUseCase,
+    private val saveProductUseCase: SaveProductUseCase,
+    private val createProductUseCase: CreateProductUseCase
+) :
     BasePresenter<NewProductContract.View>(view), NewProductContract.Presenter {
 
     private lateinit var productoEdition: Producto
+    private var newProduct: Boolean = true
 
     override fun onInit(producto: Producto?) {
         view.loadCategories(Categorias.values().toList())
-        if(producto != null) {
+        if (producto != null) {
             productoEdition = producto
             loadDataFromProduct()
         } else {
@@ -20,7 +29,10 @@ class NewProductPresenter(private val view: NewProductContract.View) :
             selectDefaultValueCategory()
         }
 
-        view.enableSaveCreateButton()
+        view.run {
+            enableSaveCreateButton()
+            setChangeListeners()
+        }
     }
 
     private fun selectDefaultValueCategory() {
@@ -28,6 +40,7 @@ class NewProductPresenter(private val view: NewProductContract.View) :
     }
 
     private fun loadDataFromProduct() {
+        newProduct = false
         view.run {
             loadBigImage(productoEdition.mainImage)
             loadName(productoEdition.nombre)
@@ -63,7 +76,43 @@ class NewProductPresenter(private val view: NewProductContract.View) :
     }
 
     override fun onSaveClick() {
-        TODO("Not yet implemented")
+        if (newProduct) {
+            getActualProfileUseCase.execute({
+                productoEdition.vendedorId = it.id
+
+                createProductUseCase.execute(
+                    productoEdition,
+                    onSuccess = this::onFinishSaveOrCreate,
+                    onError = this::showError
+                )
+            }, ::showError)
+        } else {
+            saveProductUseCase.execute(
+                productoEdition,
+                onComplete = this::onFinishSaveOrCreate,
+                onError = this::showError
+            )
+        }
+    }
+
+    override fun onNewPriceInserted(price: String) {
+        price.toFloatOrNull()?.let { p -> productoEdition.precio = p }
+    }
+
+    override fun onCategoryChanged(position: Int) {
+        productoEdition.categoria = position
+    }
+
+    override fun onNewEtiquetasInserted(categorias: List<String>) {
+        productoEdition.etiquetas = categorias
+    }
+
+    private fun onFinishSaveOrCreate() {
+        if (newProduct) {
+            showMsg("Se ha creado correctamente!")
+        } else {
+            showMsg("Se ha guardado correctamente!")
+        }
     }
 
 }

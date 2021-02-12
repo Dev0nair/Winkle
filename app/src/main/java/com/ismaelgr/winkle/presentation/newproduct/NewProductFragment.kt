@@ -2,7 +2,10 @@ package com.ismaelgr.winkle.presentation.newproduct
 
 import android.text.Editable
 import android.text.TextUtils
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
@@ -10,17 +13,20 @@ import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.di.presenterModules
 import com.ismaelgr.winkle.presentation.base.BaseContract
+import com.ismaelgr.winkle.presentation.home.HomePresenter
 import com.ismaelgr.winkle.util.GlideLoader
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_newproduct.*
 import kotlinx.coroutines.joinAll
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class NewProductFragment : BaseFragment(R.layout.fragment_newproduct), NewProductContract.View {
 
-    private lateinit var newproductPresenter: NewProductContract.Presenter
+    private val newproductPresenter: NewProductContract.Presenter by inject<NewProductPresenter> { parametersOf(this) }
     private lateinit var categoriesAdapter: ArrayAdapter<String>
 
     override fun loadBigImage(url: String) {
@@ -72,13 +78,33 @@ class NewProductFragment : BaseFragment(R.layout.fragment_newproduct), NewProduc
         new_etiquetas_et.text = Editable.Factory.getInstance().newEditable(etiquetasFormated)
     }
 
+    override fun setChangeListeners() {
+        new_product_name_et.doOnTextChanged { text, start, before, count -> newproductPresenter.onNewNameInserted(new_product_name_et.text.toString()) }
+        new_price_et.doOnTextChanged { text, start, before, count -> newproductPresenter.onNewPriceInserted(new_price_et.text.toString()) }
+        new_description_et.doOnTextChanged { text, start, before, count -> newproductPresenter.onNewDescriptionInserted(new_description_et.text.toString()) }
+        new_categorias_sp.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                newproductPresenter.onCategoryChanged(position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                newproductPresenter.onCategoryChanged(Categorias.OTROS.ordinal)
+            }
+
+        }
+        new_etiquetas_et.doOnTextChanged { text, start, before, count -> newproductPresenter.onNewEtiquetasInserted(new_etiquetas_et.text.toString().split(",")) }
+
+        new_update_create_btn.setOnClickListener { newproductPresenter.onSaveClick() }
+    }
+
     override fun initElements() {
-        newproductPresenter = NewProductPresenter(this as NewProductContract.View)
-
         var producto: Producto? = null
-
         arguments?.get("producto")?.let { producto = it as Producto }
-
         newproductPresenter.onInit(producto)
     }
 

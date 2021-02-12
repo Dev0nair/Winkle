@@ -17,6 +17,7 @@ interface NewProductContract {
         fun loadCategories(categorias: List<Categorias>)
         fun loadCategoria(categoria: Categorias)
         fun loadEtiquetas(etiquetas: List<String>)
+        fun setChangeListeners()
     }
 
     interface Presenter : BaseContract.Presenter {
@@ -27,5 +28,8 @@ interface NewProductContract {
         fun onAddDescriptionImageClick()
         fun onDisabledOnNextBuyClik()
         fun onSaveClick()
+        fun onNewPriceInserted(price: String)
+        fun onCategoryChanged(position: Int)
+        fun onNewEtiquetasInserted(split: List<String>)
     }
 }

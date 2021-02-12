@@ -8,6 +8,8 @@ import com.ismaelgr.winkle.presentation.login.LoginContract
 import com.ismaelgr.winkle.presentation.login.LoginPresenter
 import com.ismaelgr.winkle.presentation.myproducts.MyProductsContract
 import com.ismaelgr.winkle.presentation.myproducts.MyProductsPresenter
+import com.ismaelgr.winkle.presentation.newproduct.NewProductContract
+import com.ismaelgr.winkle.presentation.newproduct.NewProductPresenter
 import com.ismaelgr.winkle.presentation.productdetails.ProductDetailsContract
 import com.ismaelgr.winkle.presentation.productdetails.ProductDetailsPresenter
 import com.ismaelgr.winkle.presentation.profile.ProfileContract
@@ -42,10 +44,14 @@ val presenterModules = module {
     factory { (view: ProductDetailsContract.View) ->
         ProductDetailsPresenter(view, get(), get(), get(), get(), get(), get(), get())
     }
+
+    factory { (view: NewProductContract.View) ->
+        NewProductPresenter(view, get(), get(), get())
+    }
 }
 
 val useCaseModule = module {
-    factory { GetAllProductsExceptMineUseCase(get(), get(), get()) }
+    factory { GetAllProductsExceptMineUseCase(get(), get()) }
     factory { GetProductosMiCesta(get(), get()) }
     factory { GetMyProductsUseCase(get(), get(), get()) }
     factory { GetMyCestaUseCase(get(), get(), get()) }
@@ -59,6 +65,8 @@ val useCaseModule = module {
     factory { GetRateUseCase(get()) }
     factory { RateProductUseCase(get()) }
     factory { GetActualProfileUseCase(get(), get()) }
+    factory { SaveProductUseCase(get()) }
+    factory { CreateProductUseCase(get()) }
 }
 
 val repositoryModules = module {

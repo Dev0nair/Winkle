@@ -5,6 +5,7 @@ import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
 import com.ismaelgr.winkle.util.FirebaseListener
 import com.ismaelgr.winkle.util.Routes
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 
 class ProductRepository : ProductRepositoryNeed {
@@ -29,7 +30,8 @@ class ProductRepository : ProductRepositoryNeed {
 
     override fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>> =
         FirebaseListener.makeOneTimeQueryListener(
-            query = getFirestore().collection(Routes.PRODUCTOS).whereNotEqualTo("vendedorId", idProfile),
+            query = getFirestore().collection(Routes.PRODUCTOS)
+                .whereNotEqualTo("vendedorId", idProfile),
             classCast = Producto::class.java
         )
 
@@ -49,7 +51,7 @@ class ProductRepository : ProductRepositoryNeed {
         }
 
     override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> {
-        return if(idProductos.isNotEmpty()){
+        return if (idProductos.isNotEmpty()) {
             FirebaseListener.makeOneTimeQueryListener(
                 query = getFirestore().collection(Routes.PRODUCTOS)
                     .whereIn("id", idProductos),
@@ -60,8 +62,28 @@ class ProductRepository : ProductRepositoryNeed {
         }
     }
 
+    override fun saveProduct(vararg producto: Producto): Completable =
+        Completable.create { completable ->
+            producto.forEach { p ->
+                getFirestore().collection(Routes.PRODUCTOS).document(p.id).set(p)
+                    .addOnFailureListener(completable::onError)
+            }
+            completable.onComplete()
+        }
+
+    override fun createProduct(vararg producto: Producto): Completable =
+        Completable.create { completable ->
+            producto.forEach { p ->
+                val reference = getFirestore().collection(Routes.PRODUCTOS).document()
+                p.id = reference.id
+                reference.set(p)
+                    .addOnFailureListener(completable::onError)
+            }
+            completable.onComplete()
+        }
+
     private fun getFirestore(): FirebaseFirestore {
-        if(firestore == null){
+        if (firestore == null) {
             firestore = FirebaseFirestore.getInstance()
         }
 

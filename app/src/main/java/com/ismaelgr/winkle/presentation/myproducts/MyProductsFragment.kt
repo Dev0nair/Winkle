@@ -72,7 +72,10 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
 
         myProducts_add_product_btn.setOnClickListener { myproductsPresenter.onAddProductClick() }
 
-        myproductsPresenter.onInit()
+        myproductsPresenter.run {
+            this.unselectAll()
+            onInit()
+        }
     }
 
     override fun loadProducts(list: List<Producto>) {

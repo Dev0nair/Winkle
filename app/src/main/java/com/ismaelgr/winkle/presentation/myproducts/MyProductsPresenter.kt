@@ -65,6 +65,11 @@ class MyProductsPresenter(
         myProds.navigateToProductDetail(null)
     }
 
+    override fun unselectAll() {
+        categorias.clear()
+        myProds.filterCategories(emptyList())
+    }
+
     override fun onDestroy() {
         getMyProductsUseCase.dispose()
     }

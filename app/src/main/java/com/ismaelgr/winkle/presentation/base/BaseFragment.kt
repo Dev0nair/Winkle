@@ -65,6 +65,10 @@ abstract class BaseFragment(@LayoutRes idScreen: Int) : Fragment(idScreen), Base
         Snackbar.make(requireView(), error, Snackbar.LENGTH_LONG).show()
     }
 
+    override fun showMsg(msg: String) {
+        Snackbar.make(requireView(), msg, Snackbar.LENGTH_LONG).show()
+    }
+
     override fun getMyString(@StringRes stringId: Int): String {
         return getString(stringId)
     }

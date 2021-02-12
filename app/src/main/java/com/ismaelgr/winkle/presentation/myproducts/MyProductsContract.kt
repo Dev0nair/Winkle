@@ -21,5 +21,6 @@ interface MyProductsContract {
         fun onCategorySelected(categoria: Categorias)
         fun onSearch(search: String)
         fun onAddProductClick()
+        fun unselectAll()
     }
 }
