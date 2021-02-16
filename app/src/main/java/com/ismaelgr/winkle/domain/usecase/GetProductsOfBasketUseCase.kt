@@ -5,7 +5,7 @@ import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.data.repository.needs.ProductRepositoryNeed
 import io.reactivex.rxjava3.disposables.Disposable
 
-class GetProductosMiCesta(
+class GetProductsOfBasketUseCase(
     private val getMyCestaUseCase: GetMyCestaUseCase,
     private val productRepositoryNeed: ProductRepositoryNeed
 ) {

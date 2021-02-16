@@ -18,7 +18,6 @@ class SelectProfileUseCase(
                 .subscribe(
                     { perfil -> profileRepositoryNeed.saveProfile(perfil).subscribe(onSuccess) },
                     { onError(it.message.toString()) },
-                    { "No se ha encontrado un perfil en la cuenta (error a mano)" }
                 )
         }
     }

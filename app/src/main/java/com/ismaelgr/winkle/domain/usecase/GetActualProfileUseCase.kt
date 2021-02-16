@@ -24,7 +24,7 @@ class GetActualProfileUseCase(
 
     private fun loadProfileFromAcc(onSuccess: (Perfil) -> Unit, onError: (String) -> Unit) {
         val idAccount = accountRepositoryNeed.getAccount().id
-        profileRepositoryNeed.getProfile(idAccount)
+        profileRepositoryNeed.getProfileFromAcc(idAccount)
             .subscribe(
                 onSuccess,
                 { onError(it.message.toString()) })

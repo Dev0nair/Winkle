@@ -18,12 +18,13 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
         idAccount: String
     ): Single<Boolean> = Single.create { maybe ->
         FirebaseListener.makeOneTimeQueryListener(
-            query = getFirestore().collection(Routes.PERFILES).whereEqualTo("id", idAccount),
+            query = getFirestore().collection(Routes.PERFILES).whereEqualTo("idAccount", idAccount),
             classCast = Perfil::class.java
         )
             .doOnSuccess { list -> maybe.onSuccess(list.isNotEmpty()) }
-            .doOnError(maybe::onError)
+            .doOnError { maybe.onError(it) }
             .doOnComplete { maybe.onSuccess(false) }
+            .subscribe()
     }
 
     override fun getProfile(
@@ -39,17 +40,15 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
     override fun getProfileFromAcc(
         idAccount: String
-    ): Maybe<Perfil> = Maybe.create { emitter ->
-        getFirestore().collection(Routes.PERFILES)
-            .whereEqualTo("id", idAccount)
-            .get()
-            .addOnSuccessListener {
-                val perfil = it.toObjects(Perfil::class.java)[0]
-                emitter.onSuccess(perfil)
-            }
-            .addOnFailureListener {
-                it.run(emitter::onError)
-            }
+    ): Single<Perfil> = Single.create { maybe ->
+        FirebaseListener.makeOneTimeQueryListener(
+            query = getFirestore().collection(Routes.PERFILES).whereEqualTo("idAccount", idAccount),
+            classCast = Perfil::class.java
+        )
+            .doOnSuccess { list -> maybe.onSuccess(list[0]) }
+            .doOnError { maybe.onError(it) }
+            .subscribe()
+
     }
 
     override fun saveProfile(perfil: Perfil): Completable = Completable.fromAction {
@@ -59,10 +58,16 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
             .apply()
     }
 
-    override fun getSavedProfile(): Maybe<Perfil> = getProfile(
-        context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
+    override fun getSavedProfile(): Maybe<Perfil> {
+        val idProfile = context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
             .getString("profileID", "no-profile").toString()
-    )
+
+        return if(idProfile != "no-profile") {
+            getProfile(idProfile)
+        } else {
+            Maybe.fromCompletable(Completable.complete())
+        }
+    }
 
     override fun createProfile(perfil: Perfil): Completable =
         Completable.create { emitter ->

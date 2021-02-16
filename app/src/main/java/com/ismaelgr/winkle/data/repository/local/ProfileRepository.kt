@@ -31,7 +31,7 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
     override fun getProfileFromAcc(
         idAccount: String
-    ): Maybe<Perfil> = Maybe.just(perfil)
+    ): Single<Perfil> = Single.just(perfil)
 
     override fun getSavedProfile(): Maybe<Perfil> = Maybe.just(perfil)
 

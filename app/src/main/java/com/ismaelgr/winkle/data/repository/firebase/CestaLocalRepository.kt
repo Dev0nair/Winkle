@@ -8,7 +8,7 @@ import com.ismaelgr.winkle.util.Routes
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 
-class CestaRepository : CestaRepositoryNeed {
+class CestaLocalRepository : CestaRepositoryNeed {
 
     private var firestore: FirebaseFirestore? = null
 

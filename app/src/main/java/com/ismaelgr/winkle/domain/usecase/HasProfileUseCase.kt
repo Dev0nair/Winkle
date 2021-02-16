@@ -12,7 +12,7 @@ class HasProfileUseCase(
         if (accountRepositoryFactory.isLogged()) {
             val myId = accountRepositoryFactory.getAccount().id
             profileRepositoryFactory.hasProfile(myId)
-                .subscribe(onLoad)
+                .subscribe(onLoad, { onLoad(false) })
         } else {
             onLoad(false)
         }

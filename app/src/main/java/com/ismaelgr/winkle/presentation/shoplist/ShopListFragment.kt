@@ -6,15 +6,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
-import com.ismaelgr.winkle.data.entity.Cesta
 import com.ismaelgr.winkle.data.entity.CestaProduct
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.data.repository.factory.AccountRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.CestaRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.ProductsRepositoryFactory
-import com.ismaelgr.winkle.data.repository.factory.ProfileRepositoryFactory
-import com.ismaelgr.winkle.domain.usecase.GetMyCestaUseCase
-import com.ismaelgr.winkle.domain.usecase.GetProductosMiCesta
 import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_shoplist.*

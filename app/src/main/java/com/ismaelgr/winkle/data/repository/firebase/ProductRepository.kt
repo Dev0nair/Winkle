@@ -31,7 +31,8 @@ class ProductRepository : ProductRepositoryNeed {
     override fun getAllProductsExcept(idProfile: String): Maybe<List<Producto>> =
         FirebaseListener.makeOneTimeQueryListener(
             query = getFirestore().collection(Routes.PRODUCTOS)
-                .whereNotEqualTo("vendedorId", idProfile),
+                .whereNotEqualTo("vendedorId", idProfile)
+                .whereEqualTo("activo", true),
             classCast = Producto::class.java
         )
 
@@ -48,6 +49,7 @@ class ProductRepository : ProductRepositoryNeed {
                 .doOnSuccess { emitter.onSuccess(it[0]) }
                 .doOnComplete(emitter::onComplete)
                 .doOnError(emitter::onError)
+                .subscribe()
         }
 
     override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> {

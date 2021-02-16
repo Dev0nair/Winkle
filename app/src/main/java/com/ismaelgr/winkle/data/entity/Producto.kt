@@ -9,7 +9,7 @@ data class Producto (
     var nombre: String,
     var descripcion: String,
     var mainImage: String,
-    var images: List<String>,
+    var images: ArrayList<String>,
     var precio: Float,
     var vendedorId: String,
     var activo: Boolean,
@@ -17,7 +17,7 @@ data class Producto (
     var categoria: Int,
     var disableNextBuy: Boolean = false
 ): Parcelable {
-    constructor() : this("","","","", emptyList(),0f, "", false, emptyList(), -1) {
+    constructor() : this("","","","", arrayListOf(),0f, "", false, emptyList(), -1) {
 
     }
 }

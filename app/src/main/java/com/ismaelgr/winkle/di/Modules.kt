@@ -26,7 +26,7 @@ val presenterModules = module {
     }
 
     factory { (view: HomeContract.View) ->
-        HomePresenter(view, get(), get())
+        HomePresenter(view, get(), get(), get())
     }
 
     factory { (view: MyProductsContract.View) ->
@@ -46,13 +46,14 @@ val presenterModules = module {
     }
 
     factory { (view: NewProductContract.View) ->
-        NewProductPresenter(view, get(), get(), get())
+        NewProductPresenter(view, get(), get(), get(), get())
     }
 }
 
 val useCaseModule = module {
-    factory { GetAllProductsExceptMineUseCase(get(), get()) }
-    factory { GetProductosMiCesta(get(), get()) }
+    factory { LoginUseCase(get()) }
+    factory { GetAllProductsExceptMineUseCase(get()) }
+    factory { GetProductsOfBasketUseCase(get(), get()) }
     factory { GetMyProductsUseCase(get(), get(), get()) }
     factory { GetMyCestaUseCase(get(), get(), get()) }
     factory { HasProfileUseCase(get(), get()) }
@@ -67,6 +68,8 @@ val useCaseModule = module {
     factory { GetActualProfileUseCase(get(), get()) }
     factory { SaveProductUseCase(get()) }
     factory { CreateProductUseCase(get()) }
+    factory { UploadImagesUseCase(get()) }
+    factory { SelectProfileUseCase(get(), get()) }
 }
 
 val repositoryModules = module {
@@ -76,4 +79,5 @@ val repositoryModules = module {
     single { AccountRepositoryFactory().getRepository() }
     single { ReportsRepositoryFactory().getRepository() }
     single { RateRepositoryFactory().getRepository() }
+    single { StorageRepositoryFactory().getRepository() }
 }

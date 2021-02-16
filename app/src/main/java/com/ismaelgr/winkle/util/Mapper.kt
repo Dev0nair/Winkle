@@ -1,12 +1,29 @@
 package com.ismaelgr.winkle.util
 
+import android.content.ContentResolver
 import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
 import com.google.firebase.auth.FirebaseUser
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Cuenta
 
 object Mapper {
+
+    fun getImagePath(uri: Uri, contentResolver: ContentResolver): String {
+        var path = ""
+        var dataToCollect = arrayOf(MediaStore.Images.Media.DATA)
+        contentResolver.query(uri, dataToCollect, null, null, null)
+            ?.let { cursor ->
+                if (cursor.moveToFirst()) {
+                   path = cursor.getString(cursor.getColumnIndex(dataToCollect[0]))
+                }
+                cursor.close()
+            }
+
+        return path
+    }
 
     fun map(firebaseUser: FirebaseUser) =
         Cuenta(

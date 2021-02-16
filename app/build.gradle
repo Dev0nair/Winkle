@@ -66,6 +66,14 @@ dependencies {
     // Firebase Firestore
     implementation 'com.google.firebase:firebase-firestore:22.0.1'
 
+    // Firebase Storage
+    //       Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:26.4.0')
+
+    //      Declare the dependency for the Cloud Storage library
+    //      When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
     // Circle Image View
     def circle_img_version = "4.2.0"
     implementation "com.mikhaellopez:circularimageview:$circle_img_version"

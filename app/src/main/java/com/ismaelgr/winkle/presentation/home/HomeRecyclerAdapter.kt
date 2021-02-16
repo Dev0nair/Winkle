@@ -1,8 +1,11 @@
 package com.ismaelgr.winkle.presentation.home
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Categorias
@@ -141,7 +144,12 @@ class HomeRecyclerAdapter(private val onProductClick: (producto: Producto) -> Un
 
     class HomeViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun setImage(url: String) {
-            GlideLoader.load(view.product_image, url)
+            if(url.startsWith("local:")){
+                val formatedImage = url.replaceFirst("local:", "")
+                BitmapFactory.decodeFile(formatedImage).also { b -> view.product_image.setImageBitmap(b) }
+            } else {
+                GlideLoader.load(view.product_image, url)
+            }
         }
 
         fun setName(name: String) {

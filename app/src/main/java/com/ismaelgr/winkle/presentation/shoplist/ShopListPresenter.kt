@@ -3,19 +3,19 @@ package com.ismaelgr.winkle.presentation.shoplist
 import com.ismaelgr.winkle.data.entity.Cesta
 import com.ismaelgr.winkle.data.entity.CestaProduct
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.domain.usecase.GetProductosMiCesta
+import com.ismaelgr.winkle.domain.usecase.GetProductsOfBasketUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class ShopListPresenter(
     private val shopList: ShopListContract.View,
-    private val getProductosMiCesta: GetProductosMiCesta
+    private val getProductsOfBasketUseCase: GetProductsOfBasketUseCase
 ) :
     BasePresenter<ShopListContract.View>(shopList), ShopListContract.Presenter {
 
     lateinit var cesta: List<Cesta>
 
     override fun onInit() {
-        getProductosMiCesta.execute(
+        getProductsOfBasketUseCase.execute(
             onSuccess = { productos, cesta ->
                 this.cesta = cesta
                 shopList.run {
@@ -59,6 +59,6 @@ class ShopListPresenter(
     }
 
     override fun onDestroy() {
-        getProductosMiCesta.dispose()
+        getProductsOfBasketUseCase.dispose()
     }
 }

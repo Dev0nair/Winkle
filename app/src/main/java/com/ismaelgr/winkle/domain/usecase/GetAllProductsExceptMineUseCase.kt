@@ -8,20 +8,14 @@ import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.disposables.Disposable
 
 class GetAllProductsExceptMineUseCase(
-    private val productRepositoryNeed: ProductRepositoryNeed,
-    private val getActualProfileUseCase: GetActualProfileUseCase
+    private val productRepositoryNeed: ProductRepositoryNeed
 ) {
 
     private var listener: Disposable? = null
 
-    fun execute(onSuccess: (List<Producto>) -> Unit, onError: (String) -> Unit) {
-        getActualProfileUseCase.execute(
-            onSuccess = { profile ->
-                listener = productRepositoryNeed.getAllProductsExcept(profile.id)
-                    .subscribe(onSuccess)
-            },
-            onError = onError
-        )
+    fun execute(idProfile: String, onSuccess: (List<Producto>) -> Unit, onError: (String) -> Unit) {
+        listener = productRepositoryNeed.getAllProductsExcept(idProfile)
+            .subscribe(onSuccess, { onError(it.message.toString()) }, {onSuccess(emptyList())})
     }
 
     fun dispose() {

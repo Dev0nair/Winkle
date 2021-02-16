@@ -7,7 +7,7 @@ import com.ismaelgr.winkle.data.repository.needs.AccountRepositoryNeed
 import com.ismaelgr.winkle.util.Mapper
 import io.reactivex.rxjava3.core.Completable
 
-class AccountRepository : AccountRepositoryNeed {
+class AccountLocalRepository : AccountRepositoryNeed {
 
     private var firebaseAuth: FirebaseAuth? = null
 

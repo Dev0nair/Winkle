@@ -13,13 +13,15 @@ object FirebaseListener {
         query.get()
             .addOnSuccessListener {
                 val data = it.toObjects(classCast)
-                if (data.isNotEmpty()){
+                if (data.isNotEmpty()) {
                     data.run(emiter::onSuccess)
                 } else {
                     emiter.onComplete()
                 }
             }
-            .addOnFailureListener(emiter::onError)
+            .addOnCompleteListener { emiter.onComplete() }
+            .addOnFailureListener { emiter.onError(it) }
+            .addOnCanceledListener { emiter.onError(Error("Canceled")) }
     }
 
     fun <T> makeOneTimeDocumentListener(
@@ -29,7 +31,7 @@ object FirebaseListener {
         documentReference.get()
             .addOnSuccessListener {
                 val data = it.toObject(classCast)
-                if (data != null){
+                if (data != null) {
                     data.run(emitter::onSuccess)
                 } else {
                     emitter.onComplete()

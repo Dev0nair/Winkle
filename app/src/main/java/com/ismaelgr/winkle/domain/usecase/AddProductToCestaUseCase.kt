@@ -23,9 +23,6 @@ class AddProductToCestaUseCase(
                 },
                 {
                     onError(it.message.toString())
-                },
-                {
-                  onError("Error")
                 }
             )
     }
