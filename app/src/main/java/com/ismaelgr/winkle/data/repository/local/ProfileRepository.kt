@@ -1,13 +1,13 @@
 package com.ismaelgr.winkle.data.repository.local
 
+import android.content.Context
 import com.ismaelgr.winkle.data.entity.Perfil
 import com.ismaelgr.winkle.data.repository.needs.ProfileRepositoryNeed
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
-import java.util.concurrent.CompletableFuture
 
-class ProfileRepository : ProfileRepositoryNeed {
+class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
     private val perfil = Perfil(
         id = "1",
@@ -15,7 +15,7 @@ class ProfileRepository : ProfileRepositoryNeed {
         username = "Ismael González",
         email = "correo_prueba@gmail.com",
         telefono = "654725348",
-        image = "",
+        image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeik6d5EHLTi89m_CKLXyShylk4L92YflpJQ&usqp=CAU",
         descripcion = "Una descripcion de ejemplo",
         emailContacto = "correo2_prueba@gmail.com"
     )
@@ -27,12 +27,21 @@ class ProfileRepository : ProfileRepositoryNeed {
 
     override fun getProfile(
         idProfile: String
-    ) = Maybe.just(perfil)
+    ): Maybe<Perfil> = Maybe.just(perfil)
 
     override fun getProfileFromAcc(
         idAccount: String
-    ) = Maybe.just(perfil)
+    ): Single<Perfil> = Single.just(perfil)
 
-    override fun createProfile(perfil: Perfil) =
+    override fun getSavedProfile(): Maybe<Perfil> = Maybe.just(perfil)
+
+    override fun saveProfile(perfil: Perfil): Completable = Completable.fromAction {
+        context.getSharedPreferences(javaClass.name, Context.MODE_PRIVATE)
+            .edit()
+            .putString("profileID", perfil.id)
+            .apply()
+    }
+
+    override fun createProfile(perfil: Perfil): Completable =
         Completable.complete()
 }

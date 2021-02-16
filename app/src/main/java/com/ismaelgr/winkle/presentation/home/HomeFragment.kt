@@ -2,6 +2,7 @@ package com.ismaelgr.winkle.presentation.home
 
 import android.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -10,27 +11,21 @@ import com.ismaelgr.winkle.presentation.base.BaseFragment
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.data.entity.Categorias
 import com.ismaelgr.winkle.data.entity.Producto
-import com.ismaelgr.winkle.data.repository.factory.ProductsRepositoryFactory
-import com.ismaelgr.winkle.domain.usecase.GetAllProductsUseCase
 import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
 
-    private lateinit var homePresenter: HomeContract.Presenter
+    private val homePresenter: HomeContract.Presenter by inject<HomePresenter> { parametersOf(this) }
     private lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
 
     override fun initElements() {
-        homePresenter =
-            HomePresenter(
-                this as HomeContract.View,
-                GetAllProductsUseCase(ProductsRepositoryFactory().getRepository())
-            )
-
         homeRecyclerAdapter = HomeRecyclerAdapter { idProducto ->
             homePresenter.onProductClick(idProducto)
         }
@@ -97,7 +92,22 @@ class HomeFragment : BaseFragment(R.layout.fragment_home), HomeContract.View {
         }
     }
 
+    override fun refreshFilters(list: List<Categorias>) {
+        for(v in home_categories_cg.children){
+            if(v is Chip){
+                if(list.any{ it.name == v.text.toString().toUpperCase()}) {
+                    v.isChecked = true
+                }
+            }
+        }
+        filterCategories(list)
+    }
+
     override fun navigateToProductDetail(producto: Producto) {
         findNavController().navigate(R.id.action_homeFragment_to_productDetailsFragment, bundleOf("producto" to producto))
+    }
+
+    override fun navigateToProductEdition(producto: Producto) {
+        findNavController().navigate(R.id.action_homeFragment_to_newProductFragment, bundleOf("producto" to producto))
     }
 }

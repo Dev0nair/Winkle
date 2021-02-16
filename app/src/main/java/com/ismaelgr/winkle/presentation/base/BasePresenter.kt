@@ -16,5 +16,9 @@ abstract class BasePresenter<T : BaseContract.View>(private val view: T) : BaseC
         view.showError(error)
     }
 
+    override fun showMsg(msg: String) {
+        view.showMsg(msg)
+    }
+
     override fun onDestroy() {}
 }

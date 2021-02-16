@@ -3,12 +3,14 @@ package com.ismaelgr.winkle.presentation.login
 import com.ismaelgr.winkle.R
 import com.ismaelgr.winkle.domain.usecase.HasProfileUseCase
 import com.ismaelgr.winkle.domain.usecase.LoginUseCase
+import com.ismaelgr.winkle.domain.usecase.SelectProfileUseCase
 import com.ismaelgr.winkle.presentation.base.BasePresenter
 
 class LoginPresenter(
     private val login: LoginContract.View,
     private val loginUseCase: LoginUseCase,
-    private val hasProfileUseCase: HasProfileUseCase
+    private val hasProfileUseCase: HasProfileUseCase,
+    private val selectProfileUseCase: SelectProfileUseCase
 ) :
     BasePresenter<LoginContract.View>(login), LoginContract.Presenter {
 
@@ -47,7 +49,14 @@ class LoginPresenter(
         hasProfileUseCase.execute { hasProfile ->
             showLoading(false)
             if (hasProfile) {
-                login.loadMainApplication()
+                // cuando no se le pasa un id de perfil, seleccionamos el primero que nos pille de nuestra cuenta
+                selectProfileUseCase.execute(
+                    onSuccess = {
+                        login.loadMainApplication()
+                    },
+                    onError = ::showError
+                )
+
             } else {
                 login.run {
                     enableButtons()

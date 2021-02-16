@@ -11,7 +11,9 @@ interface HomeContract {
         fun filterTags(list: List<String>)
         fun filterCategories(list: List<Categorias>)
         fun filterNameDesc(string: String)
+        fun refreshFilters(list: List<Categorias>)
         fun navigateToProductDetail(producto: Producto)
+        fun navigateToProductEdition(producto: Producto)
     }
 
     interface Presenter : BaseContract.Presenter {

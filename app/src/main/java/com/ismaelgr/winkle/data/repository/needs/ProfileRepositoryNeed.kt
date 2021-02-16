@@ -9,6 +9,8 @@ interface ProfileRepositoryNeed {
 
     fun hasProfile(idAccount: String): Single<Boolean>
     fun getProfile(idProfile: String): Maybe<Perfil>
-    fun getProfileFromAcc(idAccount: String): Maybe<Perfil>
+    fun getProfileFromAcc(idAccount: String): Single<Perfil>
+    fun saveProfile(perfil: Perfil): Completable
+    fun getSavedProfile(): Maybe<Perfil>
     fun createProfile(perfil: Perfil): Completable
 }

@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ismaelgr.winkle.R
+import com.ismaelgr.winkle.data.entity.Cesta
+import com.ismaelgr.winkle.data.entity.CestaProduct
 import com.ismaelgr.winkle.data.entity.Producto
 import com.ismaelgr.winkle.util.GlideLoader
 import com.ismaelgr.winkle.util.Mapper
@@ -12,11 +14,11 @@ import kotlinx.android.synthetic.main.shopping_list_item_view.view.*
 
 class CestaRecyclerAdapter(
     private val onDeleteClick: (idProducto: String) -> Unit,
-    private val onItemClick: (idProducto: String) -> Unit
+    private val onItemClick: (producto: Producto) -> Unit
 ) :
     RecyclerView.Adapter<CestaRecyclerAdapter.CestaViewHolder>() {
 
-    private var productList = arrayListOf<Producto>()
+    private var productList = arrayListOf<CestaProduct>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CestaViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -27,11 +29,12 @@ class CestaRecyclerAdapter(
     override fun onBindViewHolder(holder: CestaViewHolder, position: Int) {
         val item = this.productList[position]
         holder.run {
-            setId(item.id)
-            setName(item.nombre)
-            setDescription(item.descripcion)
-            setImage(item.image)
-            setPrice(item.precio)
+            setProduct(item.producto)
+            setCount(item.count)
+            updateImage()
+            updateName()
+            updatePrice()
+            updateDescription()
             setDeleteAction(onDeleteClick)
             setClickAction(onItemClick)
         }
@@ -39,7 +42,7 @@ class CestaRecyclerAdapter(
 
     override fun getItemCount(): Int = this.productList.size
 
-    fun loadList(productos: List<Producto>) {
+    fun loadList(productos: List<CestaProduct>) {
         this.productList.run {
             clear()
             addAll(productos)
@@ -48,37 +51,41 @@ class CestaRecyclerAdapter(
     }
 
     class CestaViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        private var id: String = ""
+        private lateinit var producto: Producto
 
-        fun setId(id: String) {
-            this.id = id
+        fun setProduct(producto: Producto) {
+            this.producto = producto
         }
 
-        fun setName(name: String) {
-            view.shoppinglistitem_title_tv.text = name
+        fun setCount(count: Int){
+            view.shoppinglistitem_count.text = view.context.getString(R.string.text_counter_product, count)
         }
 
-        fun setDescription(desc: String) {
-            view.shoppinglistitem_desc_tv.text = desc
+        fun updateName() {
+            view.shoppinglistitem_title_tv.text = this.producto.nombre
         }
 
-        fun setImage(url: String) {
-            GlideLoader.load(view.shoppinglistitem_civ, url)
+        fun updateDescription() {
+            view.shoppinglistitem_desc_tv.text = this.producto.descripcion
         }
 
-        fun setPrice(price: Float) {
+        fun updateImage() {
+            GlideLoader.load(view.shoppinglistitem_civ, this.producto.mainImage)
+        }
+
+        fun updatePrice() {
             view.shoppinglistitem_price_tv.text = view.context.getString(
                 R.string.text_price,
-                Mapper.map(price)
+                Mapper.map(this.producto.precio)
             )
         }
 
         fun setDeleteAction(action: (idProducto: String) -> Unit) {
-            view.shoppinglistitem_quitar_btn.setOnClickListener { action(id) }
+            view.shoppinglistitem_quitar_btn.setOnClickListener { action(this.producto.id) }
         }
 
-        fun setClickAction(onItemClick: (idProducto: String) -> Unit) {
-            view.setOnClickListener { onItemClick(id) }
+        fun setClickAction(onItemClick: (Producto) -> Unit) {
+            view.setOnClickListener { onItemClick(this.producto) }
         }
     }
 }

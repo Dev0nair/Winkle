@@ -2,6 +2,7 @@ package com.ismaelgr.winkle.presentation.myproducts
 
 import android.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,29 +19,26 @@ import com.ismaelgr.winkle.presentation.base.BaseContract
 import com.ismaelgr.winkle.presentation.home.HomeRecyclerAdapter
 import com.ismaelgr.winkle.util.Mapper
 import kotlinx.android.synthetic.main.fragment_myproducts.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 /**
  * A simple [Fragment] subclass.
  */
 class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProductsContract.View {
 
-    private lateinit var myproductsPresenter: MyProductsContract.Presenter
+    private val myproductsPresenter: MyProductsContract.Presenter by inject<MyProductsPresenter> {
+        parametersOf(
+            this as MyProductsContract.View
+        )
+    }
     private lateinit var homeRecyclerAdapter: HomeRecyclerAdapter
 
     override fun bindPresenter(): BaseContract.Presenter = this.myproductsPresenter
 
     override fun initElements() {
-        myproductsPresenter =
-            MyProductsPresenter(
-                this as MyProductsContract.View,
-                GetMyProductsUseCase(
-                    AccountRepositoryFactory().getRepository(),
-                    ProfileRepositoryFactory().getRepository(),
-                    ProductsRepositoryFactory().getRepository()
-                )
-            )
-        homeRecyclerAdapter = HomeRecyclerAdapter { idProducto ->
-            myproductsPresenter.onProductClick(idProducto)
+        homeRecyclerAdapter = HomeRecyclerAdapter { producto ->
+            myproductsPresenter.onProductClick(producto)
         }
 
         myProducts_products_rv.run {
@@ -72,7 +70,12 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
             }
         })
 
-        myproductsPresenter.onInit()
+        myProducts_add_product_btn.setOnClickListener { myproductsPresenter.onAddProductClick() }
+
+        myproductsPresenter.run {
+            this.unselectAll()
+            onInit()
+        }
     }
 
     override fun loadProducts(list: List<Producto>) {
@@ -100,9 +103,20 @@ class MyProductsFragment : BaseFragment(R.layout.fragment_myproducts), MyProduct
         }
     }
 
-    override fun navigateToProductDetail(producto: Producto) {
+    override fun refreshFilters(list: List<Categorias>) {
+        for(v in myProducts_categories_cg.children){
+            if(v is Chip){
+                if(list.any{ it.name == v.text.toString().toUpperCase()}) {
+                    v.isChecked = true
+                }
+            }
+        }
+        filterCategories(list)
+    }
+
+    override fun navigateToProductDetail(producto: Producto?) {
         findNavController().navigate(
-            R.id.action_myProductsFragment_to_productDetailsFragment,
+            R.id.action_myProductsFragment_to_newProductFragment,
             bundleOf("producto" to producto)
         )
     }
