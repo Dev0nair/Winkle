@@ -8,6 +8,7 @@ import com.ismaelgr.winkle.util.FirebaseListener
 import com.ismaelgr.winkle.util.Routes
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class RateRepository : RateRepositoryNeed {
 
@@ -21,7 +22,7 @@ class RateRepository : RateRepositoryNeed {
                 query = getFirestore().collection(Routes.FAVORITOS)
                     .whereEqualTo("vendedorId", idProfile),
                 Puntuacion::class.java
-            ).subscribe(
+            ).subscribeOn(Schedulers.io()).subscribe(
                 { list ->
                     emitter.onSuccess(list)
                 },

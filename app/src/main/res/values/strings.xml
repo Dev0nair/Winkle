@@ -49,4 +49,12 @@
     <string name="text_ropahombre">Ropa Hombre</string>
     <string name="text_hogar">Hogar</string>
     <string name="text_otros">Otros</string>
+    <string name="text_insert_name">Insertar nombre</string>
+    <string name="text_insert_price">Insertar precio</string>
+    <string name="text_insert_description">Insertar descripcion</string>
+    <string name="text_product_photos">Fotos del producto</string>
+    <string name="text_categories">Categorías</string>
+    <string name="text_tags">Etiquetas (separados por coma)</string>
+    <string name="text_active_product">Producto activo</string>
+    <string name="text_sign_product">Registrar producto</string>
 </resources>

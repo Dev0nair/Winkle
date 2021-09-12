@@ -47,4 +47,12 @@
     <string name="text_ropahombre">Men Clothes</string>
     <string name="text_hogar">Home</string>
     <string name="text_otros">Others</string>
+    <string name="text_insert_name">Insert name</string>
+    <string name="text_insert_price">Insert price</string>
+    <string name="text_insert_description">Insert description</string>
+    <string name="text_product_photos">Product photos</string>
+    <string name="text_categories">Categories</string>
+    <string name="text_tags">Tags (comma separated)</string>
+    <string name="text_active_product">Active product</string>
+    <string name="text_sign_product">Sign product</string>
 </resources>

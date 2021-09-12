@@ -85,6 +85,7 @@ class HomePresenter(
     }
 
     override fun onDestroy() {
+        super.onDestroy()
         getAllProductsExceptMineUseCase.dispose()
         isMyProductUseCase.dispose()
     }

@@ -9,6 +9,7 @@ import com.ismaelgr.winkle.util.Routes
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
 
@@ -24,7 +25,7 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
             .doOnSuccess { list -> maybe.onSuccess(list.isNotEmpty()) }
             .doOnError { maybe.onError(it) }
             .doOnComplete { maybe.onSuccess(false) }
-            .subscribe()
+            .subscribeOn(Schedulers.io()).subscribe()
     }
 
     override fun getProfile(
@@ -47,7 +48,7 @@ class ProfileRepository(private val context: Context) : ProfileRepositoryNeed {
         )
             .doOnSuccess { list -> maybe.onSuccess(list[0]) }
             .doOnError { maybe.onError(it) }
-            .subscribe()
+            .subscribeOn(Schedulers.io()).subscribe()
 
     }
 

@@ -7,6 +7,7 @@ import com.ismaelgr.winkle.util.FirebaseListener
 import com.ismaelgr.winkle.util.Routes
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class ProductRepository : ProductRepositoryNeed {
 
@@ -49,7 +50,7 @@ class ProductRepository : ProductRepositoryNeed {
                 .doOnSuccess { emitter.onSuccess(it[0]) }
                 .doOnComplete(emitter::onComplete)
                 .doOnError(emitter::onError)
-                .subscribe()
+                .subscribeOn(Schedulers.io()).subscribe()
         }
 
     override fun getProductsInfo(idProductos: List<String>): Maybe<List<Producto>> {

@@ -5,7 +5,6 @@ import android.util.Log
 import com.ismaelgr.winkle.di.presenterModules
 import com.ismaelgr.winkle.di.repositoryModules
 import com.ismaelgr.winkle.di.useCaseModule
-import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin

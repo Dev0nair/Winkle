@@ -2,7 +2,6 @@ package com.ismaelgr.winkle.util
 
 import com.google.firebase.firestore.*
 import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Observable
 
 object FirebaseListener {
 
